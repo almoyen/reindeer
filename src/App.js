@@ -1,24 +1,31 @@
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router";
+import { LandingPage, FoodModal, Navbar } from "./Components";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Welcome to the Reindeer Project!</p>
+  //const [defaultCity, setDefaultCity] = useState("Helsinki");
+  const [searchInput, setSearchInput] = useState("");
 
-        <p> branch added!</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  return (
+    <>
+      <Navbar />
+
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <LandingPage
+              {...props}
+              searchInput={searchInput}
+              setSearchInput={setSearchInput}
+            />
+          )}
+        />
+
+        <Route path="/orders" render={(props) => <FoodModal {...props} />} />
+      </Switch>
+    </>
   );
 }
 
