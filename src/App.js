@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router";
-import { LandingPage, FoodModal, Navbar } from "./Components";
+import { LandingPage, FoodContent, Navbar } from "./Components";
 
 function App() {
-  //const [defaultCity, setDefaultCity] = useState("Helsinki");
   const [searchInput, setSearchInput] = useState("");
 
   return (
@@ -23,7 +22,7 @@ function App() {
           )}
         />
 
-        <Route path="/orders" render={(props) => <FoodModal {...props} />} />
+        <Route path="/orders" render={(props) => <FoodContent {...props} />} />
       </Switch>
     </>
   );

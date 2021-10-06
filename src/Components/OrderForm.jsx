@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Form } from "react-bootstrap";
-import { Col, Container, Jumbotron, Row, Button } from "react-bootstrap";
-import Select from "react-select";
-import { finlandCity } from "../utils/data";
 import axios from "axios";
+import Select from "react-select";
+import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
+import { finlandCity } from "../utils/data";
+import React, { useEffect, useState } from "react";
+import { Col, Container, Jumbotron, Row, Button } from "react-bootstrap";
 
-function MediumSlide({ searchInput, setSearchInput }) {
+function OrderForm({ searchInput, setSearchInput }) {
   const history = useHistory();
   const [trains, setTrains] = useState([]);
-  //const [trainNumber, setTrainNumber] = useState([]);
-  //const [trainType, setTrainType] = useState([]);
 
-  const getTrainModel = async () => {
+  const getTrainModel = () => {
     try {
       axios
         .get("https://rata.digitraffic.fi/api/v1/live-trains?version=0")
@@ -21,13 +19,15 @@ function MediumSlide({ searchInput, setSearchInput }) {
         .then((res) => {
           setTrains(res);
         });
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   useEffect(() => {
     getTrainModel();
   }, []);
 
-  //console.log("trains", trains);
   const filterCity = finlandCity.filter((allC) => {
     if (
       searchInput &&
@@ -142,7 +142,7 @@ function MediumSlide({ searchInput, setSearchInput }) {
   );
 }
 
-export default MediumSlide;
+export default OrderForm;
 /** 
  *  <Container
         className="p-5 mt-5 mr-5"

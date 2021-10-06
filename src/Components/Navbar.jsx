@@ -1,23 +1,16 @@
-//import logo from "./logo.svg";
-import Icon from "../Images/Icon.svg";
 import React from "react";
-import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+import Icon from "../Images/Icon.svg";
 import { useHistory } from "react-router";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 
 function Header() {
   const history = useHistory();
   return (
     <>
-      <Navbar
-        collapseOnSelect
-        expand="lg"
-        bg="dark"
-        variant="dark"
-        /*  style={{ zIndex: 2 }} */
-      >
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container fluid>
           <Navbar.Brand
-            /* href="/" */ onClick={() => history.push("/")}
+            onClick={() => history.push("/")}
             style={{ cursor: "pointer" }}
           >
             <img

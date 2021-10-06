@@ -1,11 +1,12 @@
 import React from "react";
-import { Button, Card, Col, Container, Jumbotron, Row } from "react-bootstrap";
+import Burg from "../Images/image.jpg";
 import { useHistory } from "react-router";
 import { FoodData } from "../utils/foodData";
 import Count from "./Reusable-components/count";
-import Burg from "../Images/image.jpg";
+import { Button, Card, Col } from "react-bootstrap";
+import { Container, Jumbotron, Row } from "react-bootstrap";
 
-function FoodModal() {
+function FoodContent() {
   const history = useHistory();
   return (
     <>
@@ -116,4 +117,4 @@ function FoodModal() {
   );
 }
 
-export default FoodModal;
+export default FoodContent;
