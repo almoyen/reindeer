@@ -48,6 +48,11 @@ function OrderForm({ searchInput, setSearchInput }) {
         }}
       >
         <Jumbotron className="p-5 mt-0" style={{ width: "70rem" }}>
+          <div className="m-3" style={{ color: "#FFFFFF" }}>
+            checkout our
+            <br />
+            <h3>Best Cousine</h3>
+          </div>
           <div style={{ backgroundColor: "#0000009D" }}>
             <Row>
               <Form>
@@ -57,7 +62,7 @@ function OrderForm({ searchInput, setSearchInput }) {
                       className="p-2"
                       style={{ color: "#fff", zIndex: 2 }}
                     >
-                      <p>where</p>
+                      where
                     </Form.Label>
 
                     <Select
@@ -77,9 +82,10 @@ function OrderForm({ searchInput, setSearchInput }) {
                       className="p-2"
                       style={{ color: "#fff", zIndex: 2 }}
                     >
-                      <p>destination</p>
+                      destination
                     </Form.Label>
                     <Select
+                      style={{ backgroundColor: "#fff" }}
                       isMulti
                       name="cities"
                       onMenuOpen={filterCity}
@@ -110,6 +116,7 @@ function OrderForm({ searchInput, setSearchInput }) {
                       style={{ marginTop: "0rem" }}
                     />
                   </Col>
+
                   <Col className="mt-3" style={{ flexBasis: "15rem" }}>
                     <Form.Label
                       className="p-2"
@@ -132,7 +139,19 @@ function OrderForm({ searchInput, setSearchInput }) {
                     {/* <Form.Control placeholder="type here" /> */}
                   </Col>
                 </Row>
-                <Button onClick={() => history.push("/orders")}>Search</Button>
+                <Row>
+                  <Col className="m-1 text-center">
+                    <Button
+                      className="mt-3"
+                      style={{ width: "7rem", height: "3rem" }}
+                      variant="secondary"
+                      bsSize="large"
+                      onClick={() => history.push("/orders")}
+                    >
+                      Search
+                    </Button>
+                  </Col>
+                </Row>
               </Form>
             </Row>
           </div>
