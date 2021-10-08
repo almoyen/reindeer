@@ -1,3 +1,4 @@
+import Pic from "../Images/markx.png";
 export const FoodData = [
   {
     id: "1",
@@ -5,6 +6,7 @@ export const FoodData = [
     available: "24.9342",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "2",
@@ -12,6 +14,7 @@ export const FoodData = [
     available: "24.6600",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "3",
@@ -19,6 +22,7 @@ export const FoodData = [
     available: "23.7608",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "4",
@@ -26,6 +30,7 @@ export const FoodData = [
     available: "25.0333",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "5",
@@ -33,6 +38,7 @@ export const FoodData = [
     available: "25.4719",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "6",
@@ -40,6 +46,7 @@ export const FoodData = [
     available: "22.2700",
     country: "Finland",
     discount: "FI",
+    image: Pic,
   },
   {
     id: "7",
@@ -47,6 +54,7 @@ export const FoodData = [
     available: "25.7333",
     country: "Finland",
     discount: "FI",
+    image: "",
   },
   {
     id: "8",
@@ -54,8 +62,9 @@ export const FoodData = [
     available: "27.6783",
     country: "Finland",
     discount: "FI",
+    image: "",
   },
-  {
+  /*   {
     id: "9",
     item: "item09",
     available: "25.6550",
@@ -68,8 +77,8 @@ export const FoodData = [
     available: "26.7042",
     country: "Finland",
     discount: "FI",
-  },
-  {
+  }, */
+  /* {
     id: "11",
     item: "item11",
     available: "21.7972",
@@ -195,5 +204,5 @@ export const FoodData = [
     available: "22.7500",
     country: "Finland",
     discount: "FI",
-  },
+  },*/
 ];

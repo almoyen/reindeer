@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router";
 import { LandingPage, FoodContent, Navbar } from "./Components";
+import Pra from "./Components/Reusable-components/pra";
 
 function App() {
   const [searchInput, setSearchInput] = useState("");
@@ -23,6 +24,7 @@ function App() {
         />
 
         <Route path="/orders" render={(props) => <FoodContent {...props} />} />
+        <Route path="/pra" render={(props) => <Pra {...props} />} />
       </Switch>
     </>
   );

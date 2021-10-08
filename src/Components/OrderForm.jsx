@@ -1,5 +1,5 @@
 import axios from "axios";
-import Select from "react-select";
+//import Select from "react-select";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { finlandCity } from "../utils/data";
@@ -28,15 +28,9 @@ function OrderForm({ searchInput, setSearchInput }) {
     getTrainModel();
   }, []);
 
-  const filterCity = finlandCity.filter((allC) => {
-    if (
-      searchInput &&
-      !allC.city.toLowerCase().includes(searchInput.toLowerCase())
-    ) {
-      return false;
-    }
-    return true;
-  });
+  const routeToNextPage = () => {
+    history.push("/orders");
+  };
 
   return (
     <>
@@ -55,7 +49,10 @@ function OrderForm({ searchInput, setSearchInput }) {
           </div>
           <div style={{ backgroundColor: "#0000009D" }}>
             <Row>
-              <Form>
+              <Form
+                /* onSubmit={onSubmit()} */ /* onSubmit={() => handleSubmit()} */
+                noValidate
+              >
                 <Row>
                   <Col className="mt-3" style={{ flexBasis: "15rem" }}>
                     <Form.Label
@@ -65,17 +62,34 @@ function OrderForm({ searchInput, setSearchInput }) {
                       where
                     </Form.Label>
 
-                    <Select
+                    {/*  <Select
                       isMulti
                       name="cities"
+                      type="text"
                       onMenuOpen={filterCity}
-                      options={filterCity.map((i) => ({
-                        label: i.city,
-                        value: i.country,
-                      }))}
+                      options={OnlyCity()}
+                      onChange={() => handleChange()}
+                      data-live-search="true"
                       className="basic-multi-select"
                       classNamePrefix="select"
-                    />
+                    /> */}
+                    <Form.Group>
+                      <Form.Control
+                        as="select"
+                        isMulti
+                        placeholder="search city"
+                      >
+                        {searchInput === ""
+                          ? finlandCity.map((m) => {
+                              return (
+                                <option placeholder="search city" key={m.city}>
+                                  {m.city}
+                                </option>
+                              );
+                            })
+                          : null}
+                      </Form.Control>
+                    </Form.Group>
                   </Col>
                   <Col className="mt-3" style={{ flexBasis: "15rem" }}>
                     <Form.Label
@@ -84,7 +98,8 @@ function OrderForm({ searchInput, setSearchInput }) {
                     >
                       destination
                     </Form.Label>
-                    <Select
+                    {/*  <Select
+                      
                       style={{ backgroundColor: "#fff" }}
                       isMulti
                       name="cities"
@@ -95,7 +110,16 @@ function OrderForm({ searchInput, setSearchInput }) {
                       }))}
                       className="basic-multi-select"
                       classNamePrefix="select"
-                    />
+                    /> */}
+                    <Form.Group>
+                      <Form.Control as="select" isMulti>
+                        {searchInput === ""
+                          ? finlandCity.map((m) => {
+                              return <option key={m.city}>{m.city}</option>;
+                            })
+                          : null}
+                      </Form.Control>
+                    </Form.Group>
                   </Col>
                 </Row>
                 <br />
@@ -125,28 +149,39 @@ function OrderForm({ searchInput, setSearchInput }) {
                     >
                       train model
                     </Form.Label>
-                    <Select
+                    {/*  <Select
                       isMulti
                       name="cities"
-                      /* onMenuOpen={filterCity} */
+                      
                       options={trains.map((i) => ({
                         label: i.trainType + i.trainNumber,
                         value: i.trainType + i.trainNumber,
                       }))}
                       className="basic-multi-select"
                       classNamePrefix="select"
-                    />
-                    {/* <Form.Control placeholder="type here" /> */}
+                      onChange={() => console.log("something changed")}
+                    /> */}
+                    <Form.Group>
+                      <Form.Control as="select" isMulti>
+                        {trains.map((i) => {
+                          return (
+                            <option key={i.trainNumber}>
+                              {i.trainType + i.trainNumber}
+                            </option>
+                          );
+                        })}
+                      </Form.Control>
+                    </Form.Group>
                   </Col>
                 </Row>
                 <Row>
                   <Col className="m-1 text-center">
                     <Button
+                      type="submit"
                       className="mt-3"
                       style={{ width: "7rem", height: "3rem" }}
                       variant="secondary"
-                      bsSize="large"
-                      onClick={() => history.push("/orders")}
+                      onClick={routeToNextPage}
                     >
                       Search
                     </Button>
@@ -162,82 +197,20 @@ function OrderForm({ searchInput, setSearchInput }) {
 }
 
 export default OrderForm;
-/** 
- *  <Container
-        className="p-5 mt-5 mr-5"
-        style={{ height: "100vh", display: "flex" }}
-      >
-       
-        <Jumbotron className="p-5 mt-0">
-          <div style={{ backgroundColor: "#0000009D" }}>
-            <Row>
-              <Col
-                md={6}
-                sm={6}
-                xs={8}
-                lg={6}
-                className="mt-3"
-                style={{ flexBasis: "25rem" }}
-              >
-                <div
-                  style={{
-                    paddingRight: "70%",
-                    borderRadius: "0.3rem",
-                  }}
-                >
-                  <h6 style={{ color: "#ffffff", textAlign: "center" }}>
-                    Where:
-                  </h6>
-                </div>
-                <Card className="" style={{ width: "26rem", height: "12rem" }}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
 
-              <Col
-                md={6}
-                sm={6}
-                xs={8}
-                lg={6}
-                className="mt-3"
-                style={{ flexBasis: "25rem" }}
-              >
-                <div
-                  style={{
-                    paddingRight: "60%",
-                    borderRadius: "0.3rem",
-                  }}
-                >
-                  <h6
-                    className="mr-3"
-                    style={{ color: "#ffffff", textAlign: "center" }}
-                  >
-                    Destination:
-                  </h6>
-                </div>
-                <Card style={{ width: "25rem", height: "12rem" }}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
-                    <Card.Text>
-                      Some quick example text to build on the card title and
-                      make up the bulk of the card's content.
-                    </Card.Text>
-                  </Card.Body>
-                </Card>
-              </Col>
-            </Row>
-          </div>
+/* const filterCity = finlandCity.filter((allC) => {
+    if (
+      searchInput &&
+      !allC.city.toLowerCase().includes(searchInput?.toLowerCase())
+    ) {
+      return false;
+    }
+    return true;
+  }); */
 
-          <Button>Search</Button>
-        </Jumbotron>
-        
-      </Container>
- */
+/* const OnlyCity = () => {
+    return filterCity.map((i) => ({
+      label: i.city,
+      value: i.country,
+    }));
+  }; */

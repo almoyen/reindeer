@@ -1,18 +1,55 @@
-import React from "react";
-import Burg from "../Images/image.jpg";
-import { useHistory } from "react-router";
+import React, { useState } from "react";
+//import Burg from "../Images/image.jpg";
+//import { useHistory } from "react-router";
 import { FoodData } from "../utils/foodData";
 import Count from "./Reusable-components/count";
-import { Button, Card, Col } from "react-bootstrap";
+import { Button, Card, Col, FormControl } from "react-bootstrap";
 import { Container, Jumbotron, Row } from "react-bootstrap";
+import FootItems from "./Reusable-components/foodItem";
+import { paginate } from "../utils/paginate";
+import Pagination from "../Components/Reusable-components/Pagination";
+//import FoodCard from "./Reusable-components/foodItem";
 
 function FoodContent() {
-  const history = useHistory();
+  //const history = useHistory();
+  /*   const [footItems, setFootItems] = useState("");
+   */ const [searchField, setSearchField] = useState("");
+  const [pageSize] = useState(4);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  /*  const footItem = FoodData.map((i) => {
+    return <p key={i.id}>{i}</p>;
+  }); */
+
+  const filterItems = FoodData.filter((m) => {
+    if (
+      searchField &&
+      !m.item.toLowerCase().includes(searchField.toLowerCase())
+    ) {
+      return false;
+    }
+    return true;
+  });
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  const onPreviousPage = () => {
+    setCurrentPage(currentPage - 1);
+  };
+
+  const onNextPage = () => {
+    setCurrentPage(currentPage + 1);
+  };
+
+  const paginatedItem = paginate(filterItems, currentPage, pageSize);
+  console.log(paginatedItem);
+  console.log(filterItems);
   return (
     <>
       <div className="m-5">
         <Container
-          /* className="m-5 mr-5" */
           style={{
             backgroundColor: "#fff",
             display: "block",
@@ -27,10 +64,10 @@ function FoodContent() {
                 <Row>
                   <Col sm={12} md={6} lg={3} my={1}>
                     <Count
-                      item={FoodData.map((item) => item.id)}
+                      /* item={FoodData.map((item) => item.id)} */
+                      item={filterItems}
                       label="result"
                     />
-                    {/*  <strong>abc</strong> */}
                   </Col>
                   <Col>
                     <Button variant="dark" size="m" style={{ width: "100px" }}>
@@ -63,49 +100,55 @@ function FoodContent() {
                   </Col>
                 </Row>
                 <Row>
-                  <Col sm={12} md={1} lg={3}>
-                    ads
+                  <Col sm={12} md={10} lg={3}>
+                    <Card style={{ height: "22rem" }}>
+                      <Card.Body>
+                        <FormControl
+                          aria-label="search"
+                          placeholder="burger only"
+                          aria-describedby="basic-addon2"
+                          className="ml-1 mr-1 mb-2 mt-1"
+                        />
+                        <FormControl
+                          aria-label="search"
+                          placeholder="pizza only"
+                          aria-describedby="basic-addon2"
+                          className="ml-1 mr-1 mb-2 mt-1"
+                        />
+                        <FormControl
+                          aria-label="search"
+                          placeholder="burger only"
+                          aria-describedby="basic-addon2"
+                          className="ml-1 mr-1 mb-2 mt-1"
+                        />
+                      </Card.Body>
+                    </Card>
                   </Col>
                   <Col sm={12} md={10} lg={9}>
-                    {" "}
-                    <Container
-                      style={{
-                        background: "#000",
-                        marginLeft: "-15px",
-                        height: "50vh",
-                      }}
-                    >
-                      <Card style={{ height: "20%", width: "20%" }}>
-                        <Card.Img
-                          variant="top"
-                          src={Burg}
-                          width={20}
-                          height={20}
-                          alt="image"
-                          style={{
-                            cursor: "pointer",
-                            height: "17.5rem",
-                            objectFit: "cover",
-                          }}
-                          onClick={() => history.push(`/next-action/`)}
-                        />
-                        <Card.Footer>
-                          <div className="text-center">
-                            <Button
-                              variant=""
-                              style={{
-                                color: "white",
-                                outline: "none",
-                                backgroundColor: "blue",
-                              }}
-                              onClick={() => history.push(`/next-action`)}
-                            >
-                              abc
-                            </Button>
-                          </div>
-                        </Card.Footer>
-                      </Card>
+                    {/*   <Container> */}
+                    <FootItems data={paginatedItem} />
+                    <Container className="justify-content-center mt-2">
+                      <Pagination
+                        pageSize={pageSize}
+                        onNextPage={onNextPage}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                        onPreviousPage={onPreviousPage}
+                        itemsCount={filterItems?.length}
+                      />
                     </Container>
+                    {/*    </Container> */}
+
+                    {/* <Container className="text-align center mt-2">
+                      <Pagination
+                        pageSize={pageSize}
+                        onNextPage={onNextPage}
+                        currentPage={currentPage}
+                        onPageChange={handlePageChange}
+                        onPreviousPage={onPreviousPage}
+                        itemsCount={filterItems?.length}
+                      />
+                    </Container> */}
                   </Col>
                 </Row>
               </>
