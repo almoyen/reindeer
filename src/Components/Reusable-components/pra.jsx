@@ -1,30 +1,32 @@
-import { Col, Container, Jumbotron, Row } from "react-bootstrap";
+import React from "react";
+export default function FilterableProductTable() {
+  return <div>ddd</div>;
+}
 
-export default function Pra() {
+/* 
+import React, { useEffect, useState } from "react";
+import { foodChoices } from "../../utils/Options";
+export default function FilterableProductTable() {
+  const [select, setSelect] = useState([]);
+  const [itemSelect, setItemSelect] = useState({});
+  const getAllItem = () => {
+    
+    setSelect(foodChoices);
+  };
+  useEffect(() => {
+    getAllItem();
+  });
+  console.log(select);
+  console.log(itemSelect);
   return (
-    <Container>
-      <Jumbotron>
-        <Row>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-          <Col>sdfasdf</Col>
-
-          <Col>sdfasdf</Col>
-        </Row>
-        <Col>sdfasdf</Col>
-
-        <Col>sdfasdf</Col>
-        <Col>sdfasdf</Col>
-        <Col>sdfasdf</Col>
-        <Col>sdfasdf</Col>
-      </Jumbotron>
-    </Container>
+    <div>
+      {select.map((i) => (
+        <div key={i.label} onClick={() => setItemSelect(i)}>
+          {i.label}
+        </div>
+      ))}
+    </div>
   );
 }
+
+ */

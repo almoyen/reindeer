@@ -3,10 +3,10 @@ import React from "react";
 //import Footer from "../Footer";
 import OrderForm from "../OrderForm";
 
-function MainPage({ searchInput, setSearchInput }) {
+function MainPage({ searchField, setSearchField }) {
   return (
     <>
-      <OrderForm searchInput={searchInput} setSearchInput={setSearchInput} />
+      <OrderForm searchInput={searchField} setSearchField={setSearchField} />
       {/*    <SubPage />
       <Footer /> */}
     </>

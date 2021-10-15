@@ -4,7 +4,7 @@ import { LandingPage, FoodContent, Navbar } from "./Components";
 import Pra from "./Components/Reusable-components/pra";
 
 function App() {
-  const [searchInput, setSearchInput] = useState("");
+  const [searchField, setSearchInput] = useState("");
 
   return (
     <>
@@ -17,7 +17,7 @@ function App() {
           render={(props) => (
             <LandingPage
               {...props}
-              searchInput={searchInput}
+              searchField={searchField}
               setSearchInput={setSearchInput}
             />
           )}
