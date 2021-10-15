@@ -245,19 +245,27 @@ function FoodContent({ searchField }) {
                     </Col>
 
                     <Col sm={12} md={10} lg={9}>
-                      <Container style={{ width: "100%" }}>
+                      <Container style={{}}>
                         <FootItems data={paginatedItem} />
+                        <Pagination
+                          pageSize={pageSize}
+                          onNextPage={onNextPage}
+                          currentPage={currentPage}
+                          onPageChange={handlePageChange}
+                          onPreviousPage={onPreviousPage}
+                          itemsCount={filterItems?.length}
+                        />
                       </Container>
-                      {/*   <Container className="justify-content-center mt-2"> */}
-                      <Pagination
-                        pageSize={pageSize}
-                        onNextPage={onNextPage}
-                        currentPage={currentPage}
-                        onPageChange={handlePageChange}
-                        onPreviousPage={onPreviousPage}
-                        itemsCount={filterItems?.length}
-                      />
-                      {/*   </Container> */}
+                      {/* <Container className="">
+                        <Pagination
+                          pageSize={pageSize}
+                          onNextPage={onNextPage}
+                          currentPage={currentPage}
+                          onPageChange={handlePageChange}
+                          onPreviousPage={onPreviousPage}
+                          itemsCount={filterItems?.length}
+                        />
+                      </Container> */}
                     </Col>
                   </Row>
                 </Container>
