@@ -35,22 +35,22 @@ function FoodContent({ searchField }) {
     getFoodData();
   }, []);
 
-  const filterItems = allData.filter((m) => {
+  const filterItems = allData.filter((el) => {
     if (
       searchField &&
-      !m.item.toLowerCase().includes(searchField.toLowerCase())
+      !el.item.toLowerCase().includes(searchField.toLowerCase())
     ) {
       return false;
     }
     if (
       itemSelect.length > 0 &&
-      !itemSelect.some((catagory) => m.foodChoices.includes(catagory))
+      !itemSelect.some((catagory) => el.foodChoices.includes(catagory))
     ) {
       return false;
     }
     if (
       searchItemField &&
-      m.ingredient.toLowerCase().includes(searchItemField.toLowerCase())
+      el.ingredient.toLowerCase().includes(searchItemField.toLowerCase())
     ) {
       return false;
     }
@@ -105,36 +105,39 @@ function FoodContent({ searchField }) {
           <Jumbotron>
             <Container className="m-4 pt-5">
               <>
-                <Row>
-                  <Col sm={12} md={10} lg={3} /* my={1} */>
-                    <Count item={filterItems} label="result" />
-                  </Col>
-                  <Col sm={12} md={10} lg={9}>
-                    <ListGroup horizontal style={{ width: "100%" }}>
-                      {mealClass.map((item) => {
-                        return (
-                          <ListGroup.Item
-                            key={item.id}
-                            style={{
-                              margin: "1.1rem",
-                              width: "100px",
-                            }}
-                          >
-                            {item.label}
-                          </ListGroup.Item>
-                        );
-                      })}
-                    </ListGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <>
+                <Container>
+                  <Row>
+                    <Col sm={12} md={10} lg={3} /* my={1} */>
+                      <Count item={filterItems} label="result" />
+                    </Col>
+                    <Col sm={12} md={10} lg={9}>
+                      <ListGroup horizontal>
+                        {mealClass.map((item) => {
+                          return (
+                            <ListGroup.Item
+                              key={item.id}
+                              style={{
+                                margin: "1.1rem",
+                                width: "100%",
+                              }}
+                            >
+                              {item.label}
+                            </ListGroup.Item>
+                          );
+                        })}
+                      </ListGroup>
+                    </Col>
+                  </Row>
+                </Container>
+                <Container /* style={{ width: "100%" }} */>
+                  <Row>
                     <Col sm={12} md={10} lg={3}>
                       <Card
                         style={{
                           height: "50rem",
                           backgroundColor: "black",
                           borderRadius: "26px",
+                          width: "100%",
                         }}
                       >
                         <Card.Body className="text-right m-3">
@@ -228,11 +231,11 @@ function FoodContent({ searchField }) {
                         </Card.Body>
                       </Card>
                     </Col>
-                  </>
-                  <Col sm={12} md={10} lg={9}>
-                    {/*   <Container> */}
-                    <FootItems data={paginatedItem} />
-                    <Container className="justify-content-center mt-2">
+
+                    <Col sm={12} md={10} lg={9}>
+                      {/*   <Container> */}
+                      <FootItems data={paginatedItem} />
+                      {/*   <Container className="justify-content-center mt-2"> */}
                       <Pagination
                         pageSize={pageSize}
                         onNextPage={onNextPage}
@@ -241,9 +244,10 @@ function FoodContent({ searchField }) {
                         onPreviousPage={onPreviousPage}
                         itemsCount={filterItems?.length}
                       />
-                    </Container>
-                  </Col>
-                </Row>
+                      {/*   </Container> */}
+                    </Col>
+                  </Row>
+                </Container>
               </>
             </Container>
           </Jumbotron>
