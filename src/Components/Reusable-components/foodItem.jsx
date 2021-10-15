@@ -1,4 +1,4 @@
-import { Button, Card, CardDeck, Container, Jumbotron } from "react-bootstrap";
+import { Card, CardDeck, Container } from "react-bootstrap";
 import { EmojiHeartEyesFill } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
 
@@ -7,9 +7,9 @@ export default function FootItems({ data }) {
 
   return (
     <Container
-      style={{
-        width: "100%",
-      }}
+    // style={{
+    //   width: "100%",
+    // }}
     >
       <CardDeck
         /*  className="w-40" */
@@ -17,15 +17,13 @@ export default function FootItems({ data }) {
           display: "flex",
           flexWrap: "wrap",
           flexDirection: "row",
+          // width: "100%",
         }}
       >
         {data.map((i, index) => {
-          const { id, image, item } = i;
+          const { id, image, item, ingredient } = i;
           return (
-            <Card
-              key={index}
-              style={{ /*  width: "23.5rem", */ margin: "0.5rem" }}
-            >
+            <Card key={index} style={{ width: "20rem", margin: "0.9rem" }}>
               {image === "" ? (
                 <EmojiHeartEyesFill
                   style={{ color: "#000", cursor: "pointer" }}
@@ -43,17 +41,17 @@ export default function FootItems({ data }) {
                     objectFit: "cover",
                   }}
                   onClick={() => history.push(`/item/${id}`)}
-                />
+                ></Card.Img>
               )}
-
-              <Card.Body>
-                <Card.Title>{item}</Card.Title>
-                {/*  <Card.Text>
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
-                  </Card.Text> */}
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
+              <Card.ImgOverlay style={{ color: "#fff" }}>
+                <Card.Title>
+                  {" "}
+                  <h4>{item}</h4>
+                </Card.Title>
+                <Card.Text>
+                  <h5>{ingredient}</h5>
+                </Card.Text>
+              </Card.ImgOverlay>
             </Card>
           );
         })}
@@ -61,7 +59,7 @@ export default function FootItems({ data }) {
     </Container>
   );
 }
-/*** 
+/***
               <Card key={index}>
                 <Card.Img
                   variant="top"

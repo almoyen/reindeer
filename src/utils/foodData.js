@@ -1,4 +1,10 @@
-import Pic from "../Images/markx.png";
+import Pic1 from "../Images/1.jpg";
+import Pic2 from "../Images/2.jpg";
+import Pic3 from "../Images/3.jpg";
+import Pic4 from "../Images/4.jpg";
+import Pic5 from "../Images/5.jpg";
+import Pic6 from "../Images/6.jpg";
+
 export const FoodData = [
   {
     id: "1",
@@ -7,7 +13,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic1,
     foodChoices: ["Non-Veg"],
   },
   {
@@ -18,7 +24,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic2,
 
     foodChoices: ["Non-Veg"],
   },
@@ -29,7 +35,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic3,
     foodChoices: ["Veg"],
   },
   {
@@ -39,7 +45,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic4,
     foodChoices: ["Lacto Veg"],
   },
   {
@@ -49,7 +55,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic5,
     foodChoices: ["Non-Veg"],
   },
   {
@@ -59,7 +65,7 @@ export const FoodData = [
     available: true,
     country: "Finland",
     discount: "FI",
-    image: Pic,
+    image: Pic6,
     foodChoices: ["Lactose Free"],
   },
   {
