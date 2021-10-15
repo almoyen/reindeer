@@ -23,7 +23,7 @@ export default function FootItems({ data }) {
         {data.map((i, index) => {
           const { id, image, item, ingredient } = i;
           return (
-            <Card key={index} style={{ width: "20rem", margin: "0.9rem" }}>
+            <Card key={index} style={{ width: "20rem", margin: "0.7rem" ,border:"none" }}>
               {image === "" ? (
                 <EmojiHeartEyesFill
                   style={{ color: "#000", cursor: "pointer" }}
@@ -37,7 +37,9 @@ export default function FootItems({ data }) {
                   src={image}
                   style={{
                     cursor: "pointer",
+                    borderRadius: "26px",
                     height: "17.5rem",
+                    // width:"10rem",
                     objectFit: "cover",
                   }}
                   onClick={() => history.push(`/item/${id}`)}
