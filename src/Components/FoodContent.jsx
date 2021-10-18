@@ -22,6 +22,7 @@ function FoodContent({ searchField }) {
   const [select, setSelect] = useState([]);
   const [itemSelect, setItemSelect] = useState([]);
   const [searchItemField, setSearchItemsField] = useState("");
+  const [selectedMeal, setSelectedMeal] = useState(null);
 
   const getOptions = () => {
     setSelect(Options);
@@ -68,6 +69,10 @@ function FoodContent({ searchField }) {
   const onNextPage = () => {
     setCurrentPage(currentPage + 1);
   };
+  const onItemSelect = (ml) => {
+    setSelectedMeal(ml);
+    setCurrentPage(1);
+  };
 
   const handleCheckCatagories = (e) => {
     if (e.target.checked) {
@@ -111,6 +116,40 @@ function FoodContent({ searchField }) {
                       <Count item={filterItems} label="result" />
                     </Col>
                     <Col sm={12} md={10} lg={9}>
+                      {/* 
+                         <ListGroup horizontal>
+                        {mealClass.map((item) => {
+                          return (
+                            <ListGroup.Item
+                              key={item.id}
+                              onClick={() => {
+                                onItemSelect(item.label);
+                              }}
+                              style={
+                                item.label === selectedMeal
+                                  ? {
+                                      color: "#ffffff",
+                                      cursor: "pointer",
+                                      backgroundColor: "#808080",
+                                    }
+                                  : {
+                                      color: "#000000",
+                                      cursor: "pointer",
+                                      backgroundColor: "#ffffff",
+                                    }
+                                    margin: "1.1rem",
+                                width: "100%", 
+                              }
+                              >
+                                {item.label}
+                              </ListGroup.Item>
+                            );
+                          })}
+                        </ListGroup>
+                      
+                      
+                      
+                      */}
                       <ListGroup horizontal>
                         {mealClass.map((item) => {
                           return (
@@ -125,12 +164,32 @@ function FoodContent({ searchField }) {
                             // </ListGroup.Item>
                             <Button
                               key={item.id}
-                              variant="secondary"
-                              style={{
+                              /* variant="secondary" */
+                              onClick={() => {
+                                onItemSelect(item.label);
+                              }}
+                              style={
+                                item.label === selectedMeal
+                                  ? {
+                                      color: "#ffffff",
+                                      cursor: "pointer",
+                                      backgroundColor: "#808080",
+                                      margin: "1.1rem",
+                                      width: "100%",
+                                    }
+                                  : {
+                                      color: "#000000",
+                                      cursor: "pointer",
+                                      backgroundColor: "#ffffff",
+                                      margin: "1.1rem",
+                                      width: "100%",
+                                    }
+                              }
+                              /*   style={{
                                 margin: "0.9rem",
                                 width: "100%",
                                 backgroundColor: "none",
-                              }}
+                              }} */
                             >
                               {" "}
                               {item.label}
