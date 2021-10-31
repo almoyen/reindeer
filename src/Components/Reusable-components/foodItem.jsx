@@ -6,18 +6,14 @@ export default function FootItems({ data }) {
   const history = useHistory();
 
   return (
-    <Container
-    // style={{
-    //   width: "100%",
-    // }}
-    >
+    <Container>
       <CardDeck
-        /*  className="w-40" */
+        
         style={{
           display: "flex",
           flexWrap: "wrap",
           flexDirection: "row",
-          // width: "100%",
+          
         }}
       >
         {data.map((i, index) => {
@@ -61,22 +57,3 @@ export default function FootItems({ data }) {
     </Container>
   );
 }
-/***
-              <Card key={index}>
-                <Card.Img
-                  variant="top"
-                  src={image}
-                  width={20}
-                  height={20}
-                  alt="image"
-                  style={{
-                    cursor: "pointer",
-                    height: "17.5rem",
-                    objectFit: "cover",
-                  }}
-                  onClick={() => history.push(`/next-action/${id}`)}
-                />
-                {item}
-              </Card>
-
-    */
