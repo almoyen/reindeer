@@ -1,20 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Options } from "../utils/Options";
-import { paginate } from "../utils/paginate";
-import { FoodData } from "../utils/foodData";
+import { paginate, Options } from "../utils";
+//import { FoodData } from "../utils/foodData";
 import Count from "./Reusable-components/count";
-import {
-  /*  Button, */ Card,
-  Col,
-  FormControl,
-  ListGroup,
-} from "react-bootstrap";
+import { Card, Col, FormControl, ListGroup } from "react-bootstrap";
 import FootItems from "./Reusable-components/foodItem";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import Pagination from "../Components/Reusable-components/Pagination";
+import Pagination from "./Reusable-components/Pagination";
+import axios from "axios";
+import { end_points } from "../utils/BACKEND_URL";
+//import useSWR from "swr";
 
 function FoodContent({ searchField }) {
+  const { getallItems } = end_points;
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [distance, setDistance] = useState(0);
@@ -28,12 +26,38 @@ function FoodContent({ searchField }) {
     setSelect(Options);
   };
 
-  const getFoodData = () => {
-    setAllData(FoodData);
+  /* const getQueries = async (url) => {
+    try {
+      const { data } = await axios.get(url);
+      return data;
+    } catch ({ response, message }) {
+      if (response.status === 404) {
+        window.location("/not-found");
+      }
+    }
   };
+
+  const { data: FoodData } = useSWR("localhost:8000/api/menus", getQueries); */
+
+  const getAllData = async () => {
+    try {
+      const respond = await axios.get(getallItems);
+      setAllData(respond.data.foodData);
+    } catch (error) {
+      console.log(error.message);
+    }
+    /* try {
+      axios.get(getallItems).then((response) => setAllData(response.data));
+    } catch (error) {
+      console.error(error);
+    } */
+  };
+  // console.log("allData", allData);
+
   useEffect(() => {
     getOptions();
-    getFoodData();
+    getAllData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const filterItems = allData.filter((el) => {
@@ -94,7 +118,7 @@ function FoodContent({ searchField }) {
     { id: 4, label: "children's" },
   ];
 
-  console.log("select", select);
+  console.log("filterItems", filterItems);
   return (
     <>
       <div className="m-2" style={{ height: "100vh", width: "100%" }}>
@@ -116,52 +140,9 @@ function FoodContent({ searchField }) {
                       <Count item={filterItems} label="result" />
                     </Col>
                     <Col sm={12} md={10} lg={9}>
-                      {/* 
-                         <ListGroup horizontal>
-                        {mealClass.map((item) => {
-                          return (
-                            <ListGroup.Item
-                              key={item.id}
-                              onClick={() => {
-                                onItemSelect(item.label);
-                              }}
-                              style={
-                                item.label === selectedMeal
-                                  ? {
-                                      color: "#ffffff",
-                                      cursor: "pointer",
-                                      backgroundColor: "#808080",
-                                    }
-                                  : {
-                                      color: "#000000",
-                                      cursor: "pointer",
-                                      backgroundColor: "#ffffff",
-                                    }
-                                    margin: "1.1rem",
-                                width: "100%", 
-                              }
-                              >
-                                {item.label}
-                              </ListGroup.Item>
-                            );
-                          })}
-                        </ListGroup>
-                      
-                      
-                      
-                      */}
                       <ListGroup horizontal>
                         {mealClass.map((item) => {
                           return (
-                            // <ListGroup.Item
-                            //   key={item.id}
-                            //   style={{
-                            //     margin: "1.1rem",
-                            //     width: "100%",
-                            //   }}
-                            // >
-                            //   {item.label}
-                            // </ListGroup.Item>
                             <Button
                               key={item.id}
                               /* variant="secondary" */
@@ -185,11 +166,6 @@ function FoodContent({ searchField }) {
                                       width: "100%",
                                     }
                               }
-                              /*   style={{
-                                margin: "0.9rem",
-                                width: "100%",
-                                backgroundColor: "none",
-                              }} */
                             >
                               {" "}
                               {item.label}
@@ -338,6 +314,15 @@ function FoodContent({ searchField }) {
 }
 
 export default FoodContent;
+
+/*  const getFoodData = () => {
+    setAllData(FoodData);
+  }; */
+
+/*  useEffect(() => {
+  
+    getFoodData();
+  }, []); */
 
 /*
 import React, { useEffect, useState } from "react";
