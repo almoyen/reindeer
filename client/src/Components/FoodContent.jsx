@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { paginate, Options } from "../utils";
+import { paginate } from "../utils";
 //import { FoodData } from "../utils/foodData";
 import Count from "./Reusable-components/count";
 import { Card, Col, FormControl, ListGroup } from "react-bootstrap";
@@ -12,19 +12,19 @@ import { end_points } from "../utils/BACKEND_URL";
 //import useSWR from "swr";
 
 function FoodContent({ searchField }) {
-  const { getallItems } = end_points;
+  const { getallItems, getAllOptions } = end_points;
   const [pageSize] = useState(4);
   const [currentPage, setCurrentPage] = useState(1);
   const [distance, setDistance] = useState(0);
   const [allData, setAllData] = useState([]);
-  const [select, setSelect] = useState([]);
   const [itemSelect, setItemSelect] = useState([]);
   const [searchItemField, setSearchItemsField] = useState("");
   const [selectedMeal, setSelectedMeal] = useState(null);
+  const [options, setOptions] = useState([]);
 
-  const getOptions = () => {
+  /*  const getOptions = () => {
     setSelect(Options);
-  };
+  }; */
 
   /* const getQueries = async (url) => {
     try {
@@ -46,13 +46,15 @@ function FoodContent({ searchField }) {
     } catch (error) {
       console.log(error.message);
     }
-    /* try {
-      axios.get(getallItems).then((response) => setAllData(response.data));
-    } catch (error) {
-      console.error(error);
-    } */
   };
-  // console.log("allData", allData);
+  const getOptions = async () => {
+    try {
+      const respond = await axios.get(getAllOptions);
+      setOptions(respond.data.Options);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     getOptions();
@@ -223,8 +225,8 @@ function FoodContent({ searchField }) {
                               style={{ color: "#fff" }}
                             >
                               <Col /*sm={10}*/>
-                                {select.foodChoices &&
-                                  select.foodChoices?.map((i) => {
+                                {options.foodChoices &&
+                                  options.foodChoices?.map((i) => {
                                     return (
                                       <div
                                         key={i.id}
@@ -291,16 +293,6 @@ function FoodContent({ searchField }) {
                           itemsCount={filterItems?.length}
                         />
                       </Container>
-                      {/* <Container className="">
-                        <Pagination
-                          pageSize={pageSize}
-                          onNextPage={onNextPage}
-                          currentPage={currentPage}
-                          onPageChange={handlePageChange}
-                          onPreviousPage={onPreviousPage}
-                          itemsCount={filterItems?.length}
-                        />
-                      </Container> */}
                     </Col>
                   </Row>
                 </Container>

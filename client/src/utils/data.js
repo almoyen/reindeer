@@ -1,4 +1,4 @@
-export const finlandCity = [
+/* export const finlandCity = [
   {
     city: "Helsinki",
     lat: "60.1756",
@@ -3586,3 +3586,4 @@ export const finlandCity = [
     population_proper: "",
   },
 ];
+ */

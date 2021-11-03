@@ -3,38 +3,44 @@ const cors = require("cors");
 //const bodyParser = require("body-parser");
 
 const foodData = require("./data/footdata.json");
+const finlandCity = require("./data/cities.json");
+const options = require("./data/options.json");
 const app = express();
 //app.use(bodyParser());
 app.use(cors());
 const port = 5000;
 
-/* const getWelcomeMessage = (req, res) => {
-  res.send("<em>Reindeer food service for train passengers</em>");
-}; */
+app.use("/api/attachment/foods", express.static("./public/images"));
 
-/* const getAllMenus = (req, res) => {
-  try {
-    res.send(foodData);
-  } catch (error) {
-    console.log(error);
-  }
-};
- */
-/* const postDepartureInfo = (req, res) => {
-  const departureInfo = req.body;
-  res.send(departureInfo);
-};
- */
 // GET
+
 app.get("/", (req, res) => {
   res.send("<em>Reindeer food service for train passengers</em>");
 });
 
+//menus
 app.get(`/api/menus`, (req, res) => {
   try {
     res.send(foodData);
   } catch (error) {
-    console.log(error);
+    console.log(error.message);
+  }
+});
+
+//cities
+app.get(`/api/cities`, (req, res) => {
+  try {
+    res.send(finlandCity);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+//options for food filter
+app.get(`/api/options`, (req, res) => {
+  try {
+    res.send(options);
+  } catch (error) {
+    console.log(error.message);
   }
 });
 

@@ -1,14 +1,16 @@
 import axios from "axios";
-//import Select from "react-select";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { finlandCity } from "../utils/data";
+//import { finlandCity } from "../utils/data";
 import React, { useEffect, useState } from "react";
 import { Col, Container, Jumbotron, Row, Button } from "react-bootstrap";
+import { end_points } from "../utils";
 
-function OrderForm({ searchInput, setSearchInput }) {
+function OrderForm({ searchInput }) {
   const history = useHistory();
   const [trains, setTrains] = useState([]);
+  const [city, setCities] = useState([]);
+  const { getAllCities } = end_points;
 
   const getTrainModel = () => {
     try {
@@ -23,9 +25,19 @@ function OrderForm({ searchInput, setSearchInput }) {
       console.log(error);
     }
   };
+  const getFinlandCities = async () => {
+    try {
+      const respond = await axios.get(getAllCities);
+      setCities(respond.data.finlandCity);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   useEffect(() => {
     getTrainModel();
+    getFinlandCities();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const routeToNextPage = () => {
@@ -62,17 +74,6 @@ function OrderForm({ searchInput, setSearchInput }) {
                       where
                     </Form.Label>
 
-                    {/*  <Select
-                      isMulti
-                      name="cities"
-                      type="text"
-                      onMenuOpen={filterCity}
-                      options={OnlyCity()}
-                      onChange={() => handleChange()}
-                      data-live-search="true"
-                      className="basic-multi-select"
-                      classNamePrefix="select"
-                    /> */}
                     <Form.Group>
                       <Form.Control
                         as="select"
@@ -80,7 +81,7 @@ function OrderForm({ searchInput, setSearchInput }) {
                         placeholder="search city"
                       >
                         {searchInput === ""
-                          ? finlandCity.map((m) => {
+                          ? city.map((m) => {
                               return (
                                 <option placeholder="search city" key={m.city}>
                                   {m.city}
@@ -98,23 +99,10 @@ function OrderForm({ searchInput, setSearchInput }) {
                     >
                       destination
                     </Form.Label>
-                    {/*  <Select
-                      
-                      style={{ backgroundColor: "#fff" }}
-                      isMulti
-                      name="cities"
-                      onMenuOpen={filterCity}
-                      options={filterCity.map((i) => ({
-                        label: i.city,
-                        value: i.country,
-                      }))}
-                      className="basic-multi-select"
-                      classNamePrefix="select"
-                    /> */}
                     <Form.Group>
                       <Form.Control as="select" isMulti>
                         {searchInput === ""
-                          ? finlandCity.map((m) => {
+                          ? city.map((m) => {
                               return <option key={m.city}>{m.city}</option>;
                             })
                           : null}
@@ -149,18 +137,6 @@ function OrderForm({ searchInput, setSearchInput }) {
                     >
                       train model
                     </Form.Label>
-                    {/*  <Select
-                      isMulti
-                      name="cities"
-                      
-                      options={trains.map((i) => ({
-                        label: i.trainType + i.trainNumber,
-                        value: i.trainType + i.trainNumber,
-                      }))}
-                      className="basic-multi-select"
-                      classNamePrefix="select"
-                      onChange={() => console.log("something changed")}
-                    /> */}
                     <Form.Group>
                       <Form.Control as="select" isMulti>
                         {trains.map((i) => {

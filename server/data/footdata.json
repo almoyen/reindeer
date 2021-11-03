@@ -7,7 +7,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic1",
+      "image": "/api/attachment/foods/1.jpg",
       "foodChoices": ["Non-Veg"]
     },
     {
@@ -18,7 +18,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic2",
+      "image": "/api/attachment/foods/2.jpg",
 
       "foodChoices": ["Non-Veg"]
     },
@@ -29,7 +29,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic3",
+      "image": "/api/attachment/foods/3.jpg",
       "foodChoices": ["Veg"]
     },
     {
@@ -39,7 +39,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic4",
+      "image": "/api/attachment/foods/4.jpg",
       "foodChoices": ["Lacto Veg"]
     },
     {
@@ -49,7 +49,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic5",
+      "image": "/api/attachment/foods/5.jpg",
       "foodChoices": ["Non-Veg"]
     },
     {
@@ -59,7 +59,7 @@
       "available": true,
       "country": "Finland",
       "discount": "FI",
-      "image": "Pic6",
+      "image": "/api/attachment/foods/6.jpg",
       "foodChoices": ["Lactose Free"]
     },
     {
