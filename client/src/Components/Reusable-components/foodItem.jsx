@@ -6,24 +6,25 @@ export default function FootItems({ data }) {
   const history = useHistory();
 
   return (
-    <Container
-    // style={{
-    //   width: "100%",
-    // }}
-    >
+    <Container>
       <CardDeck
-        /*  className="w-40" */
         style={{
           display: "flex",
           flexWrap: "wrap",
           flexDirection: "row",
-          // width: "100%",
         }}
       >
         {data.map((i, index) => {
           const { id, image, item, ingredient } = i;
           return (
-            <Card key={index} style={{ width: "20rem", margin: "0.7rem" ,border:"none" }}>
+            <Card
+              key={index}
+              style={{
+                width: "19rem",
+                margin: "0.5rem",
+                border: "none",
+              }}
+            >
               {image === "" ? (
                 <EmojiHeartEyesFill
                   style={{ color: "#000", cursor: "pointer" }}
@@ -39,7 +40,6 @@ export default function FootItems({ data }) {
                     cursor: "pointer",
                     borderRadius: "26px",
                     height: "17.5rem",
-                    // width:"10rem",
                     objectFit: "cover",
                   }}
                   onClick={() => history.push(`/item/${id}`)}
@@ -61,22 +61,3 @@ export default function FootItems({ data }) {
     </Container>
   );
 }
-/***
-              <Card key={index}>
-                <Card.Img
-                  variant="top"
-                  src={image}
-                  width={20}
-                  height={20}
-                  alt="image"
-                  style={{
-                    cursor: "pointer",
-                    height: "17.5rem",
-                    objectFit: "cover",
-                  }}
-                  onClick={() => history.push(`/next-action/${id}`)}
-                />
-                {item}
-              </Card>
-
-    */

@@ -1,37 +1,74 @@
-import useSWR from "swr";
-import axios from "axios";
-import { paginate } from "../utils";
-import Count from "./Reusable-components/count";
+import React from "react";
+export default function FilterableProductTable() {
+  return <div>ddd</div>;
+}
+
+/* 
 import React, { useEffect, useState } from "react";
-import FootItems from "./Reusable-components/foodItem";
-import Pagination from "./Reusable-components/Pagination";
-import { Form, Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { foodChoices } from "../../utils/Options";
+export default function FilterableProductTable() {
+  const [select, setSelect] = useState([]);
+  const [itemSelect, setItemSelect] = useState({});
+  const getAllItem = () => {
+    
+    setSelect(foodChoices);
+  };
+  useEffect(() => {
+    getAllItem();
+  });
+  console.log(select);
+  console.log(itemSelect);
+  return (
+    <div>
+      {select.map((i) => (
+        <div key={i.label} onClick={() => setItemSelect(i)}>
+          {i.label}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+ */
+
+/* foodData component 
+
+
+import React, { useEffect, useState } from "react";
+import { paginate } from "../utils";
+//import { FoodData } from "../utils/foodData";
+import Count from "./Reusable-components/count";
 import { Card, Col, FormControl, ListGroup } from "react-bootstrap";
+import FootItems from "./Reusable-components/foodItem";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import Pagination from "./Reusable-components/Pagination";
+import axios from "axios";
 import { end_points } from "../utils/BACKEND_URL";
+import useSWR from "swr";
 
 function FoodContent({ searchField }) {
+  async function fetcher(url) {
+    return await axios.get(url);
+  }
+  const { getallItems, getAllOptions } = end_points;
+  const { data } = useSWR(getallItems, fetcher);
   const [pageSize] = useState(4);
   const [options, setOptions] = useState([]);
+   const [allData, setAllData] = useState([]); 
   const [distance, setDistance] = useState(0);
   const [itemSelect, setItemSelect] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [searchItemField, setSearchItemsField] = useState("");
 
-  async function fetcher(url) {
-    return await axios.get(url);
-  }
-  const { getallItems, getAllOptions } = end_points;
-  const { data } = useSWR(getallItems, fetcher);
-
-  /* const getAllData = async () => {
+   const getAllData = async () => {
     try {
       const respond = await axios.get(getallItems);
       setAllData(respond.data.foodData);
     } catch (error) {
       console.log(error.message);
-    } */
+    } 
 
   const getOptions = async () => {
     try {
@@ -112,187 +149,23 @@ function FoodContent({ searchField }) {
     { id: 5, label: "children's" },
   ];
   return (
-    <div>
-      <Container className="mt-4">
-        <Jumbotron style={{ background: "grey", border: "none" }}>
-          <Row>
-            <Col lg={4} sm={4}>
-              <Card
-                className="ml-3 mr-3"
-                style={{ background: "none", border: "none" }}
-              >
-                <Card.Body>
-                  <Count item={filterItems} label="result" />
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={8} sm={10}>
-              <Card
-                className="ml-3 mr-3"
-                style={{ background: "none", border: "none" }}
-              >
-                <Card.Body>
-                  {mealClass.map((item) => {
-                    return (
-                      <Button
-                        key={item.id}
-                        onClick={() => {
-                          onItemSelect(item.label);
-                        }}
-                        style={
-                          item.label === selectedMeal
-                            ? {
-                                color: "#ffffff",
-                                cursor: "pointer",
-                                backgroundColor: "#808080",
-                                margin: "0.5rem",
-                                width: "17%",
-                              }
-                            : {
-                                color: "#000000",
-                                cursor: "pointer",
-                                backgroundColor: "#ffffff",
-                                margin: "0.5rem",
-                                width: "17%",
-                              }
-                        }
-                      >
-                        {item.label}
-                      </Button>
-                    );
-                  })}
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-          {/*           <br />
-           */}{" "}
-          <Row>
-            <Col lg={4} sm={4}>
-              <Card
-                className="ml-3 mr-3"
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: "26px",
-                }}
-              >
-                <Card.Body>
-                  <Card.Title className="text-secondary">Price</Card.Title>{" "}
-                  <Form.Group controlId="formBasicRange">
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Tooltip>
-                          {distance}
-                          {"   "}€
-                        </Tooltip>
-                      }
-                    >
-                      <Form.Control
-                        style={{ width: "12rem" }}
-                        type="range"
-                        className="mt-3"
-                        placement="top"
-                        defaultValue="{distance}"
-                        onChange={(e) => setDistance(e.target.value)}
-                      />
-                    </OverlayTrigger>
-                  </Form.Group>
-                  <Card.Title className="text-secondary mt-3">
-                    Foot Choices
-                  </Card.Title>
-                  <>
-                    <Form.Group
-                      as={Row}
-                      className="mt-4"
-                      style={{ color: "#fff" }}
-                    >
-                      <Col>
-                        {options.foodChoices &&
-                          options.foodChoices?.map((i) => {
-                            return (
-                              <div
-                                key={i.id}
-                                style={{
-                                  display: "flex",
-                                  overflow: "auto",
-                                  alignItems: "center",
-                                  flexDirection: "row",
-                                  justifyContent: "flex-start",
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: "gray" }}
-                                  type="checkbox"
-                                  name={i.label}
-                                  id={`default-${i.label}`}
-                                  onClick={handleCheckCatagories}
-                                />
-                                <span>{i.label}</span>
-                              </div>
-                            );
-                          })}
-                      </Col>
-                    </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      controlId="formGridCity"
-                      className="mt-2"
-                    >
-                      <Form.Label style={{ color: "gray" }}>
-                        <Card.Title className="text-secondary mt-3">
-                          Alergic?
-                        </Card.Title>
-                      </Form.Label>
-                      <FormControl
-                        value={searchItemField || ""}
-                        placeholder="type anything"
-                        onChange={(e) => setSearchItemsField(e.target.value)}
-                      />
-                    </Form.Group>
-                  </>
-                </Card.Body>
-              </Card>
-            </Col>
-            <Col lg={8} sm={10}>
-              <Card
-                className="ml-3 mr-3"
-                style={{ background: "none", border: "none" }}
-              >
-                <Card.Body>
-                  <FootItems data={paginatedItem} />
-                  {/*  <Card.Text>
-                    <Button className="">load more</Button>
-                  </Card.Text> */}
-                  {/* <Pagination
-                    pageSize={pageSize}
-                    onNextPage={onNextPage}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                    onPreviousPage={onPreviousPage}
-                    itemsCount={filterItems?.length}
-                  /> */}
-                </Card.Body>
-              </Card>
-            </Col>
-          </Row>
-        </Jumbotron>
-      </Container>
-    </div>
-  );
-}
-
-export default FoodContent;
-
-/* 
-  <Jumbotron>
+    <>
+      <div className="m-2" style={{ height: "100vh", width: "100%" }}>
+        <Container
+          style={{
+            backgroundColor: "#fff",
+            display: "block",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        >
+          <Jumbotron>
             <Container className="m-4 pt-5">
               <>
                 <Container>
                   <Row>
-                    <Col sm={12} md={10} lg={3}>
-                    <Count item={filterItems} label="result" />
+                    <Col sm={12} md={10} lg={3} >
+                      <Count item={filterItems} label="result" />
                     </Col>
                     <Col sm={12} md={10} lg={9}>
                       <ListGroup horizontal>
@@ -374,7 +247,7 @@ export default FoodContent;
                               className="mt-4"
                               style={{ color: "#fff" }}
                             >
-                              <Col >
+                              <Col>
                                 {options.foodChoices &&
                                   options.foodChoices?.map((i) => {
                                     return (
@@ -445,7 +318,12 @@ export default FoodContent;
               </>
             </Container>
           </Jumbotron>
-
+        </Container>
+      </div>
+    </>
+  );
+}
+export default FoodContent;
 */
 
 /*  const getFoodData = () => {

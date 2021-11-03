@@ -1,4 +1,4 @@
-export const Options = {
+/* export const Options = {
   foodChoices: [
     {
       id: "1",
@@ -27,3 +27,4 @@ export const Options = {
     },
   ],
 };
+ */

@@ -57,14 +57,11 @@ function OrderForm({ searchInput }) {
           <div className="m-3" style={{ color: "#FFFFFF" }}>
             checkout our
             <br />
-            <h3>Best Cousine</h3>
+            <p className="h3">Best Cousine</p>
           </div>
           <div style={{ backgroundColor: "#0000009D" }}>
             <Row>
-              <Form
-                /* onSubmit={onSubmit()} */ /* onSubmit={() => handleSubmit()} */
-                noValidate
-              >
+              <Form noValidate>
                 <Row>
                   <Col className="mt-3" style={{ flexBasis: "15rem" }}>
                     <Form.Label
