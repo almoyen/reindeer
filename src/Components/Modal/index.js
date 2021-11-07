@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
 import "./index.css";
 
+//Author:Fahid Khan
+
 const ModalConfirm = (props) => {
   const [step, setStep] = useState(1); //1, 2, 3 and 4 is finish dialog
   const [title, setTitle] = useState("Step 1: Choose Course Meal");
