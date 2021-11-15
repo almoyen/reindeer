@@ -185,131 +185,135 @@ function FoodContent({ searchField }) {
 
           <Row>
             <Col lg={4} sm={4}>
-              <Card
-                className="ml-3 mr-2"
-                style={{
-                  backgroundColor: "black",
-                  borderRadius: "26px",
-                }}
-              >
-                <Card.Body>
-                  <Card.Title className="text-secondary">Price</Card.Title>{" "}
-                  <Form.Group controlId="formBasicRange">
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={
-                        <Tooltip>
-                          {distance}
-                          {"   "}€
-                        </Tooltip>
-                      }
-                    >
-                      <Form.Control
-                        style={{ width: "12rem" }}
-                        type="range"
-                        className="mt-3"
+              <Container>
+                <Card
+                  className="ml-3 mr-2"
+                  style={{
+                    backgroundColor: "black",
+                    borderRadius: "26px",
+                  }}
+                >
+                  <Card.Body>
+                    <Card.Title className="text-secondary">Price</Card.Title>{" "}
+                    <Form.Group controlId="formBasicRange">
+                      <OverlayTrigger
                         placement="top"
-                        defaultValue="{distance}"
-                        onChange={(e) => setDistance(e.target.value)}
-                      />
-                    </OverlayTrigger>
-                  </Form.Group>
-                  <Card.Title className="text-secondary mt-3">Sort</Card.Title>
-                  <>
-                    <Form.Group
-                      as={Row}
-                      className="mt-4"
-                      style={{ color: "#fff" }}
-                    >
-                      <Col>
-                        {sortItem &&
-                          sortItem?.map((i) => {
-                            return (
-                              <div
-                                key={i.id}
-                                style={{
-                                  display: "flex",
-                                  overflow: "auto",
-                                  alignItems: "center",
-                                  flexDirection: "row",
-                                  justifyContent: "flex-start",
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: "gray" }}
-                                  type="checkbox"
-                                  name={i.label}
-                                  id={`default-${i.label}`}
-                                />
-                                <span>{i.label}</span>
-                              </div>
-                            );
-                          })}
-                      </Col>
+                        overlay={
+                          <Tooltip>
+                            {distance}
+                            {"   "}€
+                          </Tooltip>
+                        }
+                      >
+                        <Form.Control
+                          style={{ width: "12rem" }}
+                          type="range"
+                          className="mt-3"
+                          placement="top"
+                          defaultValue="{distance}"
+                          onChange={(e) => setDistance(e.target.value)}
+                        />
+                      </OverlayTrigger>
                     </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      controlId="formGridCity"
-                      className="mt-2"
-                    ></Form.Group>
-                  </>
-                  <Card.Title className="text-secondary mt-3">
-                    Foot Choices
-                  </Card.Title>
-                  <>
-                    <Form.Group
-                      as={Row}
-                      className="mt-4"
-                      style={{ color: "#fff" }}
-                    >
-                      <Col>
-                        {options.foodChoices &&
-                          options.foodChoices?.map((i) => {
-                            return (
-                              <div
-                                key={i.id}
-                                style={{
-                                  display: "flex",
-                                  overflow: "auto",
-                                  alignItems: "center",
-                                  flexDirection: "row",
-                                  justifyContent: "flex-start",
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: "gray" }}
-                                  type="checkbox"
-                                  name={i.label}
-                                  id={`default-${i.label}`}
-                                  onClick={handleCheckCatagories}
-                                />
-                                <span>{i.label}</span>
-                              </div>
-                            );
-                          })}
-                      </Col>
-                    </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      controlId="formGridCity"
-                      className="mt-2"
-                    >
-                      <Form.Label style={{ color: "gray" }}>
-                        <Card.Title className="text-secondary mt-3">
-                          Alergic?
-                        </Card.Title>
-                      </Form.Label>
-                      <FormControl
-                        value={searchItemField || ""}
-                        placeholder="type anything"
-                        onChange={(e) => setSearchItemsField(e.target.value)}
-                      />
-                    </Form.Group>
-                  </>
-                </Card.Body>
-              </Card>
+                    <Card.Title className="text-secondary mt-3">
+                      Sort
+                    </Card.Title>
+                    <>
+                      <Form.Group
+                        as={Row}
+                        className="mt-4"
+                        style={{ color: "#fff" }}
+                      >
+                        <Col>
+                          {sortItem &&
+                            sortItem?.map((i) => {
+                              return (
+                                <div
+                                  key={i.id}
+                                  style={{
+                                    display: "flex",
+                                    overflow: "auto",
+                                    alignItems: "center",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                  }}
+                                >
+                                  <Form.Check
+                                    className=""
+                                    style={{ color: "gray" }}
+                                    type="checkbox"
+                                    name={i.label}
+                                    id={`default-${i.label}`}
+                                  />
+                                  <span>{i.label}</span>
+                                </div>
+                              );
+                            })}
+                        </Col>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        controlId="formGridCity"
+                        className="mt-2"
+                      ></Form.Group>
+                    </>
+                    <Card.Title className="text-secondary mt-3">
+                      Foot Choices
+                    </Card.Title>
+                    <>
+                      <Form.Group
+                        as={Row}
+                        className="mt-4"
+                        style={{ color: "#fff" }}
+                      >
+                        <Col>
+                          {options.foodChoices &&
+                            options.foodChoices?.map((i) => {
+                              return (
+                                <div
+                                  key={i.id}
+                                  style={{
+                                    display: "flex",
+                                    overflow: "auto",
+                                    alignItems: "center",
+                                    flexDirection: "row",
+                                    justifyContent: "flex-start",
+                                  }}
+                                >
+                                  <Form.Check
+                                    className=""
+                                    style={{ color: "gray" }}
+                                    type="checkbox"
+                                    name={i.label}
+                                    id={`default-${i.label}`}
+                                    onClick={handleCheckCatagories}
+                                  />
+                                  <span>{i.label}</span>
+                                </div>
+                              );
+                            })}
+                        </Col>
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        controlId="formGridCity"
+                        className="mt-2"
+                      >
+                        <Form.Label style={{ color: "gray" }}>
+                          <Card.Title className="text-secondary mt-3">
+                            Alergic?
+                          </Card.Title>
+                        </Form.Label>
+                        <FormControl
+                          value={searchItemField || ""}
+                          placeholder="type anything"
+                          onChange={(e) => setSearchItemsField(e.target.value)}
+                        />
+                      </Form.Group>
+                    </>
+                  </Card.Body>
+                </Card>
+              </Container>
             </Col>
 
             <Col lg={8} sm={10}>
@@ -331,7 +335,7 @@ function FoodContent({ searchField }) {
                       key={index}
                       style={{
                         background: "none",
-                        width: "23rem",
+                        width: "20rem",
                         border: "none",
                       }}
                     >
@@ -342,9 +346,10 @@ function FoodContent({ searchField }) {
                               style={{
                                 color: "#000",
                                 cursor: "pointer",
+                                borderRadius: "26px",
+                                height: "17rem",
+                                width: "18rem",
                               }}
-                              width={100}
-                              height="17rem"
                               onClick={() => history.push(`/item/${id}`)}
                             />
                           ) : (
@@ -354,7 +359,7 @@ function FoodContent({ searchField }) {
                               style={{
                                 cursor: "pointer",
                                 borderRadius: "26px",
-                                height: "19.5rem",
+                                height: "18rem",
                                 objectFit: "cover",
                               }}
                               onClick={() => history.push(`/item/${id}`)}
@@ -371,7 +376,7 @@ function FoodContent({ searchField }) {
                               className=""
                               style={{
                                 height: "7rem",
-                                marginTop: "12.5rem",
+                                marginTop: "11rem",
                                 borderRadius: "20px",
                                 position: "relative",
                                 backgroundColor: "black",

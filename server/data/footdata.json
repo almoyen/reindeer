@@ -2,8 +2,8 @@
   "foodData": [
     {
       "id": "1",
-      "item": "item01",
-      "ingredient": "potatos,cocumber",
+      "item": "Turkish Kebab",
+      "ingredient": "Rankalainen,Kana, Salati",
       "available": true,
       "country": "Finland",
       "discount": false,
@@ -13,8 +13,8 @@
     },
     {
       "id": "2",
-      "item": "item02",
-      "ingredient": "garlic,Lamb,salad",
+      "item": "Kerrosateria",
+      "ingredient": "Hampurilainen,Raskalaiset perunat",
       "available": true,
       "country": "Finland",
       "discount": false,
@@ -26,8 +26,8 @@
     },
     {
       "id": "3",
-      "item": "item03",
-      "ingredient": "garlic, salad, Chilli ",
+      "item": "Kana-ateria",
+      "ingredient": "Hamprilainen, Ranskalaiset perunat",
       "available": true,
       "country": "Finland",
       "discount": false,
