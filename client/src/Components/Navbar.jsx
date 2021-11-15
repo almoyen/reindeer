@@ -1,13 +1,7 @@
 import React from "react";
 import Icon from "../Images/Icon.svg";
 import { useHistory } from "react-router";
-import {
-  Container,
-  Navbar,
-  Nav,
-  NavDropdown,
-  SplitButton,
-} from "react-bootstrap";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
 import { Cart } from "react-bootstrap-icons";
 function Header() {
   const history = useHistory();
