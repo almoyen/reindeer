@@ -1,28 +1,22 @@
 import useSWR from "swr";
 import axios from "axios";
-//import { paginate } from "../utils";
-import Count from "./Reusable-components/count";
-import React, { useEffect, useState } from "react";
-import FootItems from "./Reusable-components/foodItem";
-//import Pagination from "./Reusable-components/Pagination";
-import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Card, Col, FormControl } from "react-bootstrap";
-import { Container, Jumbotron, Button, Row } from "react-bootstrap";
-import { end_points } from "../utils/BACKEND_URL";
-import { EmojiHeartEyesFill } from "react-bootstrap-icons";
-//import SwitchButton from "./Reusable-components/SwitchButton";
 import { useHistory } from "react-router";
+import Count from "./Reusable-components/count";
+import { end_points } from "../utils/BACKEND_URL";
+import React, { useEffect, useState } from "react";
+//import FootItems from "./Reusable-components/foodItem";
+import { Card, Col, FormControl } from "react-bootstrap";
+import { EmojiHeartEyesFill } from "react-bootstrap-icons";
+import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Container, Jumbotron, Button, Row } from "react-bootstrap";
 
 function FoodContent({ searchField }) {
-  //const [pageSize] = useState(4);
   const [options, setOptions] = useState([]);
   const [distance, setDistance] = useState(0);
   const [itemSelect, setItemSelect] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [searchItemField, setSearchItemsField] = useState("");
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4);
-  const [itemShowmore, setItemShowMore] = useState([]);
   const history = useHistory();
 
   async function fetcher(url) {
@@ -50,7 +44,6 @@ function FoodContent({ searchField }) {
 
   useEffect(() => {
     getOptions();
-    // getAllData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -96,7 +89,6 @@ function FoodContent({ searchField }) {
 
   const onItemSelect = (ml) => {
     setSelectedMeal(ml);
-    /* setCurrentPage(1); */
   };
 
   const handleCheckCatagories = (e) => {
@@ -334,7 +326,7 @@ function FoodContent({ searchField }) {
                   const { id, image, item, price, ingredient } = i;
                   return (
                     <Card
-                      className="ml-0 mr-0"
+                      key={index}
                       style={{
                         background: "none",
                         width: "19rem",
@@ -367,22 +359,27 @@ function FoodContent({ searchField }) {
                             ></Card.Img>
                           )}
                           <Card.ImgOverlay
-                            style={{ color: "#fff", width: "100%" }}
+                            style={{
+                              color: "#fff",
+                              width: "100%",
+                              opacity: "0.8",
+                            }}
                           >
                             <div
                               className=""
                               style={{
-                                width: "",
-                                marginTop: "10rem",
+                                height: "7rem",
+                                marginTop: "13.6rem",
+                                borderRadius: "20px",
                                 position: "relative",
                                 backgroundColor: "black",
                               }}
                             >
-                              <Card.Title>
+                              <Card.Title style={{ margin: "12px" }}>
                                 {" "}
                                 <h4>{item}</h4>
                               </Card.Title>
-                              <Card.Text>
+                              <Card.Text style={{ margin: "12px" }}>
                                 <h5>{ingredient}</h5>
                                 <h5>{price} € (INC. Vat)</h5>
                               </Card.Text>
@@ -393,23 +390,24 @@ function FoodContent({ searchField }) {
                     </Card>
                   );
                 })}
-              </Container>
-              <Container
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Button
+                <br />
+                <Container
                   style={{
-                    height: "4rem",
-                    width: "9rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                  onClick={onNextPage}
                 >
-                  show more
-                </Button>
+                  <Button
+                    style={{
+                      height: "4rem",
+                      width: "9rem",
+                    }}
+                    onClick={onNextPage}
+                  >
+                    show more
+                  </Button>
+                </Container>
               </Container>
             </Col>
           </Row>
