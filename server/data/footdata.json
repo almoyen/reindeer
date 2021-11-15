@@ -6,7 +6,8 @@
       "ingredient": "potatos,cocumber",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "30",
       "image": "/api/attachment/foods/1.jpg",
       "foodChoices": ["Non-Veg"]
     },
@@ -14,10 +15,11 @@
       "id": "2",
       "item": "item02",
       "ingredient": "garlic,Lamb,salad",
-
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "32",
+
       "image": "/api/attachment/foods/2.jpg",
 
       "foodChoices": ["Non-Veg"]
@@ -28,7 +30,9 @@
       "ingredient": "garlic, salad, Chilli ",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "32",
+
       "image": "/api/attachment/foods/3.jpg",
       "foodChoices": ["Veg"]
     },
@@ -38,7 +42,9 @@
       "ingredient": "garlic, salad, Chicken, Chilli",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "32",
+
       "image": "/api/attachment/foods/4.jpg",
       "foodChoices": ["Lacto Veg"]
     },
@@ -48,7 +54,9 @@
       "ingredient": "garlic, salad, Chicken,Chilli",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "32",
+
       "image": "/api/attachment/foods/5.jpg",
       "foodChoices": ["Non-Veg"]
     },
@@ -58,7 +66,9 @@
       "ingredient": "garlic, salad, Chicken, Chilli",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
+      "price": "12",
+
       "image": "/api/attachment/foods/6.jpg",
       "foodChoices": ["Lactose Free"]
     },
@@ -68,8 +78,10 @@
       "ingredient": "garlic, salad, Chicken, Chilli",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
       "image": "",
+      "price": "22",
+
       "foodChoices": ["Gluton free"]
     },
     {
@@ -78,7 +90,7 @@
       "ingredient": "garlic, salad, Chicken, Chilli",
       "available": true,
       "country": "Finland",
-      "discount": "FI",
+      "discount": false,
       "image": "",
       "foodChoices": ["Gluton free"]
     }

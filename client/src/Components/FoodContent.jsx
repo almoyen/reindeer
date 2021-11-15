@@ -53,6 +53,7 @@ function FoodContent({ searchField }) {
   }
 
   const foodData = data.data.foodData;
+  
   const filterItems = foodData.filter((el) => {
     if (
       searchField &&
@@ -285,7 +286,7 @@ function FoodContent({ searchField }) {
 
 export default FoodContent;
 
-/* 
+/*
   <Jumbotron>
             <Container className="m-4 pt-5">
               <>
@@ -453,7 +454,7 @@ export default FoodContent;
   }; */
 
 /*  useEffect(() => {
-  
+
     getFoodData();
   }, []); */
 

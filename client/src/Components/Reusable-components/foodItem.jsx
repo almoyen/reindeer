@@ -15,7 +15,7 @@ export default function FootItems({ data }) {
         }}
       >
         {data.map((i, index) => {
-          const { id, image, item, ingredient } = i;
+          const { id, image, item, price, ingredient } = i;
           return (
             <Card
               key={index}
@@ -45,14 +45,25 @@ export default function FootItems({ data }) {
                   onClick={() => history.push(`/item/${id}`)}
                 ></Card.Img>
               )}
-              <Card.ImgOverlay style={{ color: "#fff" }}>
-                <Card.Title>
-                  {" "}
-                  <h4>{item}</h4>
-                </Card.Title>
-                <Card.Text>
-                  <h5>{ingredient}</h5>
-                </Card.Text>
+              <Card.ImgOverlay style={{ color: "#fff", width: "100%" }}>
+                <div
+                  className=""
+                  style={{
+                    width: "",
+                    marginTop: "10rem",
+                    position: "relative",
+                    backgroundColor: "black",
+                  }}
+                >
+                  <Card.Title>
+                    {" "}
+                    <h4>{item}</h4>
+                  </Card.Title>
+                  <Card.Text>
+                    <h5>{ingredient}</h5>
+                    <h5>{price} € (INC. Vat)</h5>
+                  </Card.Text>
+                </div>
               </Card.ImgOverlay>
             </Card>
           );
