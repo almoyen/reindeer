@@ -186,7 +186,7 @@ function FoodContent({ searchField }) {
           <Row>
             <Col lg={4} sm={4}>
               <Card
-                className="ml-3 mr-3"
+                className="ml-3 mr-2"
                 style={{
                   backgroundColor: "black",
                   borderRadius: "26px",
@@ -331,7 +331,7 @@ function FoodContent({ searchField }) {
                       key={index}
                       style={{
                         background: "none",
-                        width: "19rem",
+                        width: "23rem",
                         border: "none",
                       }}
                     >
