@@ -129,7 +129,9 @@ function FoodContent({ searchField }) {
   return (
     <div>
       <Container className="mt-4">
-        <Jumbotron style={{ background: "grey", border: "none" }}>
+        <Jumbotron
+          style={{ background: "white", border: "none", opacity: "1" }}
+        >
           <Row>
             <Col lg={4} sm={4}>
               <Card
@@ -369,7 +371,7 @@ function FoodContent({ searchField }) {
                               className=""
                               style={{
                                 height: "7rem",
-                                marginTop: "13.6rem",
+                                marginTop: "12.5rem",
                                 borderRadius: "20px",
                                 position: "relative",
                                 backgroundColor: "black",
