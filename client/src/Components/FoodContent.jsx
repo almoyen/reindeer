@@ -119,7 +119,7 @@ function FoodContent({ searchField }) {
           style={{ background: "white", border: "none", opacity: "1" }}
         >
           <Row>
-            <Col lg={5} md={6} sm={12}>
+            <Col lg={6} md={6} sm={12}>
               <Container style={{ display: "flex", width: "100" }}>
                 <Card
                   className="ml-3 mr-3"
@@ -134,7 +134,7 @@ function FoodContent({ searchField }) {
                 </Card>
               </Container>
             </Col>
-            <Col lg={7} md={6} sm={6} className="mt-3">
+            <Col lg={6} md={6} sm={6} className="mt-3">
               <Container>
                 {/* <Card
                   className="ml-3 mr-3"
