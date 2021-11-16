@@ -9,6 +9,7 @@ function App() {
   return (
     <>
       <Navbar />
+
       <Switch>
         <Route
           exact

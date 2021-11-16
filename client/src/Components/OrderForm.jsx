@@ -2,44 +2,43 @@ import axios from "axios";
 import { Form } from "react-bootstrap";
 import { useHistory } from "react-router";
 //import { finlandCity } from "../utils/data";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Col, Container, Jumbotron, Row, Button } from "react-bootstrap";
 import { end_points } from "../utils";
+import useSWR from "swr";
+import { Loader } from ".";
 
 function OrderForm({ searchInput }) {
   const history = useHistory();
-  const [trains, setTrains] = useState([]);
-  const [city, setCities] = useState([]);
-  const { getAllCities } = end_points;
+  //const [trains, setTrains] = useState([]);
+  //const [city, setCities] = useState([]);
+  //const [loader, setLoader] = useState(false);
 
-  const getTrainModel = () => {
-    try {
-      axios
-        .get("https://rata.digitraffic.fi/api/v1/live-trains?version=0")
-        .then((res) => res.data)
+  const { getAllCities, getAllTrainModels } = end_points;
 
-        .then((res) => {
-          setTrains(res);
-        });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  const getFinlandCities = async () => {
+  async function fetcher(url) {
+    return await axios.get(url);
+  }
+
+  const { data } = useSWR(getAllCities, fetcher);
+  const { data: trainModels } = useSWR(getAllTrainModels, fetcher);
+
+  /*  const getFinlandCities = async () => {
     try {
       const respond = await axios.get(getAllCities);
       setCities(respond.data.finlandCity);
+      setLoader(true);
     } catch (error) {
       console.log(error.message);
     }
-  };
+  }; */
 
-  useEffect(() => {
-    getTrainModel();
-    getFinlandCities();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  if (!data) {
+    return <Loader />;
+  }
+  const city = data.data.finlandCity;
+  const trains = trainModels && trainModels.data.trainModel;
+  console.log(trains);
   const routeToNextPage = () => {
     history.push("/orders");
   };
@@ -72,11 +71,7 @@ function OrderForm({ searchInput }) {
                     </Form.Label>
 
                     <Form.Group>
-                      <Form.Control
-                        as="select"
-                        isMulti
-                        placeholder="search city"
-                      >
+                      <Form.Control as="select" placeholder="search city">
                         {searchInput === ""
                           ? city.map((m) => {
                               return (
@@ -97,7 +92,7 @@ function OrderForm({ searchInput }) {
                       destination
                     </Form.Label>
                     <Form.Group>
-                      <Form.Control as="select" isMulti>
+                      <Form.Control as="select">
                         {searchInput === ""
                           ? city.map((m) => {
                               return <option key={m.city}>{m.city}</option>;
@@ -135,14 +130,17 @@ function OrderForm({ searchInput }) {
                       train model
                     </Form.Label>
                     <Form.Group>
-                      <Form.Control as="select" isMulti>
-                        {trains.map((i) => {
-                          return (
-                            <option key={i.trainNumber}>
-                              {i.trainType + i.trainNumber}
-                            </option>
-                          );
-                        })}
+                      <Form.Control as="select">
+                        {searchInput === ""
+                          ? trains &&
+                            trains.map((i) => {
+                              return (
+                                <option key={i.trainNumber}>
+                                  {i.trainType + i.trainNumber}
+                                </option>
+                              );
+                            })
+                          : null}
                       </Form.Control>
                     </Form.Group>
                   </Col>

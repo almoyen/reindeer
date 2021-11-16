@@ -5,6 +5,7 @@ const cors = require("cors");
 const foodData = require("./data/footdata.json");
 const finlandCity = require("./data/cities.json");
 const options = require("./data/options.json");
+const trainModel = require("./data/trainModel.json");
 const app = express();
 //app.use(bodyParser());
 app.use(cors());
@@ -39,6 +40,15 @@ app.get(`/api/cities`, (req, res) => {
 app.get(`/api/options`, (req, res) => {
   try {
     res.send(options);
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
+//trains from night shift
+app.get(`/api/trains`, (req, res) => {
+  try {
+    res.send(trainModel);
   } catch (error) {
     console.log(error.message);
   }

@@ -6,4 +6,5 @@ export const end_points = {
   getTrainModel: "https://rata.digitraffic.fi/api/v1/live-trains?version=0",
   getAllCities: `${url}/${BACKEND_PIN}/cities`,
   getAllOptions: `${url}/${BACKEND_PIN}/options`,
+  getAllTrainModels: `${url}/${BACKEND_PIN}/trains`,
 };

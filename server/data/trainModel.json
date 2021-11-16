@@ -1,15 +1,19 @@
 {
-  "finlandCity": [
+  "trainModel": [
     {
       "id": "1",
       "city": "Helsinki",
       "country": "Finland",
+      "trainType": "IC",
+      "trainNumber": "87",
       "iso2": "FI"
     },
     {
       "id": "2",
 
       "city": "Tampere",
+      "trainType": "C",
+      "trainNumber": "15",
       "country": "Finland",
       "iso2": "FI"
     },
@@ -17,12 +21,16 @@
       "id": "3",
       "city": "Turku",
       "country": "Finland",
+      "trainType": "IC",
+      "trainNumber": "925",
       "iso2": "FI"
     },
     {
       "id": "4",
       "city": "Seinäjoki",
       "country": "Finland",
+      "trainType": "IC",
+      "trainNumber": "750",
       "iso2": "FI"
     }
   ]

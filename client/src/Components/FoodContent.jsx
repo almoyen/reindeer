@@ -1,7 +1,7 @@
 import useSWR from "swr";
 import axios from "axios";
 import { useHistory } from "react-router";
-import Count from "./Reusable-components/count";
+import { Count, Loader } from "./index";
 import { end_points } from "../utils/BACKEND_URL";
 import React, { useEffect, useState } from "react";
 //import FootItems from "./Reusable-components/foodItem";
@@ -25,14 +25,6 @@ function FoodContent({ searchField }) {
   const { getallItems, getAllOptions } = end_points;
   const { data } = useSWR(getallItems, fetcher);
 
-  /* const getAllData = async () => {
-    try {
-      const respond = await axios.get(getallItems);
-      setAllData(respond.data.foodData);
-    } catch (error) {
-      console.log(error.message);
-    } */
-
   const getOptions = async () => {
     try {
       const respond = await axios.get(getAllOptions);
@@ -42,16 +34,18 @@ function FoodContent({ searchField }) {
     }
   };
 
+  console.log(selectedMeal);
+
   useEffect(() => {
     getOptions();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!data) {
-    return <p>Loading</p>;
+    return <Loader />;
   }
-
   const foodData = data.data.foodData;
+  console.log("data", data);
 
   const filterItems = foodData.filter((el) => {
     if (
@@ -75,14 +69,6 @@ function FoodContent({ searchField }) {
     return true;
   });
 
-  /*   const handlePageChange = (page) => {
-    setCurrentPage(page);
-  };
-
-  const onPreviousPage = () => {
-    setCurrentPage(currentPage - 1);
-  };
-*/
   const onNextPage = () => {
     setNumberofItemsShown(numberOfitemsShown + 2);
   };
@@ -133,58 +119,62 @@ function FoodContent({ searchField }) {
           style={{ background: "white", border: "none", opacity: "1" }}
         >
           <Row>
-            <Col lg={4} sm={4}>
-              <Card
-                className="ml-3 mr-3"
-                style={{ background: "none", border: "none" }}
-              >
-                <Card.Body>
-                  <Count item={filterItems} label="result" />
-                </Card.Body>
-              </Card>
+            <Col lg={5} md={6} sm={12}>
+              <Container style={{ display: "flex", width: "100" }}>
+                <Card
+                  className="ml-3 mr-3"
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
+                >
+                  <Card.Body>
+                    <Count item={filterItems} label="result" />
+                  </Card.Body>
+                </Card>
+              </Container>
             </Col>
-            <Col lg={8} sm={10}>
-              <Card
-                className="ml-3 mr-3"
-                style={{ background: "none", border: "none" }}
-              >
-                <Card.Body>
-                  {mealClass.map((item) => {
-                    return (
-                      <Button
-                        key={item.id}
-                        onClick={() => {
-                          onItemSelect(item.label);
-                        }}
-                        style={
-                          item.label === selectedMeal
-                            ? {
-                                color: "#ffffff",
-                                cursor: "pointer",
-                                backgroundColor: "#808080",
-                                margin: "0.5rem",
-                                width: "17%",
-                              }
-                            : {
-                                color: "#000000",
-                                cursor: "pointer",
-                                backgroundColor: "#ffffff",
-                                margin: "0.5rem",
-                                width: "17%",
-                              }
-                        }
-                      >
-                        {item.label}
-                      </Button>
-                    );
-                  })}
-                </Card.Body>
-              </Card>
+            <Col lg={7} md={6} sm={6} className="mt-3">
+              <Container>
+                {/* <Card
+                  className="ml-3 mr-3"
+                  style={{
+                    background: "none",
+                    border: "none",
+                  }}
+                >
+                  <Card.Body
+                    style={{
+                      display: "flex",
+                      overflow: "auto",
+                      alignItems: "center",
+                      flexDirection: "row",
+                      justifyContent: "flex-start",
+                      width: "100%",
+                    }}
+                  > */}
+                {mealClass.map((item) => {
+                  return (
+                    <Button
+                      variant="outline-secondary"
+                      className="m-2"
+                      key={item.id}
+                      onClick={() => {
+                        onItemSelect(item.label);
+                      }}
+                    >
+                      {item.label}
+                    </Button>
+                  );
+                })}
+                {/*  </Card.Body>
+                </Card> */}
+              </Container>{" "}
             </Col>
           </Row>
 
           <Row>
-            <Col lg={4} sm={4}>
+            <Col lg={5} sm={4}>
               <Container>
                 <Card
                   className="ml-3 mr-2"
@@ -316,7 +306,7 @@ function FoodContent({ searchField }) {
               </Container>
             </Col>
 
-            <Col lg={8} sm={10}>
+            <Col lg={7} sm={10}>
               <Container
                 style={{
                   background: "none",
@@ -409,6 +399,7 @@ function FoodContent({ searchField }) {
                     style={{
                       height: "4rem",
                       width: "9rem",
+                      backgroundColor: "#808080",
                     }}
                     onClick={onNextPage}
                   >
@@ -429,3 +420,10 @@ export default FoodContent;
 /*   {itemsToShow.length ? itemsToShow : "loading...."} */
 
 /*   <FootItems data={filterItems} numberofItemsShown={4} /> */
+/* const getAllData = async () => {
+  try {
+    const respond = await axios.get(getallItems);
+    setAllData(respond.data.foodData);
+  } catch (error) {
+    console.log(error.message);
+  } */
