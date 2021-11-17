@@ -119,7 +119,7 @@ function FoodContent({ searchField }) {
           style={{ background: "white", border: "none", opacity: "1" }}
         >
           <Row>
-            <Col lg={6} md={6} sm={12}>
+            <Col lg={4} md={6} sm={12}>
               <Container style={{ display: "flex", width: "100" }}>
                 <Card
                   className="ml-3 mr-3"
@@ -134,25 +134,8 @@ function FoodContent({ searchField }) {
                 </Card>
               </Container>
             </Col>
-            <Col lg={6} md={6} sm={6} className="mt-3">
-              <Container>
-                {/* <Card
-                  className="ml-3 mr-3"
-                  style={{
-                    background: "none",
-                    border: "none",
-                  }}
-                >
-                  <Card.Body
-                    style={{
-                      display: "flex",
-                      overflow: "auto",
-                      alignItems: "center",
-                      flexDirection: "row",
-                      justifyContent: "flex-start",
-                      width: "100%",
-                    }}
-                  > */}
+            <Col lg={8} md={6} sm={6} className="mt-3">
+              <Container className="topMealList">
                 {mealClass.map((item) => {
                   return (
                     <Button
@@ -174,7 +157,7 @@ function FoodContent({ searchField }) {
           </Row>
 
           <Row>
-            <Col lg={5} sm={4}>
+            <Col lg={4} md={5} sm={12}>
               <Container>
                 <Card
                   className="ml-3 mr-2"
@@ -184,12 +167,17 @@ function FoodContent({ searchField }) {
                   }}
                 >
                   <Card.Body>
-                    <Card.Title className="text-secondary">Price</Card.Title>{" "}
+                    <Card.Title className="text-secondary sidebarTitles">
+                      Price
+                    </Card.Title>{" "}
                     <Form.Group controlId="formBasicRange">
                       <OverlayTrigger
                         placement="top"
                         overlay={
-                          <Tooltip>
+                          <Tooltip
+                            className="sidebarItems"
+                            style={{ color: "light" }}
+                          >
                             {distance}
                             {"   "}€
                           </Tooltip>
@@ -205,7 +193,7 @@ function FoodContent({ searchField }) {
                         />
                       </OverlayTrigger>
                     </Form.Group>
-                    <Card.Title className="text-secondary mt-3">
+                    <Card.Title className="text-secondary mt-3 sidebarTitles">
                       Sort
                     </Card.Title>
                     <>
@@ -219,6 +207,7 @@ function FoodContent({ searchField }) {
                             sortItem?.map((i) => {
                               return (
                                 <div
+                                  className="sidebarItems"
                                   key={i.id}
                                   style={{
                                     display: "flex",
@@ -247,7 +236,7 @@ function FoodContent({ searchField }) {
                         className="mt-2"
                       ></Form.Group>
                     </>
-                    <Card.Title className="text-secondary mt-3">
+                    <Card.Title className="text-secondary mt-3 sidebarTitles">
                       Foot Choices
                     </Card.Title>
                     <>
@@ -261,6 +250,7 @@ function FoodContent({ searchField }) {
                             options.foodChoices?.map((i) => {
                               return (
                                 <div
+                                  className="sidebarItems"
                                   key={i.id}
                                   style={{
                                     display: "flex",
@@ -290,11 +280,12 @@ function FoodContent({ searchField }) {
                         className="mt-2"
                       >
                         <Form.Label style={{ color: "gray" }}>
-                          <Card.Title className="text-secondary mt-3">
+                          <Card.Title className="text-secondary mt-3 sidebarItems">
                             Alergic?
                           </Card.Title>
                         </Form.Label>
                         <FormControl
+                          className="sidebarTitles"
                           value={searchItemField || ""}
                           placeholder="type anything"
                           onChange={(e) => setSearchItemsField(e.target.value)}
@@ -306,8 +297,9 @@ function FoodContent({ searchField }) {
               </Container>
             </Col>
 
-            <Col lg={7} sm={10}>
+            <Col lg={8} md={7} sm={12}>
               <Container
+                className="sidebar_elem"
                 style={{
                   background: "none",
                   border: "none",
@@ -325,8 +317,9 @@ function FoodContent({ searchField }) {
                       key={index}
                       style={{
                         background: "none",
-                        width: "20rem",
+                        width: "22rem",
                         border: "none",
+                        margin: "0rem",
                       }}
                     >
                       <Card.Body>
@@ -348,8 +341,9 @@ function FoodContent({ searchField }) {
                               src={image}
                               style={{
                                 cursor: "pointer",
-                                borderRadius: "26px",
+                                borderRadius: "18px",
                                 height: "18rem",
+                                width: "20rem",
                                 objectFit: "cover",
                               }}
                               onClick={() => history.push(`/item/${id}`)}
@@ -358,7 +352,7 @@ function FoodContent({ searchField }) {
                           <Card.ImgOverlay
                             style={{
                               color: "#fff",
-                              width: "100%",
+                              width: "22rem",
                               opacity: "0.8",
                             }}
                           >
@@ -367,17 +361,29 @@ function FoodContent({ searchField }) {
                               style={{
                                 height: "7rem",
                                 marginTop: "11rem",
-                                borderRadius: "20px",
+                                borderBottomLeftRadius: "18px",
+                                borderBottomRightRadius: "18px",
                                 position: "relative",
                                 backgroundColor: "black",
                               }}
                             >
-                              <Card.Title style={{ margin: "12px" }}>
-                                {" "}
-                                <h4>{item}</h4>
+                              <Card.Title>
+                                <h4
+                                  className="m-4 mb-2 mt-5 listFoodItem_1"
+                                  style={{
+                                    textTransform: "uppercase",
+                                  }}
+                                >
+                                  {item}
+                                </h4>
                               </Card.Title>
-                              <Card.Text style={{ margin: "12px" }}>
-                                <h5>{ingredient}</h5>
+                              <Card.Text>
+                                <h5
+                                  className=" m-2 mt-1 listFoodItem_2"
+                                  style={{ textTransform: "full-width" }}
+                                >
+                                  {ingredient}
+                                </h5>
                                 <h5>{price} € (INC. Vat)</h5>
                               </Card.Text>
                             </div>

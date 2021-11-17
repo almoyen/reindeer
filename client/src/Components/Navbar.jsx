@@ -1,14 +1,16 @@
 import React from "react";
-import Icon from "../Images/Icon.svg";
+import Icon from "../Images/ReinDeer_logo.png";
+import CartIcon from "../Images/shopping_cart_item.png";
+
 import { useHistory } from "react-router";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { Cart } from "react-bootstrap-icons";
+//import { Cart } from "react-bootstrap-icons";
 function Header() {
   const history = useHistory();
   return (
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-        <Container fluid>
+        <Container fluid className="NavItems">
           <Navbar.Brand
             onClick={() => history.push("/")}
             style={{ cursor: "pointer" }}
@@ -16,11 +18,12 @@ function Header() {
             <img
               alt="icon"
               src={Icon}
-              width="30"
+              width="100"
               height="30"
-              className="d-inline-block align-top"
+              className="d-inline-block align-top m-2 pr-2"
             />{" "}
-            <strong>Reindeer</strong>
+            {/*             <strong>Reindeer</strong>
+             */}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
 
@@ -41,26 +44,7 @@ function Header() {
               >
                 register
               </Nav.Link>
-              {/* <Nav.Link
-                style={{ width: "40px", backgroundColor: "dark" }}
-                eventKey={2}
-                className="float-right"
-              >
-                en
-              </Nav.Link> */}
-              {/* <NavDropdown
-                alignRight
-                style={{ width: "50px", backgroundColor: "dark" }}
-                title="en"
-                id="basic-nav-dropdown-pull-righ"
-              >
-                <NavDropdown.Item
-                  style={{ width: "50px", backgroundColor: "dark" }}
-                  href="#action/3.1"
-                >
-                  fi
-                </NavDropdown.Item>
-              </NavDropdown> */}
+
               <NavDropdown
                 alignLeft
                 title="en"
@@ -81,7 +65,15 @@ function Header() {
                 eventKey={2}
                 onClick={() => history.push("/Cart")}
               >
-                <Cart size={25} />
+                <img
+                  alt="icon"
+                  src={CartIcon}
+                  width="30"
+                  height="30"
+                  className="d-inline-block align-top"
+                />
+                {/*                 <Cart size={25} />
+                 */}{" "}
               </Nav.Link>
               <Nav.Link
                 style={{ width: "60px", backgroundColor: "dark" }}

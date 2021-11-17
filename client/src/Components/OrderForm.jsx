@@ -53,12 +53,12 @@ function OrderForm({ searchInput }) {
         }}
       >
         <Jumbotron className="p-5 mt-0" style={{ width: "70rem" }}>
-          <div className="m-3" style={{ color: "#FFFFFF" }}>
-            checkout our
+          <div className="m-3 title_1" style={{ color: "#FFFFFF" }}>
+            check out our
             <br />
-            <p className="h3">Best Cousine</p>
+            <p className="h3 title_2">Best Cousine</p>
           </div>
-          <div style={{ backgroundColor: "#0000009D" }}>
+          <div className="tableoflist" style={{ backgroundColor: "#0000009D" }}>
             <Row>
               <Form noValidate>
                 <Row>
