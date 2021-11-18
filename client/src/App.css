@@ -50,7 +50,17 @@
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
 }
+.image_div {
+  background-image: url('./Images/background_picture.png');
 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.footContent {
+  background-color: #fff;
+}
 /* @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
   .sidebar_elem {
         width: '20rem';

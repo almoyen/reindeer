@@ -36,23 +36,23 @@ function OrderForm({ searchInput }) {
   if (!data) {
     return <Loader />;
   }
-  const city = data.data.finlandCity;
-  const trains = trainModels && trainModels.data.trainModel;
-  console.log(trains);
+  const city = data.data;
+  const trains = trainModels && trainModels.data;
+
+  console.log(trainModels);
   const routeToNextPage = () => {
     history.push("/orders");
   };
 
   return (
-    <>
+    <div className="image_div" style={{ height: "100vh" }}>
       <Container
-        className="p-5 mt-5 mr-5"
+        className=""
         style={{
-          height: "100vh",
           display: "flex",
         }}
       >
-        <Jumbotron className="p-5 mt-0" style={{ width: "70rem" }}>
+        <Jumbotron className="mb-5 m-5" style={{ width: "70rem" }}>
           <div className="m-3 title_1" style={{ color: "#FFFFFF" }}>
             check out our
             <br />
@@ -163,7 +163,7 @@ function OrderForm({ searchInput }) {
           </div>
         </Jumbotron>
       </Container>
-    </>
+    </div>
   );
 }
 
