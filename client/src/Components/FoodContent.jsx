@@ -342,6 +342,7 @@ function FoodContent({ searchField }) {
                               objectFit: "cover",
                               margin: ".05rem",
                               height: "15rem",
+                              borderRadius: "12px",
                             }}
                             onClick={() => history.push(`/item/${id}`)}
                           />
@@ -374,12 +375,11 @@ function FoodContent({ searchField }) {
                                 onClick={() => history.push(`/item/${id}`)}
                               />
                             )} */}
-                          {/*           <Card.ImgOverlay
+                          <Card.ImgOverlay
                             style={{
                               color: "#fff",
-                              width: "27rem",
-                              margin: "0.6rem",
-
+                              width: "24rem",
+                              margin: "rem",
                               opacity: "0.8",
                             }}
                           >
@@ -387,9 +387,10 @@ function FoodContent({ searchField }) {
                               className=""
                               style={{
                                 height: "7rem",
-                                marginTop: "11rem",
-                                borderBottomLeftRadius: "18px",
-                                borderBottomRightRadius: "18px",
+                                marginLeft: "0.05rem",
+                                marginTop: "8rem",
+                                borderBottomLeftRadius: "15px",
+                                borderBottomRightRadius: "15px",
                                 position: "relative",
                                 backgroundColor: "black",
                               }}
@@ -416,7 +417,7 @@ function FoodContent({ searchField }) {
                                 <h5>{price} € (INC. Vat)</h5>
                               </Card.Text>
                             </div>
-                          </Card.ImgOverlay> */}
+                          </Card.ImgOverlay>
                         </Card.Body>
                       </Card>
                     );
