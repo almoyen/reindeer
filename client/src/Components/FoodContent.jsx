@@ -5,14 +5,8 @@ import { Count, Loader } from "./index";
 import { end_points } from "../utils/BACKEND_URL";
 import React, { useEffect, useState } from "react";
 //import FootItems from "./Reusable-components/foodItem";
-import {
-  Card,
-  Col,
-  FormControl,
-  ListGroup,
-  ListGroupItem,
-} from "react-bootstrap";
-import { EmojiHeartEyesFill } from "react-bootstrap-icons";
+import { Card, Col, FormControl } from "react-bootstrap";
+//import { EmojiHeartEyesFill } from "react-bootstrap-icons";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
 import burgImage from "../Images/v290_52.png";
@@ -148,7 +142,7 @@ function FoodContent({ searchField }) {
                 </Container>
               </Col>
               <Col lg={9} md={6} sm={6} className="mt-3">
-                <Container className="MealList m-5">
+                <Container className="MealList m-0 mt-5">
                   {mealClass.map((item) => {
                     return (
                       <Button
@@ -464,9 +458,9 @@ export default FoodContent;
     console.log(error.message);
   } */
 
-/* 
-  
-  
+/*
+
+
     <div className="footContent">
       <Container style={{ height: "100%", width: "100%" }}>
         <Jumbotron>
@@ -699,7 +693,7 @@ export default FoodContent;
                                 onClick={() => history.push(`/item/${id}`)}
                               />
                             ) : (
-                             
+
                             <Card.Img
                             variant="top"
                             src={burgImage}
