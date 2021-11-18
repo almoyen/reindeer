@@ -1,10 +1,8 @@
 import React from "react";
 import Icon from "../Images/ReinDeer_logo.png";
 import CartIcon from "../Images/shopping_cart_item.png";
-
 import { useHistory } from "react-router";
 import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
-//import { Cart } from "react-bootstrap-icons";
 function Header() {
   const history = useHistory();
   return (
@@ -13,7 +11,7 @@ function Header() {
         <Container fluid className="NavItems">
           <Navbar.Brand
             onClick={() => history.push("/")}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", marginLeft: "6rem" }}
           >
             <img
               alt="icon"
@@ -29,13 +27,17 @@ function Header() {
 
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto"></Nav>
-            <Nav className="ml-auto paddingLeft5" pullRight>
-              {/* <Nav.Link
+            <Nav
+              className="ml-auto paddingLeft5"
+              pullRight
+              style={{ marginRight: "7rem" }}
+            >
+              <Nav.Link
                 style={{ width: "60px", backgroundColor: "dark" }}
                 onClick={() => history.push("/login")}
               >
                 login
-              </Nav.Link> */}
+              </Nav.Link>
               <Nav.Link
                 style={{ width: "60px", backgroundColor: "dark" }}
                 eventKey={2}
@@ -48,15 +50,15 @@ function Header() {
               <NavDropdown
                 alignLeft
                 title="en"
-                id="basic-nav-dropdown"
+                id="basic-nav"
                 style={{ width: "60px", marginLeft: "20px" }}
               >
-                <NavDropdown.Item
+                {/* <NavDropdown.Item
                   style={{ right: "auto", left: "auto" }}
                   href="#action/3.1"
                 >
                   fi
-                </NavDropdown.Item>{" "}
+                </NavDropdown.Item>{" "} */}
               </NavDropdown>
 
               <Nav.Link
@@ -75,12 +77,12 @@ function Header() {
                 {/*                 <Cart size={25} />
                  */}{" "}
               </Nav.Link>
-              <Nav.Link
+              {/* <Nav.Link
                 style={{ width: "60px", backgroundColor: "dark" }}
                 onClick={() => history.push("/login")}
               >
                 login
-              </Nav.Link>
+              </Nav.Link> */}
             </Nav>
           </Navbar.Collapse>
         </Container>
