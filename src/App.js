@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import { Route, Switch } from "react-router";
+import { LandingPage, FoodContent, Navbar } from "./Components";
+import Pra from "./Components/Reusable-components/pra";
 
 function App() {
+  const [searchField, setSearchInput] = useState("");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Welcome to the Reindeer Project!
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+
+      <Switch>
+        <Route
+          exact
+          path="/"
+          render={(props) => (
+            <LandingPage
+              {...props}
+              searchField={searchField}
+              setSearchInput={setSearchInput}
+            />
+          )}
+        />
+
+        <Route path="/orders" render={(props) => <FoodContent {...props} />} />
+        <Route path="/pra" render={(props) => <Pra {...props} />} />
+      </Switch>
+    </>
   );
 }
 
