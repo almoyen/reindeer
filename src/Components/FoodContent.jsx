@@ -317,7 +317,7 @@ function FoodContent({ searchField }) {
                   }}
                 >
                   {filterItems.slice(0, numberOfitemsShown).map((i, index) => {
-                    const { id, image, item, price, ingredient } = i;
+                    const { id, /* image, */ item, price, ingredient } = i;
                     return (
                       <Card
                         key={index}

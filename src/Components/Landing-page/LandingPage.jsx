@@ -6,7 +6,7 @@ import OrderForm from "../OrderForm";
 function MainPage({ searchField, setSearchField }) {
   return (
     <>
-      <OrderForm searchInput={searchField} setSearchField={setSearchField} />
+      <OrderForm searchField={searchField} setSearchField={setSearchField} />
       {/*    <SubPage />
       <Footer /> */}
     </>

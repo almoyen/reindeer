@@ -52,7 +52,7 @@
 }
 .image_div {
   background-image: url('./Images/background_picture.png');
-
+  background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
