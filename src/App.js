@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Route, Switch } from "react-router";
 import { LandingPage, FoodContent, Navbar } from "./Components";
-/* import Pra from "./Components/Reusable-components/pra"; */
+import Prac from "./Components/Reusable-components/unusedComponents";
 
 function App() {
   const [searchField, setSearchInput] = useState("");
@@ -24,7 +24,7 @@ function App() {
         />
 
         <Route path="/orders" render={(props) => <FoodContent {...props} />} />
-        {/*  <Route path="/pra" render={(props) => <Pra {...props} />} /> */}
+        <Route path="/pra" render={(props) => <Prac {...props} />} />
       </Switch>
     </>
   );

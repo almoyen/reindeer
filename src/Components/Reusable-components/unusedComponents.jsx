@@ -1,6 +1,5 @@
-import React from "react";
 export default function FilterableProductTable() {
-  return <div>ddd</div>;
+  return <div className="container-fluid p-5">asdfas</div>;
 }
 
 /* 

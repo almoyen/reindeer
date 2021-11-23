@@ -29,7 +29,6 @@ function Header() {
             <Nav className="me-auto"></Nav>
             <Nav
               className="ml-auto paddingLeft5"
-              pullRight
               style={{ marginRight: "7rem" }}
             >
               <Nav.Link
@@ -48,18 +47,10 @@ function Header() {
               </Nav.Link>
 
               <NavDropdown
-                alignLeft
                 title="en"
                 id="basic-nav"
                 style={{ width: "60px", marginLeft: "20px" }}
-              >
-                {/* <NavDropdown.Item
-                  style={{ right: "auto", left: "auto" }}
-                  href="#action/3.1"
-                >
-                  fi
-                </NavDropdown.Item>{" "} */}
-              </NavDropdown>
+              ></NavDropdown>
 
               <Nav.Link
                 className="float-end"

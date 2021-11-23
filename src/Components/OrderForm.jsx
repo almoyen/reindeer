@@ -2,53 +2,74 @@ import axios from "axios";
 import { FormControl, Image, InputGroup } from "react-bootstrap";
 import { Badge, Button, Card, Form } from "react-bootstrap";
 import { useHistory } from "react-router";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { end_points } from "../utils";
-import useSWR from "swr";
-import { Loader } from ".";
+//import { Loader } from ".";
 import { ArrowLeftRight } from "react-bootstrap-icons";
 import OrdPic from "../Images/background_picture.png";
 
 function OrderForm({ searchField }) {
   const history = useHistory();
-
   const { getAllCities, getAllTrainModels } = end_points;
+  const [whereCities, setWhereCities] = useState([]);
+  const [trainModels, setTrainModels] = useState([]);
+  const [destinationCities, setDestinationCities] = useState([]);
 
-  async function fetcher(url) {
-    return await axios.get(url);
-  }
-
-  const { data } = useSWR(getAllCities, fetcher);
-  const { data: trainModels } = useSWR(getAllTrainModels, fetcher);
-
-  /*  const getFinlandCities = async () => {
+  const getCities = () => {
+    axios
+      .get(getAllCities)
+      .then(async (response) => {
+        const wc = [];
+        for (let i = 0; i < response.data.length; i++) {
+          let obj = {};
+          obj.city = response.data[i].city;
+          obj.country = response.data[i].country;
+          obj.iso = response.data[i].iso;
+          wc.push(obj);
+        }
+        const dc = [];
+        for (let i = 0; i < response.data.length; i++) {
+          let obj = {};
+          obj.city = response.data[i].city;
+          obj.country = response.data[i].country;
+          obj.iso = response.data[i].iso;
+          dc.push(obj);
+        }
+        setWhereCities(wc);
+        setDestinationCities(dc.reverse());
+      })
+      .catch((e) => console.log(e.message));
+  };
+  const getTrainModels = async () => {
     try {
-      const respond = await axios.get(getAllCities);
-      setCities(respond.data.finlandCity);
-      setLoader(true);
+      const respond = await axios.get(getAllTrainModels);
+      setTrainModels(respond.data);
+      return respond;
     } catch (error) {
       console.log(error.message);
     }
-  }; */
+  };
 
-  if (!data) {
-    return <Loader />;
-  }
-  const city = data.data;
-  const trains = trainModels && trainModels.data;
+  useEffect(() => {
+    getCities();
+    getTrainModels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const routeToNextPage = () => {
     history.push("/orders");
   };
 
-  const getValidationState = () => {
-    const length = searchField.length;
-    if (length > 5) return "success";
-    if (length > 1) return "warning";
-    if (length > 0) return "error";
-    return null;
+  const switchToOther = () => {
+    const dc = whereCities;
+    const cd = destinationCities;
+    setDestinationCities(dc);
+    setWhereCities(cd);
+    console.log("whereCities", whereCities);
+    console.log("destinationCities", destinationCities);
   };
+
   return (
     <>
       <div style={{ position: "relative", zIndex: "-1" }}>
@@ -72,7 +93,7 @@ function OrderForm({ searchField }) {
             marginTop: "-55.5rem",
           }}
         >
-          <Badge className="m-2 mt-5">
+          <Badge className="m-2 mt-5 text-left">
             <p
               className="title_1"
               style={{
@@ -96,203 +117,199 @@ function OrderForm({ searchField }) {
 
           <Row>
             <Col lg={12} md={12} sm={12}>
-              <Container>
-                <div
+              <Container
+                style={{
+                  margin: "auto",
+                  width: "100%",
+                  fontSize: "1.7rem",
+                  position: "relative",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#0000",
+                }}
+              >
+                <Card
                   style={{
-                    margin: "auto",
-                    width: "100%",
-                    fontSize: "1.7rem",
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#0000",
+                    width: "80rem",
+                    backgroundColor: "#000009DF",
+                    opacity: "0.88",
+                    borderRadius: "15px",
                   }}
                 >
-                  <Card
-                    style={{
-                      width: "80rem",
-                      backgroundColor: "#000009DF",
-                      opacity: "0.88",
-                      borderRadius: "15px",
-                    }}
-                  >
-                    <Card.Body>
-                      <Form>
-                        <Row>
-                          <Col xs="" lg={6} className="m-0">
-                            <Form.Label
-                              className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
-                              htmlFor="inlineFormInputGroup"
-                              style={{ color: "#fff" }}
+                  <Card.Body>
+                    <Form>
+                      <Row>
+                        <Col xs="" lg={6} className="m-0">
+                          <Form.Label
+                            className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
+                            htmlFor="inlineFormInputGroup"
+                            style={{ color: "#fff" }}
+                          >
+                            where
+                          </Form.Label>
+                          <InputGroup className="mb-2 m-3">
+                            <FormControl
+                              required
+                              as="select"
+                              id="inlineFormInputGroup1"
+                              size="lg"
+                              type="text"
+                              onChange={(e) => {
+                                console.log(e.target.value);
+                              }}
+                              style={{ background: "grey", color: "#fff" }}
                             >
-                              where
-                            </Form.Label>
-                            <InputGroup
-                              className="mb-2 m-3"
-                              validationState={getValidationState}
+                              {searchField === ""
+                                ? whereCities.map((city, index) => {
+                                    return (
+                                      <option
+                                        className="tableoflist"
+                                        defaultValue={city.city}
+                                        value={city.city}
+                                        key={index}
+                                      >
+                                        {city.city}
+                                      </option>
+                                    );
+                                  })
+                                : null}
+                            </FormControl>
+                            <InputGroup.Text
+                              style={{
+                                marginLeft: "1.5rem",
+                                width: "50px",
+                                height: "50px",
+                                backgroundColor: "#0000",
+                                opacity: "0.88",
+                                border: "none",
+                              }}
                             >
-                              <FormControl
-                                required
-                                as="select"
-                                id="inlineFormInputGroup"
-                                size="lg"
-                                type="text"
-                                /*                               value={searchField}
-                                 */
-                                /*   onChange={(e) => {
-                                setSearchField(e.target.value);
-                              }} */
-                                style={{ background: "grey", color: "#fff" }}
-                              >
-                                {searchField === ""
-                                  ? city.map((m) => {
-                                      return (
-                                        <option
-                                          className="tableoflist"
-                                          key={m.city}
-                                        >
-                                          {m.city}
-                                        </option>
-                                      );
-                                    })
-                                  : null}
-                              </FormControl>
-                              <InputGroup.Text
+                              <ArrowLeftRight
                                 style={{
-                                  marginLeft: "1.5rem",
-                                  width: "50px",
-                                  height: "50px",
-                                  backgroundColor: "#0000",
-                                  opacity: "0.88",
-                                  border: "none",
-                                }}
-                              >
-                                <ArrowLeftRight
-                                  style={{
-                                    marginLeft: "0px",
-                                    backgroundColor: "none",
-                                    fontSize: "40px",
-                                    cursor: "pointer",
-                                    color: "#fff",
-                                  }}
-                                  onClick={() => console.log("clicked")}
-                                />
-                              </InputGroup.Text>{" "}
-                            </InputGroup>
-                          </Col>
-                          <Col xs="" lg={6}>
-                            <Form.Label
-                              className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
-                              htmlFor="inlineFormInputGroup"
-                              style={{ color: "#fff" }}
-                            >
-                              destination
-                            </Form.Label>
-                            <InputGroup
-                              className="mb-2 m-3"
-                              validationState={getValidationState}
-                            >
-                              <FormControl
-                                required
-                                as="select"
-                                id="inlineFormInputGroup"
-                                size="lg"
-                                type="text"
-                                style={{
-                                  marginRight: "4rem",
-                                  width: "20px",
+                                  marginLeft: "0px",
+                                  backgroundColor: "none",
+                                  fontSize: "40px",
+                                  cursor: "pointer",
                                   color: "#fff",
-                                  background: "grey",
                                 }}
-                              >
-                                {searchField === ""
-                                  ? city.map((m) => {
-                                      return (
-                                        <option
-                                          className="tableoflist"
-                                          key={m.city}
-                                        >
-                                          {m.city}
-                                        </option>
-                                      );
-                                    })
-                                  : null}
-                              </FormControl>
-                            </InputGroup>
-                          </Col>
-                        </Row>
-                        <Row className="">
-                          <Col xs="" lg={6}>
-                            <Form.Label
-                              className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
-                              htmlFor="inlineFormInputGroup"
-                              style={{ color: "#fff" }}
-                            >
-                              departure date & time
-                            </Form.Label>
-                            <InputGroup className="mb-2 m-3 tableoflist">
-                              <FormControl
-                                className=""
-                                id="inlineFormInputGroup"
-                                size="lg"
-                                type="datetime-local"
-                                style={{ background: "grey", color: "#fff" }}
+                                onClick={switchToOther}
                               />
-                              <InputGroup.Text
-                                className=""
-                                style={{
-                                  marginLeft: "1.5rem",
-                                  width: "50px",
-                                  height: "50px",
-                                  background: "none",
-                                  border: "none",
-                                }}
-                              ></InputGroup.Text>
-                            </InputGroup>
-                          </Col>
-                          <Col xs="" lg={6}>
-                            <Form.Label
-                              className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
-                              htmlFor="inlineFormInputGroup"
-                              style={{ color: "#fff" }}
+                            </InputGroup.Text>{" "}
+                          </InputGroup>
+                        </Col>
+                        <Col lg={6}>
+                          <Form.Label
+                            className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
+                            htmlFor="inlineFormInputGroup"
+                            style={{ color: "#fff" }}
+                          >
+                            destination
+                          </Form.Label>
+                          <InputGroup className="mb-2 m-3">
+                            <FormControl
+                              required
+                              as="select"
+                              id="inlineFormInputGroup2"
+                              size="lg"
+                              type="text"
+                              style={{
+                                marginRight: "4rem",
+                                width: "20px",
+                                color: "#fff",
+                                background: "grey",
+                              }}
+                              onChange={(e) => console.log(e.target.value)}
                             >
-                              train model
-                            </Form.Label>
-                            <InputGroup className="mb-2 m-3 pb-4">
-                              <FormControl
-                                required
-                                as="select"
-                                id="inlineFormInputGroup"
-                                size="lg"
-                                style={{
-                                  marginRight: "4rem",
-                                  width: "20px",
-                                  color: "#fff",
-                                  background: "grey",
-                                }}
-                              >
-                                {searchField === ""
-                                  ? trains &&
-                                    trains.map((i) => {
-                                      return (
-                                        <option
-                                          className="tableoflist"
-                                          key={i.trainNumber}
-                                        >
-                                          {i.trainType + i.trainNumber}
-                                        </option>
-                                      );
-                                    })
-                                  : null}
-                              </FormControl>
-                            </InputGroup>
-                          </Col>
-                        </Row>
-                      </Form>
-                    </Card.Body>
-                  </Card>
-                </div>
+                              {searchField === ""
+                                ? destinationCities.map((city, index) => {
+                                    return (
+                                      <option
+                                        className="tableoflist"
+                                        defaultValue={city.city}
+                                        value={city.city}
+                                        key={index}
+                                      >
+                                        {city.city}
+                                      </option>
+                                    );
+                                  })
+                                : null}
+                            </FormControl>
+                          </InputGroup>
+                        </Col>
+                      </Row>
+                      <Row className="">
+                        <Col xs="" lg={6}>
+                          <Form.Label
+                            className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
+                            htmlFor="inlineFormInputGroup"
+                            style={{ color: "#fff" }}
+                          >
+                            departure date & time
+                          </Form.Label>
+                          <InputGroup className="mb-2 m-3 tableoflist">
+                            <FormControl
+                              className=""
+                              id="inlineFormInputGroup"
+                              size="lg"
+                              type="datetime-local"
+                              style={{ background: "grey", color: "#fff" }}
+                            />
+                            <InputGroup.Text
+                              className=""
+                              style={{
+                                marginLeft: "1.5rem",
+                                width: "50px",
+                                height: "50px",
+                                background: "none",
+                                border: "none",
+                              }}
+                            ></InputGroup.Text>
+                          </InputGroup>
+                        </Col>
+                        <Col xs="" lg={6}>
+                          <Form.Label
+                            className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
+                            htmlFor="inlineFormInputGroup"
+                            style={{ color: "#fff" }}
+                          >
+                            train model
+                          </Form.Label>
+                          <InputGroup className="mb-2 m-3 pb-4">
+                            <FormControl
+                              required
+                              as="select"
+                              id="inlineFormInputGroup"
+                              size="lg"
+                              style={{
+                                marginRight: "4rem",
+                                width: "20px",
+                                color: "#fff",
+                                background: "grey",
+                              }}
+                            >
+                              {searchField === ""
+                                ? trainModels &&
+                                  trainModels.map((trainModel, index) => {
+                                    return (
+                                      <option
+                                        className="tableoflist"
+                                        key={index}
+                                      >
+                                        {trainModel.trainType +
+                                          trainModel.trainNumber}
+                                      </option>
+                                    );
+                                  })
+                                : null}
+                            </FormControl>
+                          </InputGroup>
+                        </Col>
+                      </Row>
+                    </Form>
+                  </Card.Body>
+                </Card>
               </Container>
             </Col>
           </Row>
@@ -303,10 +320,14 @@ function OrderForm({ searchField }) {
                 style={{ paddingRight: "4rem", paddingBottom: "15px" }}
               >
                 <Button
-                  style={{ width: "7rem", height: "3rem" }}
+                  style={{
+                    width: "7rem",
+                    height: "3rem",
+                    backgroundColor: "grey",
+                    border: "none",
+                  }}
                   type="submit"
                   className="mt-3"
-                  variant="secondary"
                   onClick={routeToNextPage}
                 >
                   Search

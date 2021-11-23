@@ -3,7 +3,7 @@ import React from "react";
 //import Footer from "../Footer";
 import OrderForm from "../OrderForm";
 
-function MainPage({ searchField, setSearchField }) {
+function LandingPage({ searchField, setSearchField }) {
   return (
     <>
       <OrderForm searchField={searchField} setSearchField={setSearchField} />
@@ -13,4 +13,4 @@ function MainPage({ searchField, setSearchField }) {
   );
 }
 
-export default MainPage;
+export default LandingPage;
