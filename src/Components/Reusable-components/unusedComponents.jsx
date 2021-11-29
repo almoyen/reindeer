@@ -1,5 +1,78 @@
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+//import useSWR from 'swr'
+import { end_points } from '../../utils'
+
 export default function FilterableProductTable() {
-  return <div className="container-fluid p-5">asdfas</div>;
+  const { getallItems } = end_points
+  const [allItems, setAllItems] = useState([])
+  const [isChecked, setIsChecked] = useState(false)
+  //const [allList, setAllList] = useState(false)
+
+  const getAllItems = async () => {
+    try {
+      const respond = await axios.get(getallItems)
+      if (isChecked) {
+        setAllItems(respond.data.slice(-3))
+      } else if (isChecked) {
+        setAllItems(respond.data)
+      } else {
+        setAllItems(respond.data)
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    getAllItems()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!isChecked])
+
+  /*  async function fetcher(url) {
+    return await axios.get(url)
+  }
+  const { data } = useSWR(getallItems, fetcher)
+
+  const foodData = data.data
+  console.log('data', data) */
+  const filtered = allItems.filter((ele) => {
+    if (!isChecked && !ele.length > 0 && !ele) {
+      return false
+    }
+    /* if (!allItems && ele.item.toLowerCase().includes(ele.item.toLowerCase())) {
+      return false
+    } */
+
+    return true
+  })
+
+  //console.log('setAllList', allList)
+  console.log('filtered', filtered)
+
+  /*  const handleClicked = (e) => {
+    if (!isChecked) {
+      allItems.map((el) => el)
+    } else {
+      allItems.map((el) => el)
+    }
+  } */
+
+  return (
+    <div className="container-fluid p-5">
+      <div>
+        <input type="checkbox" onClick={() => setIsChecked(isChecked)}></input>
+        <label>all results</label>
+
+        <input type="checkbox" onClick={() => setIsChecked(!isChecked)}></input>
+        <label>three</label>
+      </div>
+      {allItems &&
+        allItems.map((el) => {
+          return <div key={el.id}>{el.item}</div>
+        })}
+    </div>
+  )
 }
 
 /* 

@@ -1,4 +1,3 @@
-import useSWR from 'swr'
 import axios from 'axios'
 import { useHistory } from 'react-router'
 import { Count, Loader } from './index'
@@ -20,13 +19,8 @@ function FoodContent({ searchField }) {
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [searchItemField, setSearchItemsField] = useState('')
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
-
-  const [items, setItems] = useState([])
-
-  async function fetcher(url) {
-    return await axios.get(url)
-  }
-  const { data } = useSWR(getallItems, fetcher)
+  const [allItems, setAllItems] = useState([])
+  const [isChecked, setIsChecked] = useState(false)
 
   const getOptions = async () => {
     try {
@@ -37,32 +31,34 @@ function FoodContent({ searchField }) {
     }
   }
 
-  const getAllLists = async () => {
+  const getAllItems = async () => {
     try {
       const respond = await axios.get(getallItems)
-      setItems(respond.data)
+      if (isChecked) {
+        setAllItems(respond.data.slice(-3))
+      } else if (isChecked) {
+        setAllItems(respond.data)
+      } else {
+        setAllItems(respond.data)
+      }
     } catch (error) {
-      console.log(error.message)
+      console.log(error)
     }
   }
 
-  console.log('items', items)
   console.log(selectedMeal)
 
   useEffect(() => {
     getOptions()
-    getAllLists()
+    getAllItems()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [!isChecked])
 
-  if (!data) {
+  /* if (!data) {
     return <Loader />
-  }
+  } */
 
-  const foodData = data.data
-  console.log('data', data)
-
-  const filterItems = foodData.filter((el) => {
+  const filterItems = allItems.filter((el) => {
     if (
       searchField &&
       !el.item.toLowerCase().includes(searchField.toLowerCase())
@@ -81,7 +77,7 @@ function FoodContent({ searchField }) {
     ) {
       return false
     }
-    if (searchField && !el.slice(-3)) {
+    if (!isChecked && !el.length > 0 && !el) {
       return false
     }
     return true
@@ -136,14 +132,14 @@ function FoodContent({ searchField }) {
     }
   }
  */
-  const sorting = (e) => {
+  /* const sorting = (e) => {
     console.log('console', e.target.checked)
     if (e.target.checked) {
       setItems(items)
     } else {
       setItems()
     }
-  }
+  } */
   return (
     <>
       <div className="footContent m-5">
@@ -258,7 +254,7 @@ function FoodContent({ searchField }) {
                               <Form.Check
                                 className=""
                                 style={{ color: 'gray' }}
-                                /*   onClick={handleSort} */
+                                onClick={() => setIsChecked(!isChecked)}
                                 type="checkbox"
                               />
                               <span>All items</span>
@@ -294,7 +290,10 @@ function FoodContent({ searchField }) {
                                 className=""
                                 style={{ color: 'gray' }}
                                 //name={items}
-                                onClick={sorting}
+                                //onClick={sorting}
+                                onClick={() => {
+                                  setIsChecked(!isChecked)
+                                }}
                                 type="checkbox"
                               />
                               <span>New items</span>
