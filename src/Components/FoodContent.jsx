@@ -21,6 +21,7 @@ function FoodContent({ searchField }) {
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [searchItemField, setSearchItemsField] = useState('')
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
+  const [fade, setFade] = useState(false)
 
   const getOptions = async () => {
     try {
@@ -118,6 +119,31 @@ function FoodContent({ searchField }) {
       label: 'new Items',
     },
   ] */
+  const onMouseEnter = () => {
+    setFade(true)
+  }
+
+  const onMouseLeave = () => {
+    setFade(false)
+  }
+
+  const fadeStyle = !fade
+    ? {
+        width: '8rem',
+        height: '3rem',
+        backgroundColor: '#949494',
+        border: 'none',
+        fontSize: '1.3rem',
+        outline: 'none',
+      }
+    : {
+        width: '8rem',
+        height: '3rem',
+        backgroundColor: '#BAB6B6',
+        border: 'none',
+        fontSize: '1.3rem',
+        outline: 'none',
+      }
 
   return (
     <>
@@ -467,22 +493,16 @@ function FoodContent({ searchField }) {
                       {' '}
                       <div
                         style={{
-                          paddingRight: '0rem',
+                          paddingRight: '1rem',
                           display: 'flex',
                           flexDirection: 'row',
                           justifyContent: 'center',
                         }}
                       >
                         <Button
-                          style={{
-                            width: '8rem',
-                            height: '3rem',
-                            backgroundColor: 'grey',
-                            border: 'none',
-                            fontSize: '1.3rem',
-
-                            outline: 'none',
-                          }}
+                          onMouseOver={onMouseEnter}
+                          onMouseOut={onMouseLeave}
+                          style={fadeStyle}
                           onClick={onNextPage}
                         >
                           show more
