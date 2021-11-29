@@ -463,23 +463,32 @@ function FoodContent({ searchField }) {
                           </Card>
                         )
                       })}
-                    <div
-                      style={{
-                        paddingLeft: '20.5rem',
-                      }}
-                    >
-                      <Button
+                    <Container>
+                      {' '}
+                      <div
                         style={{
-                          width: '7rem',
-                          height: '3rem',
-                          backgroundColor: 'grey',
-                          border: 'none',
+                          paddingRight: '0rem',
+                          display: 'flex',
+                          flexDirection: 'row',
+                          justifyContent: 'center',
                         }}
-                        onClick={onNextPage}
                       >
-                        show more
-                      </Button>
-                    </div>
+                        <Button
+                          style={{
+                            width: '8rem',
+                            height: '3rem',
+                            backgroundColor: 'grey',
+                            border: 'none',
+                            fontSize: '1.3rem',
+
+                            outline: 'none',
+                          }}
+                          onClick={onNextPage}
+                        >
+                          show more
+                        </Button>
+                      </div>
+                    </Container>
                   </Container>
                 </Col>
               </Row>
