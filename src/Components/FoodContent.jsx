@@ -1,119 +1,117 @@
-import useSWR from "swr";
-import axios from "axios";
-import { useHistory } from "react-router";
-import { Count, Loader } from "./index";
-import { end_points } from "../utils/BACKEND_URL";
-import React, { useEffect, useState } from "react";
+import useSWR from 'swr'
+import axios from 'axios'
+import { useHistory } from 'react-router'
+import { Count, Loader } from './index'
+import { end_points } from '../utils/BACKEND_URL'
+import React, { useEffect, useState } from 'react'
 //import FootItems from "./Reusable-components/foodItem";
-import { Card, Col, FormControl } from "react-bootstrap";
-import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Container, Jumbotron, Button, Row } from "react-bootstrap";
-import burgImage from "../Images/v290_52.png";
+import { Card, Col, FormControl } from 'react-bootstrap'
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Container, Jumbotron, Button, Row } from 'react-bootstrap'
+import burgImage from '../Images/v290_52.png'
 
 function FoodContent({ searchField }) {
-  const history = useHistory();
-  const { getallItems, getAllOptions } = end_points;
+  const history = useHistory()
+  const { getallItems, getAllOptions } = end_points
 
-  const [options, setOptions] = useState([]);
-  const [distance, setDistance] = useState(0);
-  const [itemSelect, setItemSelect] = useState([]);
-  const [selectedMeal, setSelectedMeal] = useState(null);
-  const [searchItemField, setSearchItemsField] = useState("");
-  const [numberOfitemsShown, setNumberofItemsShown] = useState(4);
+  const [options, setOptions] = useState([])
+  const [distance, setDistance] = useState(0)
+  const [itemSelect, setItemSelect] = useState([])
+  const [selectedMeal, setSelectedMeal] = useState(null)
+  const [searchItemField, setSearchItemsField] = useState('')
+  const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
 
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([])
 
   async function fetcher(url) {
-    return await axios.get(url);
+    return await axios.get(url)
   }
-  const { data } = useSWR(getallItems, fetcher);
+  const { data } = useSWR(getallItems, fetcher)
 
   const getOptions = async () => {
     try {
-      const respond = await axios.get(getAllOptions);
-      setOptions(respond.data);
+      const respond = await axios.get(getAllOptions)
+      setOptions(respond.data)
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
-  };
+  }
 
   const getAllLists = async () => {
     try {
-      const respond = await axios.get(getallItems);
-      setItems(respond.data);
+      const respond = await axios.get(getallItems)
+      setItems(respond.data)
     } catch (error) {
-      console.log(error.message);
+      console.log(error.message)
     }
-  };
-
-  console.log("items", items);
-  console.log(selectedMeal);
-
-  useEffect(() => {
-    getOptions();
-    getAllLists();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (!data) {
-    return <Loader />;
   }
 
-  const foodData = data.data;
-  console.log("data", data);
+  console.log('items', items)
+  console.log(selectedMeal)
+
+  useEffect(() => {
+    getOptions()
+    getAllLists()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  if (!data) {
+    return <Loader />
+  }
+
+  const foodData = data.data
+  console.log('data', data)
 
   const filterItems = foodData.filter((el) => {
     if (
       searchField &&
       !el.item.toLowerCase().includes(searchField.toLowerCase())
     ) {
-      return false;
+      return false
     }
     if (
       itemSelect.length > 0 &&
       !itemSelect.some((catagory) => el.foodChoices.includes(catagory))
     ) {
-      return false;
+      return false
     }
     if (
       searchItemField &&
       el.ingredient.toLowerCase().includes(searchItemField.toLowerCase())
     ) {
-      return false;
+      return false
     }
     if (searchField && !el.slice(-3)) {
-      return false;
+      return false
     }
-    return true;
-  });
+    return true
+  })
 
   const onNextPage = () => {
-    setNumberofItemsShown(numberOfitemsShown + 2);
-  };
+    setNumberofItemsShown(numberOfitemsShown + 2)
+  }
 
   const onItemSelect = (ml) => {
-    setSelectedMeal(ml);
-  };
+    setSelectedMeal(ml)
+  }
 
   const handleCheckCatagories = (e) => {
     if (e.target.checked) {
-      setItemSelect(itemSelect.concat(e.target.name));
+      setItemSelect(itemSelect.concat(e.target.name))
     } else {
-      setItemSelect(
-        itemSelect.filter((catagory) => e.target.name !== catagory)
-      );
+      setItemSelect(itemSelect.filter((catagory) => e.target.name !== catagory))
     }
-  };
+  }
 
   //const paginatedItem = paginate(filterItems, currentPage, itemSize);
 
   const mealClass = [
-    { id: 1, label: "full meal" },
-    { id: 2, label: "course meal" },
-    { id: 3, label: "apetizer" },
-    { id: 4, label: "drink" },
+    { id: 1, label: 'full meal' },
+    { id: 2, label: 'course meal' },
+    { id: 3, label: 'apetizer' },
+    { id: 4, label: 'drink' },
     { id: 5, label: "children's" },
-  ];
+  ]
 
   /* const sortItem = [
     {
@@ -139,32 +137,32 @@ function FoodContent({ searchField }) {
   }
  */
   const sorting = (e) => {
-    console.log("console", e.target.checked);
+    console.log('console', e.target.checked)
     if (e.target.checked) {
-      setItems(items);
+      setItems(items)
     } else {
-      setItems();
+      setItems()
     }
-  };
+  }
   return (
     <>
       <div className="footContent m-5">
-        <Container style={{ height: "100%", width: "100%" }}>
+        <Container style={{ height: '100%', width: '100%' }}>
           <Jumbotron>
             <Row>
               <Col lg={3} md={6} sm={12}>
                 <Container
                   className=""
                   style={{
-                    display: "flex",
-                    width: "100%",
+                    display: 'flex',
+                    width: '100%',
                   }}
                 >
                   <Card
                     className="ml-3 mr-3"
                     style={{
-                      background: "none",
-                      border: "none",
+                      background: 'none',
+                      border: 'none',
                     }}
                   >
                     <Card.Body>
@@ -182,13 +180,13 @@ function FoodContent({ searchField }) {
                         className="m-2"
                         key={item.id}
                         onClick={() => {
-                          onItemSelect(item.label);
+                          onItemSelect(item.label)
                         }}
-                        style={{ width: "8.5rem", margin: "3rem" }}
+                        style={{ width: '8.5rem', margin: '3rem' }}
                       >
                         {item.label}
                       </Button>
-                    );
+                    )
                   })}
                 </Container>
               </Col>
@@ -200,9 +198,9 @@ function FoodContent({ searchField }) {
                   <Card
                     className="ml-3 mr-2"
                     style={{
-                      backgroundColor: "black",
-                      borderRadius: "15px",
-                      height: "100%",
+                      backgroundColor: 'black',
+                      borderRadius: '15px',
+                      height: '100%',
                     }}
                   >
                     <Card.Body>
@@ -215,15 +213,15 @@ function FoodContent({ searchField }) {
                           overlay={
                             <Tooltip
                               className="sidebarItems"
-                              style={{ color: "light" }}
+                              style={{ color: 'light' }}
                             >
                               {distance}
-                              {"   "}€
+                              {'   '}€
                             </Tooltip>
                           }
                         >
                           <Form.Control
-                            style={{ width: "12rem" }}
+                            style={{ width: '12rem' }}
                             type="range"
                             className="mt-3"
                             placement="top"
@@ -239,7 +237,7 @@ function FoodContent({ searchField }) {
                         <Form.Group
                           as={Row}
                           className="mt-4"
-                          style={{ color: "#fff" }}
+                          style={{ color: '#fff' }}
                         >
                           <Col>
                             {/*   {sortItem &&
@@ -250,34 +248,34 @@ function FoodContent({ searchField }) {
                               className="sidebarItems"
                               /*   key={i.id} */
                               style={{
-                                display: "flex",
-                                overflow: "auto",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                justifyContent: "flex-start",
+                                display: 'flex',
+                                overflow: 'auto',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
                               }}
                             >
                               <Form.Check
                                 className=""
-                                style={{ color: "gray" }}
+                                style={{ color: 'gray' }}
                                 /*   onClick={handleSort} */
-                                type="radio"
+                                type="checkbox"
                               />
                               <span>All items</span>
                             </div>
                             <div
                               className="sidebarItems"
                               style={{
-                                display: "flex",
-                                overflow: "auto",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                justifyContent: "flex-start",
+                                display: 'flex',
+                                overflow: 'auto',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
                               }}
                             >
                               <Form.Check
                                 className=""
-                                style={{ color: "gray" }}
+                                style={{ color: 'gray' }}
                                 type="checkbox"
                               />
                               <span>Best rated</span>
@@ -285,16 +283,16 @@ function FoodContent({ searchField }) {
                             <div
                               className="sidebarItems"
                               style={{
-                                display: "flex",
-                                overflow: "auto",
-                                alignItems: "center",
-                                flexDirection: "row",
-                                justifyContent: "flex-start",
+                                display: 'flex',
+                                overflow: 'auto',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                justifyContent: 'flex-start',
                               }}
                             >
                               <Form.Check
                                 className=""
-                                style={{ color: "gray" }}
+                                style={{ color: 'gray' }}
                                 //name={items}
                                 onClick={sorting}
                                 type="checkbox"
@@ -319,7 +317,7 @@ function FoodContent({ searchField }) {
                         <Form.Group
                           as={Row}
                           className="mt-4"
-                          style={{ color: "#fff" }}
+                          style={{ color: '#fff' }}
                         >
                           <Col>
                             {options &&
@@ -329,16 +327,16 @@ function FoodContent({ searchField }) {
                                     className="sidebarItems"
                                     key={i.id}
                                     style={{
-                                      display: "flex",
-                                      overflow: "auto",
-                                      alignItems: "center",
-                                      flexDirection: "row",
-                                      justifyContent: "flex-start",
+                                      display: 'flex',
+                                      overflow: 'auto',
+                                      alignItems: 'center',
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-start',
                                     }}
                                   >
                                     <Form.Check
                                       className=""
-                                      style={{ color: "gray" }}
+                                      style={{ color: 'gray' }}
                                       type="radio"
                                       name={i.label}
                                       id={`default-${i.label}`}
@@ -346,7 +344,7 @@ function FoodContent({ searchField }) {
                                     />
                                     <span>{i.label}</span>
                                   </div>
-                                );
+                                )
                               })}
                           </Col>
                         </Form.Group>
@@ -355,14 +353,14 @@ function FoodContent({ searchField }) {
                           controlId="formGridCity"
                           className="mt-2"
                         >
-                          <Form.Label style={{ color: "gray" }}>
+                          <Form.Label style={{ color: 'gray' }}>
                             <Card.Title className="text-secondary mt-3 sidebarItems">
                               Alergic?
                             </Card.Title>
                           </Form.Label>
                           <FormControl
                             className="sidebarTitles"
-                            value={searchItemField || ""}
+                            value={searchItemField || ''}
                             placeholder="type anything"
                             onChange={(e) =>
                               setSearchItemsField(e.target.value)
@@ -379,21 +377,21 @@ function FoodContent({ searchField }) {
                 <Container
                   className=""
                   style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    flexDirection: "row",
-                    margin: "0rem",
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    flexDirection: 'row',
+                    margin: '0rem',
                   }}
                 >
                   {filterItems.slice(0, numberOfitemsShown).map((i, index) => {
-                    const { id, /*  image, */ item, price, ingredient } = i;
+                    const { id, /*  image, */ item, price, ingredient } = i
                     return (
                       <Card
                         key={index}
                         className="ml-3 mr-2"
                         style={{
-                          width: "24rem",
-                          border: "none",
+                          width: '24rem',
+                          border: 'none',
                         }}
                       >
                         <Card.Body>
@@ -401,12 +399,12 @@ function FoodContent({ searchField }) {
                             variant="top"
                             src={burgImage}
                             style={{
-                              cursor: "pointer",
-                              objectFit: "cover",
-                              margin: ".05rem",
-                              height: "15rem",
-                              borderRadius: "12px",
-                              position: "relative",
+                              cursor: 'pointer',
+                              objectFit: 'cover',
+                              margin: '.05rem',
+                              height: '15rem',
+                              borderRadius: '12px',
+                              position: 'relative',
                             }}
                             onClick={() => history.push(`/item/${id}`)}
                           />
@@ -442,31 +440,31 @@ function FoodContent({ searchField }) {
 
                           <Card.ImgOverlay
                             style={{
-                              color: "#fff",
-                              opacity: "0.8",
-                              display: "flex",
-                              flexWrap: "wrap",
-                              flexDirection: "row",
-                              margin: "0rem",
+                              color: '#fff',
+                              opacity: '0.8',
+                              display: 'flex',
+                              flexWrap: 'wrap',
+                              flexDirection: 'row',
+                              margin: '0rem',
                             }}
                           >
                             <div
                               style={{
-                                height: "7rem",
-                                marginLeft: "0.05rem",
-                                width: "22rem",
-                                marginTop: "8rem",
-                                borderBottomLeftRadius: "15px",
-                                borderBottomRightRadius: "15px",
-                                backgroundColor: "black",
+                                height: '7rem',
+                                marginLeft: '0.05rem',
+                                width: '22rem',
+                                marginTop: '8rem',
+                                borderBottomLeftRadius: '15px',
+                                borderBottomRightRadius: '15px',
+                                backgroundColor: 'black',
                               }}
                             >
                               <Card.Title>
                                 <span
                                   className="m-4 mb-0 mt-0 listFoodItem_1"
                                   style={{
-                                    textTransform: "uppercase",
-                                    lineHeight: "2rem",
+                                    textTransform: 'uppercase',
+                                    lineHeight: '2rem',
                                   }}
                                 >
                                   {item}
@@ -475,13 +473,13 @@ function FoodContent({ searchField }) {
                               <Card.Text>
                                 <h5
                                   className="m-4 mt-1 listFoodItem_2"
-                                  style={{ lineHeight: "10px" }}
+                                  style={{ lineHeight: '10px' }}
                                 >
                                   {ingredient}
                                 </h5>
                                 <h5
                                   className="m-4"
-                                  style={{ lineHeight: "10px" }}
+                                  style={{ lineHeight: '10px' }}
                                 >
                                   {price} € (INC. Vat)
                                 </h5>
@@ -490,19 +488,19 @@ function FoodContent({ searchField }) {
                           </Card.ImgOverlay>
                         </Card.Body>
                       </Card>
-                    );
+                    )
                   })}
                   <div
                     style={{
-                      paddingLeft: "20.5rem",
+                      paddingLeft: '20.5rem',
                     }}
                   >
                     <Button
                       style={{
-                        width: "7rem",
-                        height: "3rem",
-                        backgroundColor: "grey",
-                        border: "none",
+                        width: '7rem',
+                        height: '3rem',
+                        backgroundColor: 'grey',
+                        border: 'none',
                       }}
                       onClick={onNextPage}
                     >
@@ -516,10 +514,10 @@ function FoodContent({ searchField }) {
         </Container>
       </div>
     </>
-  );
+  )
 }
 
-export default FoodContent;
+export default FoodContent
 
 /*   {itemsToShow.length ? itemsToShow : "loading...."} */
 
