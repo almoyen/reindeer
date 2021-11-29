@@ -8,14 +8,16 @@ export default function FilterableProductTable() {
   const [allItems, setAllItems] = useState([])
   const [isChecked, setIsChecked] = useState(false)
   //const [allList, setAllList] = useState(false)
+  const [forceUpdate, setForceUpdate] = useState()
 
   const getAllItems = async () => {
     try {
       const respond = await axios.get(getallItems)
       if (isChecked) {
         setAllItems(respond.data.slice(-3))
-      } else if (isChecked) {
+      } else if (!isChecked) {
         setAllItems(respond.data)
+        setForceUpdate(!forceUpdate)
       } else {
         setAllItems(respond.data)
       }
@@ -24,6 +26,8 @@ export default function FilterableProductTable() {
     }
   }
 
+  //const forceupdate = useCallback(() => forceUpdate(2000), [])
+  //setForceUpdate(!forceUpdate)
   useEffect(() => {
     getAllItems()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -61,7 +65,11 @@ export default function FilterableProductTable() {
   return (
     <div className="container-fluid p-5">
       <div>
-        <input type="checkbox" onClick={() => setIsChecked(isChecked)}></input>
+        <input
+          type="checkbox"
+          /*  isChecked={!isChecked} */
+          onClick={forceUpdate}
+        ></input>
         <label>all results</label>
 
         <input type="checkbox" onClick={() => setIsChecked(!isChecked)}></input>

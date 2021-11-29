@@ -1,40 +1,36 @@
-import { Card, CardDeck, Container } from "react-bootstrap";
-import { EmojiHeartEyesFill } from "react-bootstrap-icons";
-import { useHistory } from "react-router";
+import { Card, CardDeck, Container } from 'react-bootstrap'
+import { EmojiHeartEyesFill } from 'react-bootstrap-icons'
+import { useHistory } from 'react-router'
 
 export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
-  const history = useHistory();
-
-  /*  const itemsToShow = filterItems
-    .slice(0, numberOfitemsShown)
-    .map((i) => <li key={i.id}>{i.item}</li>); */
+  const history = useHistory()
 
   return (
     <>
       {data.slice(0, 2).map((i, index) => {
-        const { id, image, item, price, ingredient } = i;
+        const { id, image, item, price, ingredient } = i
         return (
           <Container>
             <CardDeck
               key={index}
               style={{
-                display: "flex",
-                flexWrap: "wrap",
-                flexDirection: "row",
+                display: 'flex',
+                flexWrap: 'wrap',
+                flexDirection: 'row',
               }}
             >
               <Card
                 style={{
-                  width: "19rem",
-                  margin: "0.5rem",
-                  border: "none",
+                  width: '19rem',
+                  margin: '0.5rem',
+                  border: 'none',
                 }}
               >
-                {image === "" ? (
+                {image === '' ? (
                   <EmojiHeartEyesFill
                     style={{
-                      color: "#000",
-                      cursor: "pointer",
+                      color: '#000',
+                      cursor: 'pointer',
                     }}
                     width={100}
                     height="17.5rem"
@@ -45,26 +41,26 @@ export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
                     variant="top"
                     src={image}
                     style={{
-                      cursor: "pointer",
-                      borderRadius: "26px",
-                      height: "17.5rem",
-                      objectFit: "cover",
+                      cursor: 'pointer',
+                      borderRadius: '26px',
+                      height: '17.5rem',
+                      objectFit: 'cover',
                     }}
                     onClick={() => history.push(`/item/${id}`)}
                   ></Card.Img>
                 )}
-                <Card.ImgOverlay style={{ color: "#fff", width: "100%" }}>
+                <Card.ImgOverlay style={{ color: '#fff', width: '100%' }}>
                   <div
                     className=""
                     style={{
-                      width: "",
-                      marginTop: "10rem",
-                      position: "relative",
-                      backgroundColor: "black",
+                      width: '',
+                      marginTop: '10rem',
+                      position: 'relative',
+                      backgroundColor: 'black',
                     }}
                   >
                     <Card.Title>
-                      {" "}
+                      {' '}
                       <h4>{item}</h4>
                     </Card.Title>
                     <Card.Text>
@@ -76,7 +72,7 @@ export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
               </Card>
             </CardDeck>
           </Container>
-        );
+        )
       })}
       {/*  <Container>
         <CardDeck
@@ -143,5 +139,5 @@ export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
         </CardDeck>
       </Container> */}
     </>
-  );
+  )
 }
