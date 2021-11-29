@@ -1,13 +1,13 @@
 import axios from 'axios'
-import { FormControl, Image, InputGroup } from 'react-bootstrap'
-import { Badge, Button, Card, Form } from 'react-bootstrap'
+import { Loader } from '.'
+import { end_points } from '../utils'
 import { useHistory } from 'react-router'
 import React, { useState, useEffect } from 'react'
 import { Col, Container, Row } from 'react-bootstrap'
-import { end_points } from '../utils'
-import { Loader } from '.'
 import { ArrowLeftRight } from 'react-bootstrap-icons'
 import OrdPic from '../Images/background_picture.png'
+import { Badge, Button, Card, Form } from 'react-bootstrap'
+import { FormControl, Image, InputGroup } from 'react-bootstrap'
 
 function OrderForm({ searchField }) {
   const history = useHistory()
@@ -350,146 +350,3 @@ function OrderForm({ searchField }) {
 }
 
 export default OrderForm
-
-/* const filterCity = finlandCity.filter((allC) => {
-    if (
-      searchInput &&
-      !allC.city.toLowerCase().includes(searchInput?.toLowerCase())
-    ) {
-      return false;
-    }
-    return true;
-  }); */
-
-/* const OnlyCity = () => {
-    return filterCity.map((i) => ({
-      label: i.city,
-      value: i.country,
-    }));
-  }; */
-
-/* 
-  
-  
-     <div className="image_div" style={{ height: "100vh" }}>
-      <Container
-        className=""
-        style={{
-          display: "flex",
-        }}
-      >
-        <Jumbotron className="mb-5 m-5" style={{ width: "70rem" }}>
-          <div className="m-3 title_1" style={{ color: "#FFFFFF" }}>
-            check out our
-            <br />
-            <p className="h3 title_2">Best Cousine</p>
-          </div>
-          <div className="tableoflist" style={{ backgroundColor: "#0000009D" }}>
-            <Row>
-              <Form noValidate>
-                <Row>
-                  <Col className="mt-3" style={{ flexBasis: "15rem" }}>
-                    <Form.Label
-                      className="p-2"
-                      style={{ color: "#fff", zIndex: 2 }}
-                    >
-                      where
-                    </Form.Label>
-
-                    <Form.Group>
-                      <Form.Control as="select" placeholder="search city">
-                        {searchInput === ""
-                          ? city.map((m) => {
-                              return (
-                                <option placeholder="search city" key={m.city}>
-                                  {m.city}
-                                </option>
-                              );
-                            })
-                          : null}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                  <Col className="mt-3" style={{ flexBasis: "15rem" }}>
-                    <Form.Label
-                      className="p-2"
-                      style={{ color: "#fff", zIndex: 2 }}
-                    >
-                      destination
-                    </Form.Label>
-                    <Form.Group>
-                      <Form.Control as="select">
-                        {searchInput === ""
-                          ? city.map((m) => {
-                              return <option key={m.city}>{m.city}</option>;
-                            })
-                          : null}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <br />
-                <br />
-                <Row>
-                  <Col className="mt-3" style={{ flexBasis: "15rem" }}>
-                    <Form.Label
-                      className="p-2"
-                      style={{ color: "#fff" }}
-                      onChange={() => console("text here")}
-                    >
-                      departure date & time
-                    </Form.Label>
-                    <Form.Control
-                      className="p-2"
-                      type="datetime-local"
-                      placeholder="choose time"
-                      style={{ marginTop: "0rem" }}
-                    />
-                  </Col>
-
-                  <Col className="mt-3" style={{ flexBasis: "15rem" }}>
-                    <Form.Label
-                      className="p-2"
-                      style={{ color: "#fff" }}
-                      onChange={() => console("text here")}
-                    >
-                      train model
-                    </Form.Label>
-                    <Form.Group>
-                      <Form.Control as="select">
-                        {searchInput === ""
-                          ? trains &&
-                            trains.map((i) => {
-                              return (
-                                <option key={i.trainNumber}>
-                                  {i.trainType + i.trainNumber}
-                                </option>
-                              );
-                            })
-                          : null}
-                      </Form.Control>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col className="m-1 text-center">
-                    <Button
-                      type="submit"
-                      className="mt-3"
-                      style={{ width: "7rem", height: "3rem" }}
-                      variant="secondary"
-                      onClick={routeToNextPage}
-                    >
-                      Search
-                    </Button>
-                  </Col>
-                </Row>
-              </Form>
-            </Row>
-          </div>
-        </Jumbotron>
-      </Container>
-    </div>
-
-  
-  */
