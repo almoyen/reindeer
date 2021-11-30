@@ -75,15 +75,21 @@ function OrderForm({ searchField }) {
     <>
       {whereCities.length > 0 ? (
         <div>
-          <div style={{ position: 'relative', zIndex: '-1' }}>
+          <div
+            style={{
+              position: 'relative',
+              zIndex: '-1',
+              height: '60rem',
+            }}
+          >
             <Image
               src={OrdPic}
               style={{
-                height: '60rem',
+                height: '62rem',
                 objectFit: 'cover',
                 width: '100%',
                 position: 'relative',
-                backgroundSize: 'cover',
+                backgroundSize: '100% 100%',
               }}
             />
           </div>
@@ -301,8 +307,9 @@ function OrderForm({ searchField }) {
                                             className="tableoflist"
                                             key={index}
                                           >
-                                            {trainModel.trainType +
-                                              trainModel.trainNumber}
+                                            {/* {trainModel.trainType +
+                                              trainModel.trainNumber} */}
+                                            {trainModel.model}
                                           </option>
                                         )
                                       })

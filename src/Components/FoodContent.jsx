@@ -21,7 +21,7 @@ function FoodContent({ searchField }) {
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [searchItemField, setSearchItemsField] = useState('')
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
-  const [fade, setFade] = useState(false)
+  const [myStyle, setMyStyle] = useState(false)
 
   const getOptions = async () => {
     try {
@@ -120,14 +120,14 @@ function FoodContent({ searchField }) {
     },
   ] */
   const onMouseEnter = () => {
-    setFade(true)
+    setMyStyle(true)
   }
 
   const onMouseLeave = () => {
-    setFade(false)
+    setMyStyle(false)
   }
 
-  const fadeStyle = !fade
+  const fadeStyle = !myStyle
     ? {
         width: '8rem',
         height: '3rem',
