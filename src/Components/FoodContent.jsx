@@ -158,7 +158,7 @@ function FoodContent({ searchField }) {
   // const resizeAll = (!size.innerWidth )
   return (
     <>
-      {filterItems ? (
+      {filterItems && filterItems.length > 0 ? (
         <>
           {' '}
           {size >= breakPoint ? (
@@ -543,7 +543,9 @@ function FoodContent({ searchField }) {
             <MobileLayout />
           )}{' '}
         </>
-      ) : null}
+      ) : (
+        <Loader />
+      )}
     </>
   )
 }

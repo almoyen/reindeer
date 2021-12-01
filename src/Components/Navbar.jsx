@@ -7,18 +7,31 @@ function Header() {
   const history = useHistory()
   return (
     <>
-      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Navbar
+        collapseOnSelect
+        expand="lg"
+        bg="dark"
+        variant="dark"
+        fluid
+        style={{ position: 'relative', width: '100%' }}
+      >
         <Container fluid className="NavItems">
           <Navbar.Brand
-            onClick={() => history.push('/')}
-            style={{ cursor: 'pointer', marginLeft: '6rem' }}
+            style={{
+              cursor: 'pointer',
+              paddingLeft: '5rem',
+              paddingBottom: '2.5rem',
+              position: 'relative',
+            }}
           >
             <img
               alt="icon"
               src={Icon}
+              style={{ position: 'fixed' }}
               width="100"
+              onClick={() => history.push('/')}
               height="30"
-              className="d-inline-block align-top m-2 pr-2"
+              className="d-inline-block align-top pt-2"
             />{' '}
             {/*             <strong>Reindeer</strong>
              */}

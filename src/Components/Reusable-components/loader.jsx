@@ -6,9 +6,9 @@ export default function Loader() {
     <div>
       <Spinner
         style={{
-          marginLeft: '47vw',
+          marginLeft: '42vw',
           marginTop: '33vh',
-          fontSize: '200px',
+          fontSize: '156px',
         }}
         animation="border"
         variant="warning"

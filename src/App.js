@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Route, Switch } from 'react-router'
 import { LandingPage, FoodContent, Navbar } from './Components'
-import MobileLayout from './Components/Reusable-components/mobileView'
-import Prac from './Components/Reusable-components/unusedComponents'
+//import MobileLayout from './Components/Reusable-components/mobileView'
+//import Prac from './Components/Reusable-components/unusedComponents'
 
 function App() {
   const [searchField, setSearchInput] = useState('')
@@ -25,15 +25,13 @@ function App() {
           )}
         />
 
-        <Route path="/orders" render={(props) => <FoodContent {...props} />} />
-        <Route path="/pra" render={(props) => <Prac {...props} />} />
         <Route
-          path="/MobileLayout"
+          path="/orders"
           render={(props) => (
-            <MobileLayout
-              {...props}
+            <FoodContent
               searchItemField={searchItemField}
               setSearchItemsField={setSearchItemsField}
+              {...props}
             />
           )}
         />
