@@ -10,8 +10,12 @@ import burgImage from '../Images/v290_52.png'
 
 function FoodContent({ searchField }) {
   const history = useHistory()
-  const { getallItems, getAllOptions } = end_points
+  const { getallItems, getAllOptions, s } = end_points
+  const [size, setSize] = useState(window.innerWidth)
 
+  const [heightSize] = useState(500)
+  const [widthSize] = useState(600)
+  const breakPoint = 556
   const [options, setOptions] = useState([])
   const [distance, setDistance] = useState(0)
   const [allItems, setAllItems] = useState([])
@@ -22,6 +26,12 @@ function FoodContent({ searchField }) {
   const [searchItemField, setSearchItemsField] = useState('')
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
   const [myStyle, setMyStyle] = useState(false)
+
+  /*   const updateDimensions = () => {
+    setSize({ width: size })
+  } */
+
+  //return size
 
   const getOptions = async () => {
     try {
@@ -53,6 +63,7 @@ function FoodContent({ searchField }) {
   useEffect(() => {
     getOptions()
     getAllItems()
+    window.addEventListener('resize', () => setSize(window.innerWidth))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!isChecked])
 
@@ -145,379 +156,393 @@ function FoodContent({ searchField }) {
         outline: 'none',
       }
 
+  // const resizeAll = (!size.innerWidth )
   return (
     <>
-      {filterItems.length > 0 ? (
-        <div className="footContent m-5">
-          <Container style={{ height: '100%', width: '100%' }}>
-            <Jumbotron>
-              <Row>
-                <Col lg={3} md={6} sm={12}>
-                  <Container
-                    className=""
-                    style={{
-                      display: 'flex',
-                      width: '100%',
-                    }}
-                  >
-                    <Card
-                      className="ml-3 mr-3"
-                      style={{
-                        background: 'none',
-                        border: 'none',
-                      }}
-                    >
-                      <Card.Body>
-                        <Count item={filterItems} label="result" />
-                      </Card.Body>
-                    </Card>
-                  </Container>
-                </Col>
-                <Col lg={9} md={6} sm={6} className="mt-3">
-                  <Container className="MealList m-0 mt-5">
-                    {mealClass.map((item) => {
-                      return (
-                        <Button
-                          variant="outline-secondary"
-                          className="m-2"
-                          key={item.id}
-                          onClick={() => {
-                            onItemSelect(item.label)
-                          }}
-                          style={{ width: '8.5rem', margin: '3rem' }}
-                        >
-                          {item.label}
-                        </Button>
-                      )
-                    })}
-                  </Container>
-                </Col>
-              </Row>
-
-              <Row>
-                <Col lg={3} md={5} sm={12}>
-                  <Container>
-                    <Card
-                      className="ml-3 mr-2"
-                      style={{
-                        backgroundColor: 'black',
-                        borderRadius: '15px',
-                        height: '100%',
-                      }}
-                    >
-                      <Card.Body>
-                        <Card.Title className="text-secondary sidebarTitles">
-                          Price
-                        </Card.Title>
-                        <Form.Group controlId="formBasicRange">
-                          <OverlayTrigger
-                            placement="top"
-                            overlay={
-                              <Tooltip
-                                className="sidebarItems"
-                                style={{ color: 'light' }}
-                              >
-                                {distance}
-                                {'   '}€
-                              </Tooltip>
-                            }
-                          >
-                            <Form.Control
-                              style={{ width: '12rem' }}
-                              type="range"
-                              className="mt-3"
-                              placement="top"
-                              defaultValue="{distance}"
-                              onChange={(e) => setDistance(e.target.value)}
-                            />
-                          </OverlayTrigger>
-                        </Form.Group>
-                        <Card.Title className="text-secondary mt-3 sidebarTitles">
-                          Sort
-                        </Card.Title>
-                        <>
-                          <Form.Group
-                            as={Row}
-                            className="mt-4"
-                            style={{ color: '#fff' }}
-                          >
-                            <Col>
-                              <div
-                                className="sidebarItems"
-                                style={{
-                                  display: 'flex',
-                                  overflow: 'auto',
-                                  alignItems: 'center',
-                                  flexDirection: 'row',
-                                  justifyContent: 'flex-start',
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: 'gray' }}
-                                  isChecked={!isChecked}
-                                  /*  onClick={() => setIsChecked(!isChecked)} */
-                                  onClick={forceUpdate}
-                                  type="checkbox"
-                                />
-                                <span>All items</span>
-                              </div>
-                              <div
-                                className="sidebarItems"
-                                style={{
-                                  display: 'flex',
-                                  overflow: 'auto',
-                                  alignItems: 'center',
-                                  flexDirection: 'row',
-                                  justifyContent: 'flex-start',
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: 'gray' }}
-                                  type="checkbox"
-                                />
-                                <span>Best rated</span>
-                              </div>
-                              <div
-                                className="sidebarItems"
-                                style={{
-                                  display: 'flex',
-                                  overflow: 'auto',
-                                  alignItems: 'center',
-                                  flexDirection: 'row',
-                                  justifyContent: 'flex-start',
-                                }}
-                              >
-                                <Form.Check
-                                  className=""
-                                  style={{ color: 'gray' }}
-                                  onClick={() => {
-                                    setIsChecked(!isChecked)
-                                  }}
-                                  type="checkbox"
-                                />
-                                <span>New items</span>
-                              </div>
-                            </Col>
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            controlId="formGridCity"
-                            className="mt-2"
-                          ></Form.Group>
-                        </>
-                        <Card.Title className="text-secondary mt-3 sidebarTitles">
-                          Foot Choices
-                        </Card.Title>
-                        <>
-                          <Form.Group
-                            as={Row}
-                            className="mt-4"
-                            style={{ color: '#fff' }}
-                          >
-                            <Col>
-                              {options &&
-                                options?.map((i) => {
-                                  return (
-                                    <div
-                                      className="sidebarItems"
-                                      key={i.id}
-                                      style={{
-                                        display: 'flex',
-                                        overflow: 'auto',
-                                        alignItems: 'center',
-                                        flexDirection: 'row',
-                                        justifyContent: 'flex-start',
-                                      }}
-                                    >
-                                      <Form.Check
-                                        className=""
-                                        style={{ color: 'gray' }}
-                                        type="radio"
-                                        name={i.label}
-                                        id={`default-${i.label}`}
-                                        onChange={handleCheckCatagories}
-                                      />
-                                      <span>{i.label}</span>
-                                    </div>
-                                  )
-                                })}
-                            </Col>
-                          </Form.Group>
-                          <Form.Group
-                            as={Col}
-                            controlId="formGridCity"
-                            className="mt-2"
-                          >
-                            <Form.Label style={{ color: 'gray' }}>
-                              <Card.Title className="text-secondary mt-3 sidebarItems">
-                                Alergic?
-                              </Card.Title>
-                            </Form.Label>
-                            <FormControl
-                              className="sidebarTitles"
-                              value={searchItemField || ''}
-                              placeholder="type anything"
-                              onChange={(e) =>
-                                setSearchItemsField(e.target.value)
-                              }
-                            />
-                          </Form.Group>
-                        </>
-                      </Card.Body>
-                    </Card>
-                  </Container>
-                </Col>
-
-                <Col lg={9} md={7} sm={12}>
-                  <Container
-                    className=""
-                    style={{
-                      display: 'flex',
-                      flexWrap: 'wrap',
-                      flexDirection: 'row',
-                      margin: '0rem',
-                    }}
-                  >
-                    {filterItems
-                      .slice(0, numberOfitemsShown)
-                      .map((i, index) => {
-                        const { id, /*  image, */ item, price, ingredient } = i
-                        return (
-                          <Card
-                            key={index}
-                            className="ml-3 mr-2"
-                            style={{
-                              width: '24rem',
-                              border: 'none',
-                            }}
-                          >
-                            <Card.Body>
-                              <Card.Img
-                                variant="top"
-                                src={burgImage}
-                                style={{
-                                  cursor: 'pointer',
-                                  objectFit: 'cover',
-                                  margin: '.05rem',
-                                  height: '15rem',
-                                  borderRadius: '12px',
-                                  position: 'relative',
-                                }}
-                                onClick={() => history.push(`/item/${id}`)}
-                              />
-                              {/*   {image ? (
-                         <Card.Img
-                           variant="top"
-                           src={burgImage}
-                           style={{
-                             cursor: "pointer",
-                             borderRadius: "18px",
-                             height: "20rem",
-                             width: "26rem",
-                             objectFit: "cover",
-                           }}
-                           onClick={() => history.push(`/item/${id}`)}
-                         />
-                       ) : (
-                         <Card.Img
-                           variant="top"
-                           src={burgImage}
-                           style={{
-                             cursor: "pointer",
-                             borderRadius: "18px",
-                             height: "20rem",
-                             width: "23rem",
-                             margin: "0.6rem",
-
-                             objectFit: "cover",
-                           }}
-                           onClick={() => history.push(`/item/${id}`)}
-                         />
-                       )} */}
-
-                              <Card.ImgOverlay
-                                style={{
-                                  color: '#fff',
-                                  opacity: '0.8',
-                                  display: 'flex',
-                                  flexWrap: 'wrap',
-                                  flexDirection: 'row',
-                                  margin: '0rem',
-                                }}
-                              >
-                                <div
-                                  style={{
-                                    height: '7rem',
-                                    marginLeft: '0.05rem',
-                                    width: '22rem',
-                                    marginTop: '8rem',
-                                    borderBottomLeftRadius: '15px',
-                                    borderBottomRightRadius: '15px',
-                                    backgroundColor: 'black',
-                                  }}
-                                >
-                                  <Card.Title>
-                                    <span
-                                      className="m-4 mb-0 mt-0 listFoodItem_1"
-                                      style={{
-                                        textTransform: 'uppercase',
-                                        lineHeight: '2rem',
-                                      }}
-                                    >
-                                      {item}
-                                    </span>
-                                  </Card.Title>
-                                  <Card.Text>
-                                    <h5
-                                      className="m-4 mt-1 listFoodItem_2"
-                                      style={{ lineHeight: '10px' }}
-                                    >
-                                      {ingredient}
-                                    </h5>
-                                    <h5
-                                      className="m-4"
-                                      style={{ lineHeight: '10px' }}
-                                    >
-                                      {price} € (INC. Vat)
-                                    </h5>
-                                  </Card.Text>
-                                </div>
-                              </Card.ImgOverlay>
-                            </Card.Body>
-                          </Card>
-                        )
-                      })}
-                    <Container>
-                      {' '}
-                      <div
+      {filterItems ? (
+        <>
+          {' '}
+          {size >= breakPoint ? (
+            <div className="footContent m-5">
+              <Container style={{ height: '100%', width: '100%' }}>
+                <Jumbotron>
+                  <Row>
+                    <Col lg={3} md={6} sm={12}>
+                      <Container
+                        className=""
                         style={{
-                          paddingRight: '1rem',
                           display: 'flex',
-                          flexDirection: 'row',
-                          justifyContent: 'center',
+                          width: '100%',
                         }}
                       >
-                        <Button
-                          onMouseOver={onMouseEnter}
-                          onMouseOut={onMouseLeave}
-                          style={fadeStyle}
-                          onClick={onNextPage}
+                        <Card
+                          className="ml-3 mr-3"
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            flexShrink: '1',
+                          }}
                         >
-                          show more
-                        </Button>
-                      </div>
-                    </Container>
-                  </Container>
-                </Col>
-              </Row>
-            </Jumbotron>
-          </Container>
-        </div>
-      ) : (
-        <Loader />
-      )}
+                          <Card.Body>
+                            <Count item={filterItems} label="result" />
+                          </Card.Body>
+                        </Card>
+                      </Container>
+                    </Col>
+                    <Col lg={9} md={6} sm={6} className="mt-3">
+                      <Container className="MealList m-0 mt-5">
+                        {mealClass.map((item) => {
+                          return (
+                            <Button
+                              variant="outline-secondary"
+                              className="m-2"
+                              key={item.id}
+                              onClick={() => {
+                                onItemSelect(item.label)
+                              }}
+                              style={{
+                                width: '8.5rem',
+                                margin: '3rem',
+                                flexShrink: '2',
+                              }}
+                            >
+                              {item.label}
+                            </Button>
+                          )
+                        })}
+                      </Container>
+                    </Col>
+                  </Row>
+
+                  <Row>
+                    <Col lg={3} md={5} sm={12}>
+                      <Container>
+                        <Card
+                          className="ml-3 mr-2"
+                          style={{
+                            backgroundColor: 'black',
+                            borderRadius: '15px',
+                            height: '100%',
+                          }}
+                        >
+                          <Card.Body>
+                            <Card.Title className="text-secondary sidebarTitles">
+                              Price
+                            </Card.Title>
+                            <Form.Group controlId="formBasicRange">
+                              <OverlayTrigger
+                                placement="top"
+                                overlay={
+                                  <Tooltip
+                                    className="sidebarItems"
+                                    style={{ color: 'light' }}
+                                  >
+                                    {distance}
+                                    {'   '}€
+                                  </Tooltip>
+                                }
+                              >
+                                <Form.Control
+                                  style={{ width: '12rem' }}
+                                  type="range"
+                                  className="mt-3"
+                                  placement="top"
+                                  defaultValue="{distance}"
+                                  onChange={(e) => setDistance(e.target.value)}
+                                />
+                              </OverlayTrigger>
+                            </Form.Group>
+                            <Card.Title className="text-secondary mt-3 sidebarTitles">
+                              Sort
+                            </Card.Title>
+                            <>
+                              <Form.Group
+                                as={Row}
+                                className="mt-4"
+                                style={{ color: '#fff' }}
+                              >
+                                <Col>
+                                  <div
+                                    className="sidebarItems"
+                                    style={{
+                                      display: 'flex',
+                                      overflow: 'auto',
+                                      alignItems: 'center',
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-start',
+                                    }}
+                                  >
+                                    <Form.Check
+                                      className=""
+                                      style={{ color: 'gray' }}
+                                      isChecked={!isChecked}
+                                      /*  onClick={() => setIsChecked(!isChecked)} */
+                                      onClick={forceUpdate}
+                                      type="checkbox"
+                                    />
+                                    <span>All items</span>
+                                  </div>
+                                  <div
+                                    className="sidebarItems"
+                                    style={{
+                                      display: 'flex',
+                                      overflow: 'auto',
+                                      alignItems: 'center',
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-start',
+                                    }}
+                                  >
+                                    <Form.Check
+                                      className=""
+                                      style={{ color: 'gray' }}
+                                      type="checkbox"
+                                    />
+                                    <span>Best rated</span>
+                                  </div>
+                                  <div
+                                    className="sidebarItems"
+                                    style={{
+                                      display: 'flex',
+                                      overflow: 'auto',
+                                      alignItems: 'center',
+                                      flexDirection: 'row',
+                                      justifyContent: 'flex-start',
+                                    }}
+                                  >
+                                    <Form.Check
+                                      className=""
+                                      style={{ color: 'gray' }}
+                                      onClick={() => {
+                                        setIsChecked(!isChecked)
+                                      }}
+                                      type="checkbox"
+                                    />
+                                    <span>New items</span>
+                                  </div>
+                                </Col>
+                              </Form.Group>
+                              <Form.Group
+                                as={Col}
+                                controlId="formGridCity"
+                                className="mt-2"
+                              ></Form.Group>
+                            </>
+                            <Card.Title className="text-secondary mt-3 sidebarTitles">
+                              Foot Choices
+                            </Card.Title>
+                            <>
+                              <Form.Group
+                                as={Row}
+                                className="mt-4"
+                                style={{ color: '#fff' }}
+                              >
+                                <Col>
+                                  {options &&
+                                    options?.map((i) => {
+                                      return (
+                                        <div
+                                          className="sidebarItems"
+                                          key={i.id}
+                                          style={{
+                                            display: 'flex',
+                                            overflow: 'auto',
+                                            alignItems: 'center',
+                                            flexDirection: 'row',
+                                            justifyContent: 'flex-start',
+                                          }}
+                                        >
+                                          <Form.Check
+                                            className=""
+                                            style={{ color: 'gray' }}
+                                            type="checkbox"
+                                            name={i.label}
+                                            id={`default-${i.label}`}
+                                            onChange={handleCheckCatagories}
+                                          />
+                                          <span>{i.label}</span>
+                                        </div>
+                                      )
+                                    })}
+                                </Col>
+                              </Form.Group>
+                              <Form.Group
+                                as={Col}
+                                controlId="formGridCity"
+                                className="mt-2"
+                              >
+                                <Form.Label style={{ color: 'gray' }}>
+                                  <Card.Title className="text-secondary mt-3 sidebarItems">
+                                    Alergic?
+                                  </Card.Title>
+                                </Form.Label>
+                                <FormControl
+                                  className="sidebarTitles"
+                                  value={searchItemField || ''}
+                                  placeholder="type anything"
+                                  onChange={(e) =>
+                                    setSearchItemsField(e.target.value)
+                                  }
+                                />
+                              </Form.Group>
+                            </>
+                          </Card.Body>
+                        </Card>
+                      </Container>
+                    </Col>
+
+                    <Col lg={9} md={7} sm={12}>
+                      <Container
+                        className=""
+                        style={{
+                          display: 'flex',
+                          flexWrap: 'wrap',
+                          flexDirection: 'row',
+                          margin: '0rem',
+                        }}
+                      >
+                        {filterItems
+                          .slice(0, numberOfitemsShown)
+                          .map((i, index) => {
+                            const {
+                              id,
+                              /*  image, */ item,
+                              price,
+                              ingredient,
+                            } = i
+                            return (
+                              <Card
+                                key={index}
+                                className="ml-3 mr-2"
+                                style={{
+                                  width: '24rem',
+                                  border: 'none',
+                                }}
+                              >
+                                <Card.Body>
+                                  <Card.Img
+                                    variant="top"
+                                    src={burgImage}
+                                    style={{
+                                      cursor: 'pointer',
+                                      objectFit: 'cover',
+                                      margin: '.05rem',
+                                      height: '15rem',
+                                      borderRadius: '12px',
+                                      position: 'relative',
+                                    }}
+                                    onClick={() => history.push(`/item/${id}`)}
+                                  />
+                                  {/*   {image ? (
+     <Card.Img
+       variant="top"
+       src={burgImage}
+       style={{
+         cursor: "pointer",
+         borderRadius: "18px",
+         height: "20rem",
+         width: "26rem",
+         objectFit: "cover",
+       }}
+       onClick={() => history.push(`/item/${id}`)}
+     />
+   ) : (
+     <Card.Img
+       variant="top"
+       src={burgImage}
+       style={{
+         cursor: "pointer",
+         borderRadius: "18px",
+         height: "20rem",
+         width: "23rem",
+         margin: "0.6rem",
+
+         objectFit: "cover",
+       }}
+       onClick={() => history.push(`/item/${id}`)}
+     />
+   )} */}
+
+                                  <Card.ImgOverlay
+                                    style={{
+                                      color: '#fff',
+                                      opacity: '0.8',
+                                      display: 'flex',
+                                      flexWrap: 'wrap',
+                                      flexDirection: 'row',
+                                      margin: '0rem',
+                                    }}
+                                  >
+                                    <div
+                                      style={{
+                                        height: '7rem',
+                                        marginLeft: '0.05rem',
+                                        width: '22rem',
+                                        marginTop: '8rem',
+                                        borderBottomLeftRadius: '15px',
+                                        borderBottomRightRadius: '15px',
+                                        backgroundColor: 'black',
+                                      }}
+                                    >
+                                      <Card.Title>
+                                        <span
+                                          className="m-4 mb-0 mt-0 listFoodItem_1"
+                                          style={{
+                                            textTransform: 'uppercase',
+                                            lineHeight: '2rem',
+                                          }}
+                                        >
+                                          {item}
+                                        </span>
+                                      </Card.Title>
+                                      <Card.Text>
+                                        <h5
+                                          className="m-4 mt-1 listFoodItem_2"
+                                          style={{ lineHeight: '10px' }}
+                                        >
+                                          {ingredient}
+                                        </h5>
+                                        <h5
+                                          className="m-4"
+                                          style={{ lineHeight: '10px' }}
+                                        >
+                                          {price} € (INC. Vat)
+                                        </h5>
+                                      </Card.Text>
+                                    </div>
+                                  </Card.ImgOverlay>
+                                </Card.Body>
+                              </Card>
+                            )
+                          })}
+                        <Container>
+                          {' '}
+                          <div
+                            style={{
+                              paddingRight: '1rem',
+                              display: 'flex',
+                              flexDirection: 'row',
+                              justifyContent: 'center',
+                            }}
+                          >
+                            <Button
+                              onMouseOver={onMouseEnter}
+                              onMouseOut={onMouseLeave}
+                              style={fadeStyle}
+                              onClick={onNextPage}
+                            >
+                              show more
+                            </Button>
+                          </div>
+                        </Container>
+                      </Container>
+                    </Col>
+                  </Row>
+                </Jumbotron>
+              </Container>
+            </div>
+          ) : null}{' '}
+        </>
+      ) : null}
     </>
   )
 }

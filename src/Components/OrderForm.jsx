@@ -89,7 +89,7 @@ function OrderForm({ searchField }) {
                 objectFit: 'cover',
                 width: '100%',
                 position: 'relative',
-                backgroundSize: '100% 100%',
+                backgroundSize: 'contain',
               }}
             />
           </div>
