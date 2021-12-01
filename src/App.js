@@ -6,6 +6,7 @@ import Prac from './Components/Reusable-components/unusedComponents'
 
 function App() {
   const [searchField, setSearchInput] = useState('')
+  const [searchItemField, setSearchItemsField] = useState('')
 
   return (
     <>
@@ -28,7 +29,13 @@ function App() {
         <Route path="/pra" render={(props) => <Prac {...props} />} />
         <Route
           path="/MobileLayout"
-          render={(props) => <MobileLayout {...props} />}
+          render={(props) => (
+            <MobileLayout
+              {...props}
+              searchItemField={searchItemField}
+              setSearchItemsField={setSearchItemsField}
+            />
+          )}
         />
       </Switch>
     </>

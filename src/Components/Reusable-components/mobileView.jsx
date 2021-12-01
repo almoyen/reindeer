@@ -2,48 +2,23 @@ import axios from 'axios'
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import {
-  Button,
-  Card,
-  Col,
-  Container,
-  Form,
-  FormControl,
-  Jumbotron,
-  Row,
-  Tooltip,
-  OverlayTrigger,
-} from 'react-bootstrap'
+import { Button, Card, Col, Container, Jumbotron, Row } from 'react-bootstrap'
 import { useHistory } from 'react-router'
-import { Count } from '..'
 import burgImage from '../../Images/v290_52.png'
 import { end_points } from '../../utils'
 
-export default function MobileLayout({ searchField }) {
+export default function MobileLayout({ searchField, searchItemField }) {
   const history = useHistory()
 
-  const { getallItems, getAllOptions, s } = end_points
-  const [size, setSize] = useState(window.innerWidth)
+  const { getallItems } = end_points
+  //const [size, setSize] = useState(window.innerWidth)
 
-  const [options, setOptions] = useState([])
-  const [distance, setDistance] = useState(0)
   const [allItems, setAllItems] = useState([])
-  const [itemSelect, setItemSelect] = useState([])
   const [forceUpdate, setForceUpdate] = useState()
-  const [isChecked, setIsChecked] = useState(false)
+  const [isChecked] = useState(false)
   const [selectedMeal, setSelectedMeal] = useState(null)
-  const [searchItemField, setSearchItemsField] = useState('')
-  const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
+  const [numberOfitemsShown, setNumberofItemsShown] = useState(3)
   const [myStyle, setMyStyle] = useState(false)
-
-  const getOptions = async () => {
-    try {
-      const respond = await axios.get(getAllOptions)
-      setOptions(respond.data)
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
 
   const getAllItems = async () => {
     try {
@@ -64,7 +39,6 @@ export default function MobileLayout({ searchField }) {
   console.log(selectedMeal)
 
   useEffect(() => {
-    getOptions()
     getAllItems()
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -77,12 +51,7 @@ export default function MobileLayout({ searchField }) {
     ) {
       return false
     }
-    if (
-      itemSelect.length > 0 &&
-      !itemSelect.some((catagory) => el.foodChoices.includes(catagory))
-    ) {
-      return false
-    }
+
     if (
       searchItemField &&
       el.ingredient.toLowerCase().includes(searchItemField.toLowerCase())
@@ -128,7 +97,7 @@ export default function MobileLayout({ searchField }) {
 
   const fadeStyle = !myStyle
     ? {
-        width: '8rem',
+        width: '12rem',
         height: '3rem',
         backgroundColor: '#949494',
         border: 'none',
@@ -136,7 +105,7 @@ export default function MobileLayout({ searchField }) {
         outline: 'none',
       }
     : {
-        width: '8rem',
+        width: '12rem',
         height: '3rem',
         backgroundColor: '#BAB6B6',
         border: 'none',
@@ -144,29 +113,37 @@ export default function MobileLayout({ searchField }) {
         outline: 'none',
       }
   return (
-    <div className="footContent m-5">
+    <div className="footContent m-4">
       <Container style={{ height: '100%', width: '100%' }}>
         <Jumbotron>
           <Row>
-            <Col lg={12} sm={12} className="mt-3">
-              <Container className="MealList m-0 mt-5">
+            <Col lg={12} md={12} sm={12} className="mt-3">
+              <Container className="MealList m-0 mt-1">
                 {mealClass.map((item) => {
                   return (
-                    <Button
-                      variant="outline-secondary"
-                      className="m-2"
-                      key={item.id}
-                      onClick={() => {
-                        onItemSelect(item.label)
-                      }}
+                    <div
                       style={{
-                        width: '8.5rem',
-                        margin: '3rem',
-                        flexShrink: '2',
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
                       }}
                     >
-                      {item.label}
-                    </Button>
+                      <Button
+                        variant="outline-secondary"
+                        className="m-2"
+                        key={item.id}
+                        onClick={() => {
+                          onItemSelect(item.label)
+                        }}
+                        style={{
+                          width: '12.5rem',
+                          margin: '3rem',
+                          flexShrink: '2',
+                        }}
+                      >
+                        {item.label}
+                      </Button>
+                    </div>
                   )
                 })}
               </Container>
@@ -196,6 +173,49 @@ export default function MobileLayout({ searchField }) {
                       }}
                     >
                       <Card.Body>
+                        <Card.ImgOverlay>
+                          <div
+                            style={{
+                              height: '7rem',
+                              marginLeft: '0.05rem',
+                              /*                               width: '22rem',
+                               */ color: '#fff',
+                              opacity: '0.8',
+                              marginTop: '8rem',
+                              borderBottomLeftRadius: '15px',
+                              borderBottomRightRadius: '15px',
+                              backgroundColor: 'black',
+                              position: 'relative',
+                              zIndex: '2',
+                            }}
+                          >
+                            <Card.Title>
+                              <span
+                                className="m-4 mb-0 mt-0 listFoodItem_1"
+                                style={{
+                                  textTransform: 'uppercase',
+                                  lineHeight: '2rem',
+                                }}
+                              >
+                                {item}
+                              </span>
+                            </Card.Title>
+                            <Card.Text>
+                              <h5
+                                className="m-4 mt-1 listFoodItem_2"
+                                style={{ lineHeight: '10px' }}
+                              >
+                                {ingredient}
+                              </h5>
+                              <h5
+                                className="m-4"
+                                style={{ lineHeight: '10px' }}
+                              >
+                                {price} € (INC. Vat)
+                              </h5>
+                            </Card.Text>
+                          </div>
+                        </Card.ImgOverlay>
                         <Card.Img
                           variant="top"
                           src={burgImage}
@@ -205,6 +225,7 @@ export default function MobileLayout({ searchField }) {
                             margin: '.05rem',
                             height: '15rem',
                             borderRadius: '12px',
+                            zIndex: '1',
                             position: 'relative',
                           }}
                           onClick={() => history.push(`/item/${id}`)}
@@ -238,55 +259,6 @@ export default function MobileLayout({ searchField }) {
  onClick={() => history.push(`/item/${id}`)}
 />
 )} */}
-
-                        <Card.ImgOverlay
-                          style={{
-                            color: '#fff',
-                            opacity: '0.8',
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            flexDirection: 'row',
-                            margin: '0rem',
-                          }}
-                        >
-                          <div
-                            style={{
-                              height: '7rem',
-                              marginLeft: '0.05rem',
-                              width: '22rem',
-                              marginTop: '8rem',
-                              borderBottomLeftRadius: '15px',
-                              borderBottomRightRadius: '15px',
-                              backgroundColor: 'black',
-                            }}
-                          >
-                            <Card.Title>
-                              <span
-                                className="m-4 mb-0 mt-0 listFoodItem_1"
-                                style={{
-                                  textTransform: 'uppercase',
-                                  lineHeight: '2rem',
-                                }}
-                              >
-                                {item}
-                              </span>
-                            </Card.Title>
-                            <Card.Text>
-                              <h5
-                                className="m-4 mt-1 listFoodItem_2"
-                                style={{ lineHeight: '10px' }}
-                              >
-                                {ingredient}
-                              </h5>
-                              <h5
-                                className="m-4"
-                                style={{ lineHeight: '10px' }}
-                              >
-                                {price} € (INC. Vat)
-                              </h5>
-                            </Card.Text>
-                          </div>
-                        </Card.ImgOverlay>
                       </Card.Body>
                     </Card>
                   )

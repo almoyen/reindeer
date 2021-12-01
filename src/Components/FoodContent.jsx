@@ -7,14 +7,13 @@ import { Card, Col, FormControl } from 'react-bootstrap'
 import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Container, Jumbotron, Button, Row } from 'react-bootstrap'
 import burgImage from '../Images/v290_52.png'
+import MobileLayout from './Reusable-components/mobileView'
 
 function FoodContent({ searchField }) {
   const history = useHistory()
-  const { getallItems, getAllOptions, s } = end_points
+  const { getallItems, getAllOptions } = end_points
   const [size, setSize] = useState(window.innerWidth)
 
-  const [heightSize] = useState(500)
-  const [widthSize] = useState(600)
   const breakPoint = 556
   const [options, setOptions] = useState([])
   const [distance, setDistance] = useState(0)
@@ -540,7 +539,9 @@ function FoodContent({ searchField }) {
                 </Jumbotron>
               </Container>
             </div>
-          ) : null}{' '}
+          ) : (
+            <MobileLayout />
+          )}{' '}
         </>
       ) : null}
     </>
