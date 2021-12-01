@@ -88,11 +88,11 @@ export default function MobileLayout({ searchField, searchItemField }) {
   } */
 
   const mealClass = [
-    { id: 1, label: 'full meal' },
-    { id: 2, label: 'course meal' },
-    { id: 3, label: 'apetizer' },
-    { id: 4, label: 'drink' },
-    { id: 5, label: "children's" },
+    { id: 1, label: 'Alkuoalat' },
+    { id: 2, label: 'Pääruoat' },
+    { id: 3, label: 'Jälkiruoka' },
+    { id: 4, label: 'Juoma' },
+    { id: 5, label: 'Lahjat' },
   ]
 
   const fadeStyle = !myStyle
