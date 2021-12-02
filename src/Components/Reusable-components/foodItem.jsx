@@ -1,6 +1,8 @@
 import { Card, CardDeck, Container } from 'react-bootstrap'
 import { EmojiHeartEyesFill } from 'react-bootstrap-icons'
 import { useHistory } from 'react-router'
+import React,{useState} from 'react';
+import ModalConfirm from '../Modal/Modal';
 
 export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
   const history = useHistory()
