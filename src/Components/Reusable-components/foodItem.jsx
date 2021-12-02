@@ -1,11 +1,31 @@
 import { Card, CardDeck, Container } from 'react-bootstrap'
 import { EmojiHeartEyesFill } from 'react-bootstrap-icons'
 import { useHistory } from 'react-router'
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import ModalConfirm from '../Modal/Modal';
 
 export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
-  const history = useHistory()
+  const history = useHistory();
+  const [textModal, setTextModal] = useState('');
+  const [modalback, setModalBack] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [item, setItem] = useState({});
+
+  const clickClose = () => {
+    setTextModal('');
+    setModalBack(false);
+    setVisibleModal(false);
+  }
+
+  const clickConfirm = () => {
+    console.log("Confirmed");
+  }
+
+  const onItemClick = (i) => {
+    console.log(i);
+    setItem(i);
+    setVisibleModal(true);
+  }
 
   return (
     <>
@@ -27,6 +47,7 @@ export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
                   margin: '0.5rem',
                   border: 'none',
                 }}
+                onClick={() => onItemClick(i)}
               >
                 {image === '' ? (
                   <EmojiHeartEyesFill
@@ -73,6 +94,14 @@ export default function FootItems({ data /*  numberOfitemsShown = 4  */ }) {
                 </Card.ImgOverlay>
               </Card>
             </CardDeck>
+            <ModalConfirm
+              textModal={textModal}
+              modalback={modalback}
+              visibleModal={visibleModal}
+              data={item}
+              itemList={data}
+              clickClose={clickClose}
+              clickConfirm={clickConfirm} />
           </Container>
         )
       })}
