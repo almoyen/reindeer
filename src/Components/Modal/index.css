@@ -1,4 +1,4 @@
-.modalBody {
+.modalBody{
   background-color: #101112;
   color: antiquewhite;
   display: flex;
@@ -7,19 +7,27 @@
   align-items: center;
 }
 
-.title {
+.title{
   font-size: 25px;
   padding-bottom: 15px;
 }
 
-.photo {
+.photo{
   border-radius: 10px;
   height: 25rem;
-  width: 40rem;
+  width:  40rem;
   object-fit: cover;
 }
 
-.itemRow {
+.photomini{
+  border-radius: 10px;
+  height: 10rem;
+  width:  10rem;
+  object-fit: cover;
+}
+
+
+.itemRow{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -29,7 +37,28 @@
   padding-bottom: 15px;
 }
 
-.itemSelector {
+.suvRow{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 40rem;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.rowLabel{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 25rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+
+.itemSelector{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -38,10 +67,10 @@
   width: 30rem;
   background-color: #3d3d3d;
   color: antiquewhite;
-  border-radius: 10px;
+  border-radius:  10px;
 }
 
-.itemCount {
+.itemCount{
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -53,7 +82,7 @@
   border-radius: 10px;
 }
 
-.whiteButton {
+.whiteButton{
   border-radius: 10px;
   background-color: antiquewhite;
   color: #3d3d3d;
@@ -63,7 +92,7 @@
   border: 0px;
 }
 
-.plusButton {
+.plusButton{
   border-radius: 10px;
   background-color: antiquewhite;
   color: #3d3d3d;
@@ -73,7 +102,7 @@
   border: 0px;
 }
 
-.minusButton {
+.minusButton{
   border-radius: 10px;
   background-color: #3d3d3d;
   color: antiquewhite;
@@ -83,7 +112,7 @@
   border: 0px;
 }
 
-.addMore {
+.addMore{
   display: flex;
   flex-direction: row;
   justify-content: start;
@@ -94,7 +123,7 @@
   font-size: 20px;
 }
 
-.buttons {
+.buttons{
   display: flex;
   flex-direction: row;
   align-items: start;
@@ -103,32 +132,43 @@
   padding-bottom: 15px;
 }
 
-.nextButton {
+.nextButton{
   border-radius: 10px;
   background-color: #3d3d3d;
   color: antiquewhite;
   height: 3rem;
-  width: 6rem;
+  width: 10rem;
   font-size: 20px;
   border: 0px;
 }
 
-.cancelButton {
+.payButton{
+  border-radius: 10px;
+  background-color: #3d3d3d;
+  color: antiquewhite;
+  height: 3rem;
+  width: 15rem;
+  font-size: 20px;
+  border: 0px;
+}
+
+.cancelButton{
   background-color: #101112;
   color: antiquewhite;
   height: 3rem;
-  width: 6rem;
+  width: 8rem;
   font-size: 20px;
   border: 0px;
 }
 
-.dropdownItem {
+.dropdownItem{
   justify-content: space-between;
   align-items: center;
   height: 3.5rem;
   width: 30rem;
   background-color: #3d3d3d;
   color: antiquewhite;
-  border-radius: 10px;
+  border-radius:  10px;
   font-size: 20px;
+  
 }
