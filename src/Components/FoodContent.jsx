@@ -8,6 +8,7 @@ import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
 import { Container, Jumbotron, Button, Row } from 'react-bootstrap'
 import burgImage from '../Images/v290_52.png'
 import MobileLayout from './Reusable-components/mobileView'
+import ModalConfirm from "./modal/index";
 
 function FoodContent({ searchField }) {
   const history = useHistory()
@@ -26,11 +27,27 @@ function FoodContent({ searchField }) {
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
   const [myStyle, setMyStyle] = useState(false)
 
-  /*   const updateDimensions = () => {
-    setSize({ width: size })
-  } */
+  const [textModal, setTextModal] = useState('');
+  const [modalBack, setModalBack] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [item, setItem] = useState({});
 
-  //return size
+  const clickClose = () => {
+    setTextModal('');
+    setModalBack(false);
+    setVisibleModal(false);
+  }
+
+  const clickConfirm = () => {
+    console.log("CONMFIRMED")
+  }
+
+  const onItemClick = (i) => {
+    console.log(i)
+    setItem(i)
+    setVisibleModal(true);
+  }
+
 
   const getOptions = async () => {
     try {
@@ -139,21 +156,21 @@ function FoodContent({ searchField }) {
 
   const fadeStyle = !myStyle
     ? {
-        width: '8rem',
-        height: '3rem',
-        backgroundColor: '#949494',
-        border: 'none',
-        fontSize: '1.3rem',
-        outline: 'none',
-      }
+      width: '8rem',
+      height: '3rem',
+      backgroundColor: '#949494',
+      border: 'none',
+      fontSize: '1.3rem',
+      outline: 'none',
+    }
     : {
-        width: '8rem',
-        height: '3rem',
-        backgroundColor: '#BAB6B6',
-        border: 'none',
-        fontSize: '1.3rem',
-        outline: 'none',
-      }
+      width: '8rem',
+      height: '3rem',
+      backgroundColor: '#BAB6B6',
+      border: 'none',
+      fontSize: '1.3rem',
+      outline: 'none',
+    }
 
   // const resizeAll = (!size.innerWidth )
   return (
@@ -416,6 +433,7 @@ function FoodContent({ searchField }) {
                                   width: '24rem',
                                   border: 'none',
                                 }}
+                                onClick={() => onItemClick(i)}
                               >
                                 <Card.Body>
                                   <Card.Img
@@ -431,35 +449,7 @@ function FoodContent({ searchField }) {
                                     }}
                                     onClick={() => history.push(`/item/${id}`)}
                                   />
-                                  {/*   {image ? (
-     <Card.Img
-       variant="top"
-       src={burgImage}
-       style={{
-         cursor: "pointer",
-         borderRadius: "18px",
-         height: "20rem",
-         width: "26rem",
-         objectFit: "cover",
-       }}
-       onClick={() => history.push(`/item/${id}`)}
-     />
-   ) : (
-     <Card.Img
-       variant="top"
-       src={burgImage}
-       style={{
-         cursor: "pointer",
-         borderRadius: "18px",
-         height: "20rem",
-         width: "23rem",
-         margin: "0.6rem",
-
-         objectFit: "cover",
-       }}
-       onClick={() => history.push(`/item/${id}`)}
-     />
-   )} */}
+                                  { }
 
                                   <Card.ImgOverlay
                                     style={{
@@ -537,6 +527,15 @@ function FoodContent({ searchField }) {
                     </Col>
                   </Row>
                 </Jumbotron>
+                <ModalConfirm
+                  textModal={textModal}
+                  modalBack={modalBack}
+                  visibleModal={visibleModal}
+                  data={item}
+                  itemList={allItems}
+                  clickClose={clickClose}
+                  clickConfirm={clickConfirm}
+                />
               </Container>
             </div>
           ) : (
