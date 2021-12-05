@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { isValidElement, useState } from 'react';
 import { Button, Modal } from "react-bootstrap";
 import "./index.css";
 import burgImage from '../../Images/v290_52.png';
@@ -10,9 +10,114 @@ import cupImage from '../../Images/cup.jpg';
 const ModalConfirm = (props) => {
 
     const [step, setStep] = useState(1); //1, 2, 3, 4 and 5
-    const [title, setTitle] = useState();
+    const [update, setUpdate] = useState(0);
     const [count, setCount] = useState(1);
     const [change, setChange] = useState(false);
+    const [selectedFoodItem, setSelectedFoodItem] = useState(0);
+    const [selectedFoodItemCount, setSelectedFoodItemCount] = useState(1);
+    const [reRend, setReRend] = useState(true);
+    const [selectedCourseMeals, setSelectedCourseMeals] = useState([{
+        itemId: 1,
+        count: 1,
+        change: false,
+    }]);
+
+    const foodData = [
+        {
+            "id": "0",
+            "item": "Turkish Kebab",
+            "ingredient": "Rankalainen,Kana, Salati",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "30",
+            "image": "/api/attachment/foods/1.jpg",
+            "foodChoices": ["Non-Veg"]
+        },
+        {
+            "id": "1",
+            "item": "Kerrosateria",
+            "ingredient": "Hampurilainen,Raskalaiset perunat",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "32",
+
+            "image": "/api/attachment/foods/2.jpg",
+
+            "foodChoices": ["Non-Veg"]
+        },
+        {
+            "id": "2",
+            "item": "Kana-ateria",
+            "ingredient": "Hamprilainen, Ranskalaiset perunat",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "32",
+
+            "image": "/api/attachment/foods/3.jpg",
+            "foodChoices": ["Veg"]
+        },
+        {
+            "id": "3",
+            "item": "item04",
+            "ingredient": "garlic, salad, Chicken, Chilli",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "32",
+
+            "image": "/api/attachment/foods/4.jpg",
+            "foodChoices": ["Lacto Veg"]
+        },
+        {
+            "id": "4",
+            "item": "item05",
+            "ingredient": "garlic, salad, Chicken,Chilli",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "32",
+
+            "image": "/api/attachment/foods/5.jpg",
+            "foodChoices": ["Non-Veg"]
+        },
+        {
+            "id": "5",
+            "item": "item06",
+            "ingredient": "garlic, salad, Chicken, Chilli",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "price": "12",
+
+            "image": "/api/attachment/foods/6.jpg",
+            "foodChoices": ["Lactose Free"]
+        },
+        {
+            "id": "6",
+            "item": "item07",
+            "ingredient": "garlic, salad, Chicken, Chilli",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "image": "",
+            "price": "22",
+
+            "foodChoices": ["Gluton free"]
+        },
+        {
+            "id": "7",
+            "item": "item08",
+            "ingredient": "garlic, salad, Chicken, Chilli",
+            "available": true,
+            "country": "Finland",
+            "discount": false,
+            "image": "",
+            "foodChoices": ["Gluton free"]
+        }
+    ]
 
     const {
         textModal,
@@ -24,23 +129,39 @@ const ModalConfirm = (props) => {
         itemList
     } = props;
 
-    const onChange = () => {
-        setChange(!change)
-        console.log(itemList)
+    const onChange = (indexOfItem) => {
+        var newCourseMeals = selectedCourseMeals;
+
+        newCourseMeals[indexOfItem].change = true;
+        setSelectedCourseMeals(newCourseMeals)
+        setUpdate(update + 1);
+
     }
 
-    const plus = () => {
-        var newCount = count + 1;
-        setCount(newCount)
+    const selectNewFood = (indexOfItem, id) => {
+        var newCourseMeals = selectedCourseMeals;
+
+        newCourseMeals[indexOfItem].itemId = id;
+        newCourseMeals[indexOfItem].count = 1;
+        newCourseMeals[indexOfItem].change = false;
+        setSelectedCourseMeals(newCourseMeals)
+        setUpdate(update + 1);
     }
 
-    const minus = () => {
-        var newCount
+    const plus = (indexOfItem) => {
+        var newCourseMeals = selectedCourseMeals;
+        newCourseMeals[indexOfItem].count = newCourseMeals[indexOfItem].count + 1
+        setSelectedCourseMeals(newCourseMeals);
+        setUpdate(update + 1);
+    }
 
-        if (count > 1) newCount = count - 1;
-        else newCount = count;
+    const minus = (indexOfItem) => {
+        var newCourseMeals = selectedCourseMeals;
 
-        setCount(newCount)
+        if (newCourseMeals[indexOfItem].count > 1) newCourseMeals[indexOfItem].count = newCourseMeals[indexOfItem].count - 1;
+
+        setSelectedCourseMeals(newCourseMeals);
+        setUpdate(update + 1);
     }
 
     const next = () => {
@@ -56,6 +177,19 @@ const ModalConfirm = (props) => {
         setStep(1);
     }
 
+    const addCourseMeal = () => {
+        var newCourseMeals = selectedCourseMeals;
+        var newCourse = {
+            itemId: 1,
+            count: 1,
+            change: false,
+        }
+        newCourseMeals.push(newCourse)
+
+        setSelectedCourseMeals(newCourseMeals)
+        setUpdate(update + 1);
+    }
+
     const { id, image, item, ingredient } = data;
 
     return (
@@ -65,26 +199,45 @@ const ModalConfirm = (props) => {
                     Step 1: Choose Course Meal
                 </div>
                 <img src={burgImage} className="photo" />
-                <div className="itemRow">
-                    <div className="itemSelector">
-                        <div style={{ fontSize: "20px", paddingLeft: "20px" }}>
-                            {item}
+                {
+                    selectedCourseMeals.map((item, index) => {
+                        var indexOfItem = index
+                        return <div>
+                            <div className="itemRow">
+                                <div className="itemSelector">
+                                    <div style={{ fontSize: "20px", paddingLeft: "20px" }}>
+                                        {foodData[item.itemId].item}
+                                    </div>
+                                    <button className="whiteButton" onClick={() => onChange(indexOfItem)}>
+                                        change
+                                    </button>
+                                </div>
+                                <div className="itemCount">
+                                    <div style={{ fontSize: "20px", paddingRight: "20px", paddingLeft: "20px" }}>{item.count}</div>
+                                    <button className="plusButton" onClick={() => plus(indexOfItem)}>
+                                        +
+                                    </button>
+                                    <button className="minusButton" onClick={() => minus(indexOfItem)}>
+                                        -
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="dropdownFood">
+                                {item.change && foodData.map(item => {
+                                    return <div
+                                        className="itemSelectorFood"
+                                        style={{ fontSize: "20px", paddingLeft: "20px" }}
+                                        onClick={() => selectNewFood(indexOfItem, item.id)}
+                                    >
+                                        {item.item}
+                                    </div>
+                                })}
+                            </div>
                         </div>
-                        <button className="whiteButton" onClick={() => onChange()}>
-                            change
-                        </button>
-                    </div>
-                    <div className="itemCount">
-                        <div style={{ fontSize: "20px", paddingRight: "20px", paddingLeft: "20px" }}>{count}</div>
-                        <button className="plusButton" onClick={() => plus()}>
-                            +
-                        </button>
-                        <button className="minusButton" onClick={() => minus()}>
-                            -
-                        </button>
-                    </div>
-                </div>
-                <div className="addMore">
+                    })
+                }
+
+                <div className="addMore" onClick={() => addCourseMeal()}>
                     + add more course meal
                 </div>
                 <div className="buttons">
