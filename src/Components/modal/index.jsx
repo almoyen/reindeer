@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Button, Modal } from "react-bootstrap";
 import "./index.css";
-//import burgImage from '../../Images/v290_52.png';
-//import cakeImage from '../../Images/cake.jpg';
-//import colaImage from '../../Images/cocacola.jpg';
-//import tshirtImage from '../../Images/tshirt.jpg';
-//import cupImage from '../../Images/cup.jpg';
+import burgImage from '../../Images/v290_52.png';
+import cakeImage from '../../Images/cake.jpg';
+import colaImage from '../../Images/cocacola.jpg';
+import tshirtImage from '../../Images/tshirt.jpg';
+import cupImage from '../../Images/cup.jpg';
 
 const ModalConfirm = (props) => {
 
