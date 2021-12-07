@@ -418,6 +418,49 @@ function FoodContent({ searchField }) {
                                 }}
                               >
                                 <Card.Body>
+                                  <Card.ImgOverlay>
+                                    <div
+                                      style={{
+                                        height: '7rem',
+                                        marginLeft: '0.05rem',
+                                        /*                               width: '22rem',
+                                         */ color: '#fff',
+                                        opacity: '0.8',
+                                        marginTop: '8rem',
+                                        borderBottomLeftRadius: '15px',
+                                        borderBottomRightRadius: '15px',
+                                        backgroundColor: 'black',
+                                        position: 'relative',
+                                        zIndex: '2',
+                                      }}
+                                    >
+                                      <Card.Title>
+                                        <span
+                                          className="m-4 mb-0 mt-0 listFoodItem_1"
+                                          style={{
+                                            textTransform: 'uppercase',
+                                            lineHeight: '2rem',
+                                          }}
+                                        >
+                                          {item}
+                                        </span>
+                                      </Card.Title>
+                                      <Card.Text>
+                                        <h5
+                                          className="m-4 mt-1 listFoodItem_2"
+                                          style={{ lineHeight: '10px' }}
+                                        >
+                                          {ingredient}
+                                        </h5>
+                                        <h5
+                                          className="m-4"
+                                          style={{ lineHeight: '10px' }}
+                                        >
+                                          {price} € (INC. Vat)
+                                        </h5>
+                                      </Card.Text>
+                                    </div>
+                                  </Card.ImgOverlay>
                                   <Card.Img
                                     variant="top"
                                     src={burgImage}
@@ -427,6 +470,7 @@ function FoodContent({ searchField }) {
                                       margin: '.05rem',
                                       height: '15rem',
                                       borderRadius: '12px',
+                                      zIndex: '1',
                                       position: 'relative',
                                     }}
                                     onClick={() => history.push(`/item/${id}`)}
@@ -460,55 +504,6 @@ function FoodContent({ searchField }) {
        onClick={() => history.push(`/item/${id}`)}
      />
    )} */}
-
-                                  <Card.ImgOverlay
-                                    style={{
-                                      color: '#fff',
-                                      opacity: '0.8',
-                                      display: 'flex',
-                                      flexWrap: 'wrap',
-                                      flexDirection: 'row',
-                                      margin: '0rem',
-                                    }}
-                                  >
-                                    <div
-                                      style={{
-                                        height: '7rem',
-                                        marginLeft: '0.05rem',
-                                        width: '22rem',
-                                        marginTop: '8rem',
-                                        borderBottomLeftRadius: '15px',
-                                        borderBottomRightRadius: '15px',
-                                        backgroundColor: 'black',
-                                      }}
-                                    >
-                                      <Card.Title>
-                                        <span
-                                          className="m-4 mb-0 mt-0 listFoodItem_1"
-                                          style={{
-                                            textTransform: 'uppercase',
-                                            lineHeight: '2rem',
-                                          }}
-                                        >
-                                          {item}
-                                        </span>
-                                      </Card.Title>
-                                      <Card.Text>
-                                        <h5
-                                          className="m-4 mt-1 listFoodItem_2"
-                                          style={{ lineHeight: '10px' }}
-                                        >
-                                          {ingredient}
-                                        </h5>
-                                        <h5
-                                          className="m-4"
-                                          style={{ lineHeight: '10px' }}
-                                        >
-                                          {price} € (INC. Vat)
-                                        </h5>
-                                      </Card.Text>
-                                    </div>
-                                  </Card.ImgOverlay>
                                 </Card.Body>
                               </Card>
                             )
