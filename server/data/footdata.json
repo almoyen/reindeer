@@ -1,0 +1,98 @@
+{
+  "foodData": [
+    {
+      "id": "1",
+      "item": "Turkish Kebab",
+      "ingredient": "Rankalainen,Kana, Salati",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "30",
+      "image": "/api/attachment/foods/1.jpg",
+      "foodChoices": ["Non-Veg"]
+    },
+    {
+      "id": "2",
+      "item": "Kerrosateria",
+      "ingredient": "Hampurilainen,Raskalaiset perunat",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "32",
+
+      "image": "/api/attachment/foods/2.jpg",
+
+      "foodChoices": ["Non-Veg"]
+    },
+    {
+      "id": "3",
+      "item": "Kana-ateria",
+      "ingredient": "Hamprilainen, Ranskalaiset perunat",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "32",
+
+      "image": "/api/attachment/foods/3.jpg",
+      "foodChoices": ["Veg"]
+    },
+    {
+      "id": "4",
+      "item": "item04",
+      "ingredient": "garlic, salad, Chicken, Chilli",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "32",
+
+      "image": "/api/attachment/foods/4.jpg",
+      "foodChoices": ["Lacto Veg"]
+    },
+    {
+      "id": "5",
+      "item": "item05",
+      "ingredient": "garlic, salad, Chicken,Chilli",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "32",
+
+      "image": "/api/attachment/foods/5.jpg",
+      "foodChoices": ["Non-Veg"]
+    },
+    {
+      "id": "6",
+      "item": "item06",
+      "ingredient": "garlic, salad, Chicken, Chilli",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "price": "12",
+
+      "image": "/api/attachment/foods/6.jpg",
+      "foodChoices": ["Lactose Free"]
+    },
+    {
+      "id": "7",
+      "item": "item07",
+      "ingredient": "garlic, salad, Chicken, Chilli",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "image": "",
+      "price": "22",
+
+      "foodChoices": ["Gluton free"]
+    },
+    {
+      "id": "8",
+      "item": "item08",
+      "ingredient": "garlic, salad, Chicken, Chilli",
+      "available": true,
+      "country": "Finland",
+      "discount": false,
+      "image": "",
+      "foodChoices": ["Gluton free"]
+    }
+  ]
+}

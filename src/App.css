@@ -1,38 +1,69 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title_1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-weight: 400;
+}
+.title_2 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: bold;
+  font-weight: 800;
+}
+.tableoflist {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+.NavItems {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.countItem {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.listFoodItem_1 {
+  font-family: 'Josefin Sans', sans-serif;
+  font-style: bold;
+  font-weight: 400;
+}
+
+.listFoodItem_2 {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+}
+.topMealList {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.sidebarTitles {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.sidebarItems {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+.image_div {
+  background-image: url('./Images/background_picture.png');
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+}
+
+.footContent {
+  background-color: #fff;
+}
+/* @media screen and (min-device-width: 481px) and (max-device-width: 768px) {
+  .sidebar_elem {
+        width: '20rem';
+
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+} */

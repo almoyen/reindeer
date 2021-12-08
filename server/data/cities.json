@@ -1,0 +1,29 @@
+{
+  "finlandCity": [
+    {
+      "id": "1",
+      "city": "Helsinki",
+      "country": "Finland",
+      "iso2": "FI"
+    },
+    {
+      "id": "2",
+
+      "city": "Tampere",
+      "country": "Finland",
+      "iso2": "FI"
+    },
+    {
+      "id": "3",
+      "city": "Turku",
+      "country": "Finland",
+      "iso2": "FI"
+    },
+    {
+      "id": "4",
+      "city": "Seinäjoki",
+      "country": "Finland",
+      "iso2": "FI"
+    }
+  ]
+}
