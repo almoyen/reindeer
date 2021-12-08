@@ -483,7 +483,7 @@ function FoodContent({ searchField }) {
                                   {image ? (
                                     <Card.Img
                                       variant="top"
-                                      src={burgImage}
+                                      src={image}
                                       style={{
                                         cursor: 'pointer',
                                         objectFit: 'cover',
@@ -523,10 +523,11 @@ function FoodContent({ searchField }) {
                           {' '}
                           <div
                             style={{
-                              paddingRight: '1rem',
+                              /*  paddingRight: '1rem', */
                               display: 'flex',
                               flexDirection: 'row',
                               justifyContent: 'center',
+                              position: 'static',
                             }}
                           >
                             <Button

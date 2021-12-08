@@ -9,10 +9,7 @@ import { end_points } from '../../utils'
 
 export default function MobileLayout({ searchField, searchItemField }) {
   const history = useHistory()
-
   const { getallItems } = end_points
-  //const [size, setSize] = useState(window.innerWidth)
-
   const [allItems, setAllItems] = useState([])
   const [forceUpdate, setForceUpdate] = useState()
   const [isChecked] = useState(false)
@@ -22,7 +19,16 @@ export default function MobileLayout({ searchField, searchItemField }) {
 
   const getAllItems = async () => {
     try {
+      let arr = []
       const respond = await axios.get(getallItems)
+      for (let i = 0; i < respond.data.length; i++) {
+        for (let j = 0; j < respond.data[i].menus.length; j++) {
+          arr.push(respond.data[i].menus[j])
+        }
+      }
+      console.log('arr', arr)
+      setAllItems(arr)
+      /*  const respond = await axios.get(getallItems)
       if (isChecked) {
         setAllItems(respond.data.slice(-3))
       } else if (!isChecked) {
@@ -30,7 +36,7 @@ export default function MobileLayout({ searchField, searchItemField }) {
         setForceUpdate(!forceUpdate)
       } else {
         setAllItems(respond.data)
-      }
+      } */
     } catch (error) {
       console.log(error)
     }
