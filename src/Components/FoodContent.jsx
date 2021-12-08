@@ -19,7 +19,7 @@ function FoodContent({ searchField }) {
   const [distance, setDistance] = useState(0)
   const [allItems, setAllItems] = useState([])
   const [itemSelect, setItemSelect] = useState([])
-  const [forceUpdate, setForceUpdate] = useState()
+  //const [forceUpdate, setForceUpdate] = useState()
   const [isChecked, setIsChecked] = useState(false)
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [searchItemField, setSearchItemsField] = useState('')
@@ -494,27 +494,23 @@ function FoodContent({ searchField }) {
                             )
                           })}
 
-                        <div
-                          style={{
-                            paddingRight: '9rem',
-                            paddingLeft: '24rem',
-                            paddingBottom: '10rem',
-                            padding: '5rem',
-                            justifyContent: 'center',
-                            display: 'flex',
-                            flexDirection: 'row',
-                            justifyContent: 'center',
-                          }}
-                        >
-                          <Button
-                            onMouseOver={onMouseEnter}
-                            onMouseOut={onMouseLeave}
-                            style={fadeStyle}
-                            onClick={onNextPage}
+                        <Container style={{ paddingRight: '10rem' }}>
+                          <div
+                            style={{
+                              padding: '1.5rem',
+                              paddingLeft: '19rem',
+                            }}
                           >
-                            show more
-                          </Button>
-                        </div>
+                            <Button
+                              onMouseOver={onMouseEnter}
+                              onMouseOut={onMouseLeave}
+                              style={fadeStyle}
+                              onClick={onNextPage}
+                            >
+                              show more
+                            </Button>
+                          </div>
+                        </Container>
                       </Container>
                     </Col>
                   </Row>

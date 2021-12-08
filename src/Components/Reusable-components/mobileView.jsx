@@ -11,7 +11,7 @@ export default function MobileLayout({ searchField, searchItemField }) {
   const history = useHistory()
   const { getallItems } = end_points
   const [allItems, setAllItems] = useState([])
-  const [forceUpdate, setForceUpdate] = useState()
+  //const [forceUpdate, setForceUpdate] = useState()
   const [isChecked] = useState(false)
   const [selectedMeal, setSelectedMeal] = useState(null)
   const [numberOfitemsShown, setNumberofItemsShown] = useState(3)
