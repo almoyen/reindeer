@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useHistory } from "react-router";
 import { Count, Loader } from "./index";
+import ModalConfirm from "./modal/index";
 import { end_points } from "../utils/BACKEND_URL";
 import React, { useEffect, useState } from "react";
 import { Card, Col, FormControl } from "react-bootstrap";
@@ -26,6 +27,26 @@ function FoodContent({ searchField }) {
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4);
   const [myStyle, setMyStyle] = useState(false);
 
+  const [textModal, setTextModal] = useState("");
+  const [modalBack, setModalBack] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [item, setItem] = useState({});
+
+  const clickClose = () => {
+    setTextModal("");
+    setModalBack(false);
+    setVisibleModal(false);
+  };
+
+  const clickConfirm = () => {
+    console.log("CONMFIRMED");
+  };
+
+  const onItemClick = (i) => {
+    console.log(i);
+    setItem(i);
+    setVisibleModal(true);
+  };
   /*   const updateDimensions = () => {
     setSize({ width: size })
   } */
@@ -406,6 +427,7 @@ function FoodContent({ searchField }) {
                                   width: "24rem",
                                   border: "none",
                                 }}
+                                onClick={() => onItemClick(i)}
                               >
                                 <Card.Body>
                                   <Card.ImgOverlay>
@@ -466,9 +488,9 @@ function FoodContent({ searchField }) {
                                         zIndex: "1",
                                         position: "relative",
                                       }}
-                                      onClick={() =>
-                                        history.push(`/item/${id}`)
-                                      }
+                                      // onClick={() =>
+                                      //   history.push(`/item/${id}`)
+                                      // }
                                     />
                                   ) : (
                                     <Card.Img
@@ -514,6 +536,15 @@ function FoodContent({ searchField }) {
                     </Col>
                   </Row>
                 </Jumbotron>
+                <ModalConfirm
+                  textModal={textModal}
+                  modalBack={modalBack}
+                  visibleModal={visibleModal}
+                  data={item}
+                  itemList={allItems}
+                  clickClose={clickClose}
+                  clickConfirm={clickConfirm}
+                />
               </Container>
             </div>
           ) : (
