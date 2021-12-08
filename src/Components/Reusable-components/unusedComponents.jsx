@@ -1,37 +1,37 @@
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+import axios from "axios";
+import { useEffect, useState } from "react";
 //import useSWR from 'swr'
-import { end_points } from '../../utils'
+import { end_points } from "../../utils";
 
 export default function FilterableProductTable() {
-  const { getallItems } = end_points
-  const [allItems, setAllItems] = useState([])
-  const [isChecked, setIsChecked] = useState(false)
+  const { getallItems } = end_points;
+  const [allItems, setAllItems] = useState([]);
+  const [isChecked, setIsChecked] = useState(false);
   //const [allList, setAllList] = useState(false)
-  const [forceUpdate, setForceUpdate] = useState()
+  const [forceUpdate, setForceUpdate] = useState();
 
   const getAllItems = async () => {
     try {
-      const respond = await axios.get(getallItems)
+      const respond = await axios.get(getallItems);
       if (isChecked) {
-        setAllItems(respond.data.slice(-3))
+        setAllItems(respond.data.slice(-3));
       } else if (!isChecked) {
-        setAllItems(respond.data)
-        setForceUpdate(!forceUpdate)
+        setAllItems(respond.data);
+        setForceUpdate(!forceUpdate);
       } else {
-        setAllItems(respond.data)
+        setAllItems(respond.data);
       }
     } catch (error) {
-      console.log(error)
+      console.error(error);
     }
-  }
+  };
 
   //const forceupdate = useCallback(() => forceUpdate(2000), [])
   //setForceUpdate(!forceUpdate)
   useEffect(() => {
-    getAllItems()
+    getAllItems();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!isChecked])
+  }, [!isChecked]);
 
   /*  async function fetcher(url) {
     return await axios.get(url)
@@ -42,17 +42,17 @@ export default function FilterableProductTable() {
   console.log('data', data) */
   const filtered = allItems.filter((ele) => {
     if (!isChecked && !ele.length > 0 && !ele) {
-      return false
+      return false;
     }
     /* if (!allItems && ele.item.toLowerCase().includes(ele.item.toLowerCase())) {
       return false
     } */
 
-    return true
-  })
+    return true;
+  });
 
   //console.log('setAllList', allList)
-  console.log('filtered', filtered)
+  console.log("filtered", filtered);
 
   /*  const handleClicked = (e) => {
     if (!isChecked) {
@@ -77,10 +77,10 @@ export default function FilterableProductTable() {
       </div>
       {allItems &&
         allItems.map((el) => {
-          return <div key={el.id}>{el.item}</div>
+          return <div key={el.id}>{el.item}</div>;
         })}
     </div>
-  )
+  );
 }
 
 /* 

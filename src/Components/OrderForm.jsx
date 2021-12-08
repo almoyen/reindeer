@@ -1,75 +1,75 @@
-import axios from 'axios'
-import { Loader } from '.'
-import { end_points } from '../utils'
-import { useHistory } from 'react-router'
-import React, { useState, useEffect } from 'react'
-import { Col, Container, Row } from 'react-bootstrap'
-import { ArrowLeftRight } from 'react-bootstrap-icons'
-import OrdPic from '../Images/background_picture.png'
-import { Badge, Button, Card, Form } from 'react-bootstrap'
-import { FormControl, Image, InputGroup } from 'react-bootstrap'
+import axios from "axios";
+import { Loader } from ".";
+import { end_points } from "../utils";
+import { useHistory } from "react-router";
+import React, { useState, useEffect } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import { ArrowLeftRight } from "react-bootstrap-icons";
+import OrdPic from "../Images/background_picture.png";
+import { Badge, Button, Card, Form } from "react-bootstrap";
+import { FormControl, Image, InputGroup } from "react-bootstrap";
 
 function OrderForm({ searchField }) {
-  const history = useHistory()
-  const { getAllCities, getAllTrainModels } = end_points
-  const [whereCities, setWhereCities] = useState([])
-  const [trainModels, setTrainModels] = useState([])
-  const [destinationCities, setDestinationCities] = useState([])
+  const history = useHistory();
+  const { getAllCities, getAllTrainModels } = end_points;
+  const [whereCities, setWhereCities] = useState([]);
+  const [trainModels, setTrainModels] = useState([]);
+  const [destinationCities, setDestinationCities] = useState([]);
 
   const getCities = () => {
     axios
       .get(getAllCities)
       .then(async (response) => {
-        const wc = []
+        const wc = [];
         for (let i = 0; i < response.data.length; i++) {
-          let obj = {}
-          obj.city = response.data[i].city
-          obj.country = response.data[i].country
-          obj.iso = response.data[i].iso
-          wc.push(obj)
+          let obj = {};
+          obj.city = response.data[i].city;
+          obj.country = response.data[i].country;
+          obj.iso = response.data[i].iso;
+          wc.push(obj);
         }
-        const dc = []
+        const dc = [];
         for (let i = 0; i < response.data.length; i++) {
-          let obj = {}
-          obj.city = response.data[i].city
-          obj.country = response.data[i].country
-          obj.iso = response.data[i].iso
-          dc.push(obj)
+          let obj = {};
+          obj.city = response.data[i].city;
+          obj.country = response.data[i].country;
+          obj.iso = response.data[i].iso;
+          dc.push(obj);
         }
-        setWhereCities(wc)
-        setDestinationCities(dc.reverse())
+        setWhereCities(wc);
+        setDestinationCities(dc.reverse());
       })
-      .catch((e) => console.log(e.message))
-  }
+      .catch((e) => console.error(e.message));
+  };
 
   const getTrainModels = async () => {
     try {
-      const respond = await axios.get(getAllTrainModels)
-      setTrainModels(respond.data)
-      return respond
+      const respond = await axios.get(getAllTrainModels);
+      setTrainModels(respond.data);
+      return respond;
     } catch (error) {
-      console.log(error.message)
+      console.error(error.message);
     }
-  }
+  };
 
   useEffect(() => {
-    getCities()
-    getTrainModels()
+    getCities();
+    getTrainModels();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   const routeToNextPage = () => {
-    history.push('/orders')
-  }
+    history.push("/orders");
+  };
 
   const switchToOther = () => {
-    const dc = whereCities
-    const cd = destinationCities
-    setDestinationCities(dc)
-    setWhereCities(cd)
-    console.log('whereCities', whereCities)
-    console.log('destinationCities', destinationCities)
-  }
+    const dc = whereCities;
+    const cd = destinationCities;
+    setDestinationCities(dc);
+    setWhereCities(cd);
+    // console.error('whereCities', whereCities)
+    // console.error('destinationCities', destinationCities)
+  };
 
   return (
     <>
@@ -77,19 +77,19 @@ function OrderForm({ searchField }) {
         <div>
           <div
             style={{
-              position: 'relative',
-              zIndex: '-1',
-              height: '60rem',
+              position: "relative",
+              zIndex: "-1",
+              height: "60rem",
             }}
           >
             <Image
               src={OrdPic}
               style={{
-                height: '62rem',
-                objectFit: 'cover',
-                width: '100%',
-                position: 'relative',
-                backgroundSize: 'contain',
+                height: "62rem",
+                objectFit: "cover",
+                width: "100%",
+                position: "relative",
+                backgroundSize: "contain",
               }}
             />
           </div>
@@ -97,19 +97,19 @@ function OrderForm({ searchField }) {
           <Container>
             <div
               style={{
-                zIndex: '2',
-                width: '100%',
-                height: '10rem',
-                marginTop: '-55.5rem',
+                zIndex: "2",
+                width: "100%",
+                height: "10rem",
+                marginTop: "-55.5rem",
               }}
             >
               <Badge className="m-2 mt-5 text-left">
                 <p
                   className="title_1"
                   style={{
-                    fontSize: '1.6rem',
-                    marginLeft: '-2rem',
-                    lineHeight: '1.8px',
+                    fontSize: "1.6rem",
+                    marginLeft: "-2rem",
+                    lineHeight: "1.8px",
                   }}
                 >
                   check out our
@@ -117,8 +117,8 @@ function OrderForm({ searchField }) {
                 <p
                   className="h3 title_2"
                   style={{
-                    fontSize: '2.5rem',
-                    marginLeft: '2rem',
+                    fontSize: "2.5rem",
+                    marginLeft: "2rem",
                   }}
                 >
                   Best Cousine
@@ -129,22 +129,22 @@ function OrderForm({ searchField }) {
                 <Col lg={12} md={12} sm={12}>
                   <Container
                     style={{
-                      margin: 'auto',
-                      width: '100%',
-                      fontSize: '1.7rem',
-                      position: 'relative',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      backgroundColor: '#0000',
+                      margin: "auto",
+                      width: "100%",
+                      fontSize: "1.7rem",
+                      position: "relative",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      backgroundColor: "#0000",
                     }}
                   >
                     <Card
                       style={{
-                        width: '80rem',
-                        backgroundColor: '#000009DF',
-                        opacity: '0.88',
-                        borderRadius: '15px',
+                        width: "80rem",
+                        backgroundColor: "#000009DF",
+                        opacity: "0.88",
+                        borderRadius: "15px",
                       }}
                     >
                       <Card.Body>
@@ -154,7 +154,7 @@ function OrderForm({ searchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: '#fff' }}
+                                style={{ color: "#fff" }}
                               >
                                 where
                               </Form.Label>
@@ -165,12 +165,12 @@ function OrderForm({ searchField }) {
                                   id="inlineFormInputGroup1"
                                   size="lg"
                                   type="text"
-                                  onChange={(e) => {
-                                    console.log(e.target.value)
-                                  }}
-                                  style={{ background: 'grey', color: '#fff' }}
+                                  // onChange={(e) => {
+                                  //   console.log(e.target.value);
+                                  // }}
+                                  style={{ background: "grey", color: "#fff" }}
                                 >
-                                  {searchField === ''
+                                  {searchField === ""
                                     ? whereCities.map((city, index) => {
                                         return (
                                           <option
@@ -181,38 +181,38 @@ function OrderForm({ searchField }) {
                                           >
                                             {city.city}
                                           </option>
-                                        )
+                                        );
                                       })
                                     : null}
                                 </FormControl>
                                 <InputGroup.Text
                                   style={{
-                                    marginLeft: '1.5rem',
-                                    width: '50px',
-                                    height: '50px',
-                                    backgroundColor: '#0000',
-                                    opacity: '0.88',
-                                    border: 'none',
+                                    marginLeft: "1.5rem",
+                                    width: "50px",
+                                    height: "50px",
+                                    backgroundColor: "#0000",
+                                    opacity: "0.88",
+                                    border: "none",
                                   }}
                                 >
                                   <ArrowLeftRight
                                     style={{
-                                      marginLeft: '0px',
-                                      backgroundColor: 'none',
-                                      fontSize: '40px',
-                                      cursor: 'pointer',
-                                      color: '#fff',
+                                      marginLeft: "0px",
+                                      backgroundColor: "none",
+                                      fontSize: "40px",
+                                      cursor: "pointer",
+                                      color: "#fff",
                                     }}
                                     onClick={switchToOther}
                                   />
-                                </InputGroup.Text>{' '}
+                                </InputGroup.Text>{" "}
                               </InputGroup>
                             </Col>
                             <Col lg={6}>
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: '#fff' }}
+                                style={{ color: "#fff" }}
                               >
                                 destination
                               </Form.Label>
@@ -224,14 +224,14 @@ function OrderForm({ searchField }) {
                                   size="lg"
                                   type="text"
                                   style={{
-                                    marginRight: '4rem',
-                                    width: '20px',
-                                    color: '#fff',
-                                    background: 'grey',
+                                    marginRight: "4rem",
+                                    width: "20px",
+                                    color: "#fff",
+                                    background: "grey",
                                   }}
                                   onChange={(e) => console.log(e.target.value)}
                                 >
-                                  {searchField === ''
+                                  {searchField === ""
                                     ? destinationCities.map((city, index) => {
                                         return (
                                           <option
@@ -242,7 +242,7 @@ function OrderForm({ searchField }) {
                                           >
                                             {city.city}
                                           </option>
-                                        )
+                                        );
                                       })
                                     : null}
                                 </FormControl>
@@ -254,7 +254,7 @@ function OrderForm({ searchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: '#fff' }}
+                                style={{ color: "#fff" }}
                               >
                                 departure date & time
                               </Form.Label>
@@ -264,16 +264,16 @@ function OrderForm({ searchField }) {
                                   id="inlineFormInputGroup"
                                   size="lg"
                                   type="datetime-local"
-                                  style={{ background: 'grey', color: '#fff' }}
+                                  style={{ background: "grey", color: "#fff" }}
                                 />
                                 <InputGroup.Text
                                   className=""
                                   style={{
-                                    marginLeft: '1.5rem',
-                                    width: '50px',
-                                    height: '50px',
-                                    background: 'none',
-                                    border: 'none',
+                                    marginLeft: "1.5rem",
+                                    width: "50px",
+                                    height: "50px",
+                                    background: "none",
+                                    border: "none",
                                   }}
                                 ></InputGroup.Text>
                               </InputGroup>
@@ -282,7 +282,7 @@ function OrderForm({ searchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: '#fff' }}
+                                style={{ color: "#fff" }}
                               >
                                 train model
                               </Form.Label>
@@ -293,13 +293,13 @@ function OrderForm({ searchField }) {
                                   id="inlineFormInputGroup"
                                   size="lg"
                                   style={{
-                                    marginRight: '4rem',
-                                    width: '20px',
-                                    color: '#fff',
-                                    background: 'grey',
+                                    marginRight: "4rem",
+                                    width: "20px",
+                                    color: "#fff",
+                                    background: "grey",
                                   }}
                                 >
-                                  {searchField === ''
+                                  {searchField === ""
                                     ? trainModels &&
                                       trainModels.map((trainModel, index) => {
                                         return (
@@ -311,7 +311,7 @@ function OrderForm({ searchField }) {
                                               trainModel.trainNumber} */}
                                             {trainModel.model}
                                           </option>
-                                        )
+                                        );
                                       })
                                     : null}
                                 </FormControl>
@@ -328,14 +328,14 @@ function OrderForm({ searchField }) {
                 <Col className="m-0 mb-2 text-center">
                   <Container
                     className=""
-                    style={{ paddingRight: '4rem', paddingBottom: '15px' }}
+                    style={{ paddingRight: "4rem", paddingBottom: "15px" }}
                   >
                     <Button
                       style={{
-                        width: '7rem',
-                        height: '3rem',
-                        backgroundColor: 'grey',
-                        border: 'none',
+                        width: "7rem",
+                        height: "3rem",
+                        backgroundColor: "grey",
+                        border: "none",
                       }}
                       type="submit"
                       className="mt-3"
@@ -353,7 +353,7 @@ function OrderForm({ searchField }) {
         <Loader />
       )}
     </>
-  )
+  );
 }
 
-export default OrderForm
+export default OrderForm;
