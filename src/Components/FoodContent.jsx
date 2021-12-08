@@ -124,20 +124,6 @@ function FoodContent({ searchField }) {
     { id: 5, label: 'Lahjat' },
   ]
 
-  /* const sortItem = [
-    {
-      id: 1,
-      label: 'all Items',
-    },
-    {
-      id: 2,
-      label: 'best Rates',
-    },
-    {
-      id: 3,
-      label: 'new Items',
-    },
-  ] */
   const onMouseEnter = () => {
     setMyStyle(true)
   }
@@ -154,6 +140,7 @@ function FoodContent({ searchField }) {
         border: 'none',
         fontSize: '1.3rem',
         outline: 'none',
+        position: 'absolute',
       }
     : {
         width: '8rem',
@@ -162,6 +149,7 @@ function FoodContent({ searchField }) {
         border: 'none',
         fontSize: '1.3rem',
         outline: 'none',
+        position: 'absolute',
       }
 
   // const resizeAll = (!size.innerWidth )
@@ -461,25 +449,11 @@ function FoodContent({ searchField }) {
                                           className="m-4"
                                           style={{ lineHeight: '10px' }}
                                         >
-                                          {price}13 € (INC. Vat)
+                                          {price} € (INC. Vat)
                                         </h5>
                                       </Card.Text>
                                     </div>
                                   </Card.ImgOverlay>
-                                  {/* <Card.Img
-                                    variant="top"
-                                    src={burgImage}
-                                    style={{
-                                      cursor: 'pointer',
-                                      objectFit: 'cover',
-                                      margin: '.05rem',
-                                      height: '15rem',
-                                      borderRadius: '12px',
-                                      zIndex: '1',
-                                      position: 'relative',
-                                    }}
-                                    onClick={() => history.push(`/item/${id}`)}
-                                  /> */}
                                   {image ? (
                                     <Card.Img
                                       variant="top"
@@ -519,27 +493,28 @@ function FoodContent({ searchField }) {
                               </Card>
                             )
                           })}
-                        <Container>
-                          {' '}
-                          <div
-                            style={{
-                              /*  paddingRight: '1rem', */
-                              display: 'flex',
-                              flexDirection: 'row',
-                              justifyContent: 'center',
-                              position: 'static',
-                            }}
+
+                        <div
+                          style={{
+                            paddingRight: '9rem',
+                            paddingLeft: '24rem',
+                            paddingBottom: '10rem',
+                            padding: '5rem',
+                            justifyContent: 'center',
+                            display: 'flex',
+                            flexDirection: 'row',
+                            justifyContent: 'center',
+                          }}
+                        >
+                          <Button
+                            onMouseOver={onMouseEnter}
+                            onMouseOut={onMouseLeave}
+                            style={fadeStyle}
+                            onClick={onNextPage}
                           >
-                            <Button
-                              onMouseOver={onMouseEnter}
-                              onMouseOut={onMouseLeave}
-                              style={fadeStyle}
-                              onClick={onNextPage}
-                            >
-                              show more
-                            </Button>
-                          </div>
-                        </Container>
+                            show more
+                          </Button>
+                        </div>
                       </Container>
                     </Col>
                   </Row>

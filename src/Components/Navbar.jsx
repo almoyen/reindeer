@@ -74,8 +74,8 @@ function Header() {
                 <img
                   alt="icon"
                   src={CartIcon}
-                  width="30"
-                  height="30"
+                  width="24"
+                  height="24"
                   className="d-inline-block align-top"
                 />
               </Nav.Link>
