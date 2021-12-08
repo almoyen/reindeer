@@ -43,7 +43,16 @@ function FoodContent({ searchField }) {
 
   const getAllItems = async () => {
     try {
+      let arr = []
       const respond = await axios.get(getallItems)
+      for (let i = 0; i < respond.data.length; i++) {
+        for (let j = 0; j < respond.data[i].menus.length; j++) {
+          arr.push(respond.data[i].menus[j])
+        }
+      }
+      console.log('arr', arr)
+      setAllItems(arr)
+      /*  const respond = await axios.get(getallItems)
       if (isChecked) {
         setAllItems(respond.data.slice(-3))
       } else if (!isChecked) {
@@ -51,7 +60,7 @@ function FoodContent({ searchField }) {
         setForceUpdate(!forceUpdate)
       } else {
         setAllItems(respond.data)
-      }
+      } */
     } catch (error) {
       console.log(error)
     }
@@ -156,6 +165,7 @@ function FoodContent({ searchField }) {
       }
 
   // const resizeAll = (!size.innerWidth )
+  console.log('allitems', allItems)
   return (
     <>
       {filterItems && filterItems.length > 0 ? (
@@ -276,7 +286,7 @@ function FoodContent({ searchField }) {
                                       style={{ color: 'gray' }}
                                       isChecked={!isChecked}
                                       /*  onClick={() => setIsChecked(!isChecked)} */
-                                      onClick={forceUpdate}
+                                      /*  onClick={forceUpdate} */
                                       type="checkbox"
                                     />
                                     <span>All items</span>
@@ -402,12 +412,7 @@ function FoodContent({ searchField }) {
                         {filterItems
                           .slice(0, numberOfitemsShown)
                           .map((i, index) => {
-                            const {
-                              id,
-                              /*  image, */ item,
-                              price,
-                              ingredient,
-                            } = i
+                            const { id, image, item, price, ingredient } = i
                             return (
                               <Card
                                 key={index}
@@ -456,12 +461,12 @@ function FoodContent({ searchField }) {
                                           className="m-4"
                                           style={{ lineHeight: '10px' }}
                                         >
-                                          {price} € (INC. Vat)
+                                          {price}13 € (INC. Vat)
                                         </h5>
                                       </Card.Text>
                                     </div>
                                   </Card.ImgOverlay>
-                                  <Card.Img
+                                  {/* <Card.Img
                                     variant="top"
                                     src={burgImage}
                                     style={{
@@ -474,36 +479,42 @@ function FoodContent({ searchField }) {
                                       position: 'relative',
                                     }}
                                     onClick={() => history.push(`/item/${id}`)}
-                                  />
-                                  {/*   {image ? (
-     <Card.Img
-       variant="top"
-       src={burgImage}
-       style={{
-         cursor: "pointer",
-         borderRadius: "18px",
-         height: "20rem",
-         width: "26rem",
-         objectFit: "cover",
-       }}
-       onClick={() => history.push(`/item/${id}`)}
-     />
-   ) : (
-     <Card.Img
-       variant="top"
-       src={burgImage}
-       style={{
-         cursor: "pointer",
-         borderRadius: "18px",
-         height: "20rem",
-         width: "23rem",
-         margin: "0.6rem",
-
-         objectFit: "cover",
-       }}
-       onClick={() => history.push(`/item/${id}`)}
-     />
-   )} */}
+                                  /> */}
+                                  {image ? (
+                                    <Card.Img
+                                      variant="top"
+                                      src={burgImage}
+                                      style={{
+                                        cursor: 'pointer',
+                                        objectFit: 'cover',
+                                        margin: '.05rem',
+                                        height: '15rem',
+                                        borderRadius: '12px',
+                                        zIndex: '1',
+                                        position: 'relative',
+                                      }}
+                                      onClick={() =>
+                                        history.push(`/item/${id}`)
+                                      }
+                                    />
+                                  ) : (
+                                    <Card.Img
+                                      variant="top"
+                                      src={burgImage}
+                                      style={{
+                                        cursor: 'pointer',
+                                        objectFit: 'cover',
+                                        margin: '.05rem',
+                                        height: '15rem',
+                                        borderRadius: '12px',
+                                        zIndex: '1',
+                                        position: 'relative',
+                                      }}
+                                      onClick={() =>
+                                        history.push(`/item/${id}`)
+                                      }
+                                    />
+                                  )}
                                 </Card.Body>
                               </Card>
                             )
