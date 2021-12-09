@@ -7,7 +7,7 @@ import { Badge, Button, Card, Form } from "react-bootstrap";
 import { FormControl, Image, InputGroup } from "react-bootstrap";
 
 import { Loader } from "../Components";
-import { end_points } from "../config";
+import { end_points, styles } from "../config";
 import OrdPic from "../assets/images/background_picture.png";
 
 export default function LandingPage({ searchField, setSearchField }) {
@@ -69,86 +69,40 @@ export default function LandingPage({ searchField, setSearchField }) {
     const cd = destinationCities;
     setDestinationCities(dc);
     setWhereCities(cd);
-    // console.error('whereCities', whereCities)
-    // console.error('destinationCities', destinationCities)
   };
+
+  const { homeSearchButtonStyle } = styles;
+  const { homeFormInputLabelStyle, homeRowContainerStyle } = styles;
+  const { homeControlArrowStyle, homeFormInputControlStyle } = styles;
+  const { homeInputFromControlStyle, homeInputGroupTextStyle } = styles;
+  const { homeBadgeStyle, homeFontBasicStyle, homeRowColStyle } = styles;
+  const { homeWhereCityFieldStyle, homeImageStyle, homeConDivStyle } = styles;
+  const { homeFormControlStyle, homeRowColCardStyle, homeInputContolStyle } =
+    styles;
 
   return (
     <>
       {whereCities.length > 0 ? (
         <div>
-          <div
-            style={{
-              position: "relative",
-              zIndex: "-1",
-              height: "60rem",
-            }}
-          >
-            <Image
-              src={OrdPic}
-              style={{
-                height: "62rem",
-                objectFit: "cover",
-                width: "100%",
-                position: "relative",
-                backgroundSize: "contain",
-              }}
-            />
+          <div style={homeWhereCityFieldStyle}>
+            <Image src={OrdPic} style={homeImageStyle} />
           </div>
 
           <Container>
-            <div
-              style={{
-                zIndex: "2",
-                width: "100%",
-                height: "10rem",
-                marginTop: "-55.5rem",
-              }}
-            >
+            <div style={homeConDivStyle}>
               <Badge className="m-2 mt-5 text-left">
-                <p
-                  className="title_1"
-                  style={{
-                    fontSize: "1.6rem",
-                    marginLeft: "-2rem",
-                    lineHeight: "1.8px",
-                  }}
-                >
+                <p className="title_1" style={homeBadgeStyle}>
                   check out our
                 </p>
-                <p
-                  className="h3 title_2"
-                  style={{
-                    fontSize: "2.5rem",
-                    marginLeft: "2rem",
-                  }}
-                >
+                <p className="h3 title_2" style={homeFontBasicStyle}>
                   Best Cousine
                 </p>
               </Badge>
 
               <Row>
                 <Col lg={12} md={12} sm={12}>
-                  <Container
-                    style={{
-                      margin: "auto",
-                      width: "100%",
-                      fontSize: "1.7rem",
-                      position: "relative",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      backgroundColor: "#0000",
-                    }}
-                  >
-                    <Card
-                      style={{
-                        width: "80rem",
-                        backgroundColor: "#000009DF",
-                        opacity: "0.88",
-                        borderRadius: "15px",
-                      }}
-                    >
+                  <Container style={homeRowColStyle}>
+                    <Card style={homeRowColCardStyle}>
                       <Card.Body>
                         <Form>
                           <Row>
@@ -163,14 +117,11 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <InputGroup className="mb-2 m-3">
                                 <FormControl
                                   required
-                                  as="select"
-                                  id="inlineFormInputGroup1"
                                   size="lg"
                                   type="text"
-                                  // onChange={(e) => {
-                                  //   console.log(e.target.value);
-                                  // }}
-                                  style={{ background: "grey", color: "#fff" }}
+                                  as="select"
+                                  id="inlineFormInputGroup1"
+                                  style={homeFormControlStyle}
                                 >
                                   {searchField === ""
                                     ? whereCities.map((city, index) => {
@@ -187,24 +138,9 @@ export default function LandingPage({ searchField, setSearchField }) {
                                       })
                                     : null}
                                 </FormControl>
-                                <InputGroup.Text
-                                  style={{
-                                    marginLeft: "1.5rem",
-                                    width: "50px",
-                                    height: "50px",
-                                    backgroundColor: "#0000",
-                                    opacity: "0.88",
-                                    border: "none",
-                                  }}
-                                >
+                                <InputGroup.Text style={homeInputContolStyle}>
                                   <ArrowLeftRight
-                                    style={{
-                                      marginLeft: "0px",
-                                      backgroundColor: "none",
-                                      fontSize: "40px",
-                                      cursor: "pointer",
-                                      color: "#fff",
-                                    }}
+                                    style={homeControlArrowStyle}
                                     onClick={switchToOther}
                                   />
                                 </InputGroup.Text>{" "}
@@ -221,16 +157,11 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <InputGroup className="mb-2 m-3">
                                 <FormControl
                                   required
-                                  as="select"
-                                  id="inlineFormInputGroup2"
                                   size="lg"
                                   type="text"
-                                  style={{
-                                    marginRight: "4rem",
-                                    width: "20px",
-                                    color: "#fff",
-                                    background: "grey",
-                                  }}
+                                  as="select"
+                                  id="inlineFormInputGroup2"
+                                  style={homeFormInputControlStyle}
                                   onChange={(e) => console.log(e.target.value)}
                                 >
                                   {searchField === ""
@@ -266,17 +197,11 @@ export default function LandingPage({ searchField, setSearchField }) {
                                   id="inlineFormInputGroup"
                                   size="lg"
                                   type="datetime-local"
-                                  style={{ background: "grey", color: "#fff" }}
+                                  style={homeInputFromControlStyle}
                                 />
                                 <InputGroup.Text
                                   className=""
-                                  style={{
-                                    marginLeft: "1.5rem",
-                                    width: "50px",
-                                    height: "50px",
-                                    background: "none",
-                                    border: "none",
-                                  }}
+                                  style={homeInputGroupTextStyle}
                                 ></InputGroup.Text>
                               </InputGroup>
                             </Col>
@@ -291,26 +216,19 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <InputGroup className="mb-2 m-3 pb-4">
                                 <FormControl
                                   required
+                                  size="lg"
                                   as="select"
                                   id="inlineFormInputGroup"
-                                  size="lg"
-                                  style={{
-                                    marginRight: "4rem",
-                                    width: "20px",
-                                    color: "#fff",
-                                    background: "grey",
-                                  }}
+                                  style={homeFormInputLabelStyle}
                                 >
                                   {searchField === ""
                                     ? trainModels &&
                                       trainModels.map((trainModel, index) => {
                                         return (
                                           <option
-                                            className="tableoflist"
                                             key={index}
+                                            className="tableoflist"
                                           >
-                                            {/* {trainModel.trainType +
-                                              trainModel.trainNumber} */}
                                             {trainModel.model}
                                           </option>
                                         );
@@ -328,20 +246,12 @@ export default function LandingPage({ searchField, setSearchField }) {
               </Row>
               <Row>
                 <Col className="m-0 mb-2 text-center">
-                  <Container
-                    className=""
-                    style={{ paddingRight: "4rem", paddingBottom: "15px" }}
-                  >
+                  <Container className="" style={homeRowContainerStyle}>
                     <Button
-                      style={{
-                        width: "7rem",
-                        height: "3rem",
-                        backgroundColor: "grey",
-                        border: "none",
-                      }}
                       type="submit"
                       className="mt-3"
                       onClick={routeToNextPage}
+                      style={homeSearchButtonStyle}
                     >
                       Search
                     </Button>

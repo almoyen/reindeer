@@ -7,14 +7,14 @@ import colaImage from "../../assets/images/cocacola.jpg";
 import tshirtImage from "../../assets/images/tshirt.jpg";
 
 import { apetizerData, drinkData, foodData } from "../../data";
+import { styles } from "../../config";
 import "./index.css";
 
 const ModalConfirm = (props) => {
   const [step, setStep] = useState(1);
   const [update, setUpdate] = useState(0);
-  const [shirtCount, setShirtCount] = useState(1);
   const [cupCount, setCupCount] = useState(1);
-
+  const [shirtCount, setShirtCount] = useState(1);
   const [selectedCourseMeals, setSelectedCourseMeals] = useState([
     {
       itemId: 0,
@@ -37,6 +37,7 @@ const ModalConfirm = (props) => {
     },
   ]);
 
+  const { modalItemDivStyle, modalItemCountStyle } = styles;
   const { visibleModal, clickClose, data } = props;
 
   const onChangeCourseMeals = (indexOfItem) => {
@@ -242,7 +243,7 @@ const ModalConfirm = (props) => {
               <div>
                 <div className="itemRow">
                   <div className="itemSelector">
-                    <div style={{ fontSize: "20px", paddingLeft: "20px" }}>
+                    <div style={modalItemDivStyle}>
                       {foodData[item.itemId].item}
                     </div>
                     <button
@@ -253,15 +254,7 @@ const ModalConfirm = (props) => {
                     </button>
                   </div>
                   <div className="itemCount">
-                    <div
-                      style={{
-                        fontSize: "20px",
-                        paddingRight: "20px",
-                        paddingLeft: "20px",
-                      }}
-                    >
-                      {item.count}
-                    </div>
+                    <div style={modalItemCountStyle}>{item.count}</div>
                     <button
                       className="plusButton"
                       onClick={() => plusCourse(indexOfItem)}
@@ -282,7 +275,7 @@ const ModalConfirm = (props) => {
                       return (
                         <div
                           className="itemSelectorFood"
-                          style={{ fontSize: "20px", paddingLeft: "20px" }}
+                          style={modalItemDivStyle}
                           onClick={() =>
                             selectNewCourseMeal(indexOfItem, item.id)
                           }
@@ -318,7 +311,7 @@ const ModalConfirm = (props) => {
               <div>
                 <div className="itemRow">
                   <div className="itemSelector">
-                    <div style={{ fontSize: "20px", paddingLeft: "20px" }}>
+                    <div style={modalItemDivStyle}>
                       {apetizerData[item.itemId].item}
                     </div>
                     <button
@@ -329,15 +322,7 @@ const ModalConfirm = (props) => {
                     </button>
                   </div>
                   <div className="itemCount">
-                    <div
-                      style={{
-                        fontSize: "20px",
-                        paddingRight: "20px",
-                        paddingLeft: "20px",
-                      }}
-                    >
-                      {item.count}
-                    </div>
+                    <div style={modalItemCountStyle}>{item.count}</div>
                     <button
                       className="plusButton"
                       onClick={() => plusApetizers(indexOfItem)}
@@ -358,7 +343,7 @@ const ModalConfirm = (props) => {
                       return (
                         <div
                           className="itemSelectorFood"
-                          style={{ fontSize: "20px", paddingLeft: "20px" }}
+                          style={modalItemDivStyle}
                           onClick={() =>
                             selectNewApetizers(indexOfItem, item.id)
                           }
@@ -397,7 +382,7 @@ const ModalConfirm = (props) => {
               <div>
                 <div className="itemRow">
                   <div className="itemSelector">
-                    <div style={{ fontSize: "20px", paddingLeft: "20px" }}>
+                    <div style={modalItemDivStyle}>
                       {drinkData[item.itemId].item}
                     </div>
                     <button
@@ -408,15 +393,7 @@ const ModalConfirm = (props) => {
                     </button>
                   </div>
                   <div className="itemCount">
-                    <div
-                      style={{
-                        fontSize: "20px",
-                        paddingRight: "20px",
-                        paddingLeft: "20px",
-                      }}
-                    >
-                      {item.count}
-                    </div>
+                    <div style={modalItemCountStyle}>{item.count}</div>
                     <button
                       className="plusButton"
                       onClick={() => plusDrinks(indexOfItem)}
@@ -436,8 +413,8 @@ const ModalConfirm = (props) => {
                     drinkData.map((item) => {
                       return (
                         <div
+                          style={modalItemDivStyle}
                           className="itemSelectorFood"
-                          style={{ fontSize: "20px", paddingLeft: "20px" }}
                           onClick={() => selectNewDrinks(indexOfItem, item.id)}
                         >
                           {item.item}
@@ -477,15 +454,7 @@ const ModalConfirm = (props) => {
               <div className="rowLabel">
                 <div className="addMore">+ add more t-shirts</div>
                 <div className="itemCount">
-                  <div
-                    style={{
-                      fontSize: "20px",
-                      paddingRight: "20px",
-                      paddingLeft: "20px",
-                    }}
-                  >
-                    {shirtCount}
-                  </div>
+                  <div style={modalItemCountStyle}>{shirtCount}</div>
                   <button className="plusButton" onClick={() => plusShirts()}>
                     +
                   </button>
@@ -509,15 +478,7 @@ const ModalConfirm = (props) => {
               <div className="rowLabel">
                 <div className="addMore">+ add more cups</div>
                 <div className="itemCount">
-                  <div
-                    style={{
-                      fontSize: "20px",
-                      paddingRight: "20px",
-                      paddingLeft: "20px",
-                    }}
-                  >
-                    {cupCount}
-                  </div>
+                  <div style={modalItemCountStyle}>{cupCount}</div>
                   <button className="plusButton" onClick={() => plusCups()}>
                     +
                   </button>

@@ -5,7 +5,7 @@ import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
 
 import { mealClass } from "../data";
-import { end_points } from "../config";
+import { end_points, styles } from "../config";
 import { Count, Loader, MobileLayout } from "../Components";
 
 import ModalConfirm from "../Components/modal";
@@ -35,12 +35,7 @@ function FoodContent({ searchField }) {
     setVisibleModal(false);
   };
 
-  const clickConfirm = () => {
-    console.log("CONMFIRMED");
-  };
-
   const onItemClick = (i) => {
-    console.log(i);
     setItem(i);
     setVisibleModal(true);
   };
@@ -123,25 +118,15 @@ function FoodContent({ searchField }) {
     setMyStyle(false);
   };
 
-  const fadeStyle = !myStyle
-    ? {
-        width: "8rem",
-        height: "3rem",
-        backgroundColor: "#949494",
-        border: "none",
-        fontSize: "1.3rem",
-        outline: "none",
-        position: "absolute",
-      }
-    : {
-        width: "8rem",
-        height: "3rem",
-        backgroundColor: "#BAB6B6",
-        border: "none",
-        fontSize: "1.3rem",
-        outline: "none",
-        position: "absolute",
-      };
+  const { desktopContainerCardStyle, desktopCardStyle, desktopCardTitleStyle } =
+    styles;
+  const { desktopRowContainerStyle, desktopCardImgOverlayStyle } = styles;
+  const { desktopFadeStyleOff, fullWidthHeightStyle, desktopDivStyle } = styles;
+  const { desktopButtonStyle, desktopRowDivStyle, desktopColDivStyle } = styles;
+  const { desktopCardImgStyle, desktopContainerDivStyle, desktopFadeStyleOn } =
+    styles;
+
+  const fadeStyle = !myStyle ? desktopFadeStyleOff : desktopFadeStyleOn;
 
   return (
     <>
@@ -150,24 +135,14 @@ function FoodContent({ searchField }) {
           {" "}
           {size >= breakPoint ? (
             <div className="footContent m-5">
-              <Container style={{ height: "100%", width: "100%" }}>
+              <Container style={fullWidthHeightStyle}>
                 <Jumbotron>
                   <Row>
                     <Col lg={3} md={6} sm={12}>
-                      <Container
-                        className=""
-                        style={{
-                          display: "flex",
-                          width: "100%",
-                        }}
-                      >
+                      <Container className="" style={desktopDivStyle}>
                         <Card
                           className="ml-3 mr-3"
-                          style={{
-                            background: "none",
-                            border: "none",
-                            flexShrink: "1",
-                          }}
+                          style={desktopContainerCardStyle}
                         >
                           <Card.Body>
                             <Count item={filterItems} label="result" />
@@ -181,16 +156,9 @@ function FoodContent({ searchField }) {
                           return (
                             <Button
                               variant="outline-secondary"
+                              style={desktopButtonStyle}
                               className="m-2"
                               key={item.id}
-                              // onClick={() => {
-                              //   onItemSelect(item.label);
-                              // }}
-                              style={{
-                                width: "8.5rem",
-                                margin: "3rem",
-                                flexShrink: "2",
-                              }}
                             >
                               {item.label}
                             </Button>
@@ -203,14 +171,7 @@ function FoodContent({ searchField }) {
                   <Row>
                     <Col lg={3} md={5} sm={12}>
                       <Container>
-                        <Card
-                          className="ml-3 mr-2"
-                          style={{
-                            backgroundColor: "black",
-                            borderRadius: "15px",
-                            height: "100%",
-                          }}
-                        >
+                        <Card className="ml-3 mr-2" style={desktopRowDivStyle}>
                           <Card.Body>
                             <Card.Title className="text-secondary sidebarTitles">
                               Price
@@ -229,11 +190,11 @@ function FoodContent({ searchField }) {
                                 }
                               >
                                 <Form.Control
-                                  style={{ width: "12rem" }}
                                   type="range"
-                                  className="mt-3"
                                   placement="top"
+                                  className="mt-3"
                                   defaultValue="{distance}"
+                                  style={{ width: "12rem" }}
                                   onChange={(e) => setDistance(e.target.value)}
                                 />
                               </OverlayTrigger>
@@ -250,58 +211,38 @@ function FoodContent({ searchField }) {
                                 <Col>
                                   <div
                                     className="sidebarItems"
-                                    style={{
-                                      display: "flex",
-                                      overflow: "auto",
-                                      alignItems: "center",
-                                      flexDirection: "row",
-                                      justifyContent: "flex-start",
-                                    }}
+                                    style={desktopColDivStyle}
                                   >
                                     <Form.Check
                                       className=""
-                                      style={{ color: "gray" }}
-                                      isChecked={!isChecked}
-                                      /*  onClick={() => setIsChecked(!isChecked)} */
-                                      /*  onClick={forceUpdate} */
                                       type="checkbox"
+                                      isChecked={!isChecked}
+                                      style={{ color: "gray" }}
                                     />
                                     <span>All items</span>
                                   </div>
                                   <div
                                     className="sidebarItems"
-                                    style={{
-                                      display: "flex",
-                                      overflow: "auto",
-                                      alignItems: "center",
-                                      flexDirection: "row",
-                                      justifyContent: "flex-start",
-                                    }}
+                                    style={desktopColDivStyle}
                                   >
                                     <Form.Check
                                       className=""
-                                      style={{ color: "gray" }}
                                       type="checkbox"
+                                      style={{ color: "gray" }}
                                     />
                                     <span>Best rated</span>
                                   </div>
                                   <div
                                     className="sidebarItems"
-                                    style={{
-                                      display: "flex",
-                                      overflow: "auto",
-                                      alignItems: "center",
-                                      flexDirection: "row",
-                                      justifyContent: "flex-start",
-                                    }}
+                                    style={desktopColDivStyle}
                                   >
                                     <Form.Check
                                       className=""
+                                      type="checkbox"
                                       style={{ color: "gray" }}
                                       onClick={() => {
                                         setIsChecked(!isChecked);
                                       }}
-                                      type="checkbox"
                                     />
                                     <span>New items</span>
                                   </div>
@@ -309,8 +250,8 @@ function FoodContent({ searchField }) {
                               </Form.Group>
                               <Form.Group
                                 as={Col}
-                                controlId="formGridCity"
                                 className="mt-2"
+                                controlId="formGridCity"
                               ></Form.Group>
                             </>
                             <Card.Title className="text-secondary mt-3 sidebarTitles">
@@ -327,22 +268,16 @@ function FoodContent({ searchField }) {
                                     options?.map((i) => {
                                       return (
                                         <div
-                                          className="sidebarItems"
                                           key={i.id}
-                                          style={{
-                                            display: "flex",
-                                            overflow: "auto",
-                                            alignItems: "center",
-                                            flexDirection: "row",
-                                            justifyContent: "flex-start",
-                                          }}
+                                          className="sidebarItems"
+                                          style={desktopColDivStyle}
                                         >
                                           <Form.Check
                                             className=""
-                                            style={{ color: "gray" }}
                                             type="checkbox"
                                             name={i.label}
                                             id={`default-${i.label}`}
+                                            style={{ color: "gray" }}
                                             onChange={handleCheckCatagories}
                                           />
                                           <span>{i.label}</span>
@@ -353,8 +288,8 @@ function FoodContent({ searchField }) {
                               </Form.Group>
                               <Form.Group
                                 as={Col}
-                                controlId="formGridCity"
                                 className="mt-2"
+                                controlId="formGridCity"
                               >
                                 <Form.Label style={{ color: "gray" }}>
                                   <Card.Title className="text-secondary mt-3 sidebarItems">
@@ -377,15 +312,7 @@ function FoodContent({ searchField }) {
                     </Col>
 
                     <Col lg={9} md={7} sm={12}>
-                      <Container
-                        className=""
-                        style={{
-                          display: "flex",
-                          flexWrap: "wrap",
-                          flexDirection: "row",
-                          margin: "0rem",
-                        }}
-                      >
+                      <Container className="" style={desktopRowContainerStyle}>
                         {filterItems
                           .slice(0, numberOfitemsShown)
                           .map((i, index) => {
@@ -394,36 +321,16 @@ function FoodContent({ searchField }) {
                               <Card
                                 key={index}
                                 className="ml-3 mr-2"
-                                style={{
-                                  width: "24rem",
-                                  border: "none",
-                                }}
+                                style={desktopCardStyle}
                                 onClick={() => onItemClick(i)}
                               >
                                 <Card.Body>
                                   <Card.ImgOverlay>
-                                    <div
-                                      style={{
-                                        height: "7rem",
-                                        marginLeft: "0.05rem",
-                                        /*                               width: '22rem',
-                                         */ color: "#fff",
-                                        opacity: "0.8",
-                                        marginTop: "8rem",
-                                        borderBottomLeftRadius: "15px",
-                                        borderBottomRightRadius: "15px",
-                                        backgroundColor: "black",
-                                        position: "relative",
-                                        zIndex: "2",
-                                      }}
-                                    >
+                                    <div style={desktopCardImgOverlayStyle}>
                                       <Card.Title>
                                         <span
                                           className="m-4 mb-0 mt-0 listFoodItem_1"
-                                          style={{
-                                            textTransform: "uppercase",
-                                            lineHeight: "2rem",
-                                          }}
+                                          style={desktopCardTitleStyle}
                                         >
                                           {item?.length <= 20
                                             ? item
@@ -448,37 +355,15 @@ function FoodContent({ searchField }) {
                                   </Card.ImgOverlay>
                                   {image ? (
                                     <Card.Img
-                                      variant="top"
                                       src={image}
-                                      style={{
-                                        cursor: "pointer",
-                                        objectFit: "cover",
-                                        margin: ".05rem",
-                                        height: "15rem",
-                                        borderRadius: "12px",
-                                        zIndex: "1",
-                                        position: "relative",
-                                      }}
-                                      // onClick={() =>
-                                      //   history.push(`/item/${id}`)
-                                      // }
+                                      variant="top"
+                                      style={desktopCardImgStyle}
                                     />
                                   ) : (
                                     <Card.Img
                                       variant="top"
                                       src={burgImage}
-                                      style={{
-                                        cursor: "pointer",
-                                        objectFit: "cover",
-                                        margin: ".05rem",
-                                        height: "15rem",
-                                        borderRadius: "12px",
-                                        zIndex: "1",
-                                        position: "relative",
-                                      }}
-                                      // onClick={() =>
-                                      //   history.push(`/item/${id}`)
-                                      // }
+                                      style={desktopCardImgStyle}
                                     />
                                   )}
                                 </Card.Body>
@@ -487,17 +372,12 @@ function FoodContent({ searchField }) {
                           })}
 
                         <Container style={{ paddingRight: "10rem" }}>
-                          <div
-                            style={{
-                              padding: "1.5rem",
-                              paddingLeft: "19rem",
-                            }}
-                          >
+                          <div style={desktopContainerDivStyle}>
                             <Button
                               onMouseOver={onMouseEnter}
                               onMouseOut={onMouseLeave}
-                              style={fadeStyle}
                               onClick={onNextPage}
+                              style={fadeStyle}
                             >
                               show more
                             </Button>
@@ -508,13 +388,12 @@ function FoodContent({ searchField }) {
                   </Row>
                 </Jumbotron>
                 <ModalConfirm
-                  textModal={textModal}
-                  modalBack={modalBack}
-                  visibleModal={visibleModal}
                   data={item}
                   itemList={allItems}
+                  textModal={textModal}
+                  modalBack={modalBack}
                   clickClose={clickClose}
-                  clickConfirm={clickConfirm}
+                  visibleModal={visibleModal}
                 />
               </Container>
             </div>

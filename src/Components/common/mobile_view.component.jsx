@@ -1,21 +1,33 @@
 import axios from "axios";
-import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import { Button, Card, Col, Container, Jumbotron, Row } from "react-bootstrap";
 
+import ModalConfirm from "../modal";
 import { mealClass } from "../../data";
-import { end_points } from "../../config";
-import burgImage from "../../assets/images/v290_52.png";
+import { end_points, styles } from "../../config";
 
 export default function MobileLayout({ searchField, searchItemField }) {
-  const history = useHistory();
   const { getallItems } = end_points;
+  const { mobileRowContainerStyle, mobileCardTitleStyle } = styles;
+  const { mobileCardStyle, mobileCardImgStyle, showMoreButtonStyle } = styles;
+  const { mobileButtonStyle, fullWidthHeightStyle, mobileFadeStyleOn } = styles;
+  const { mobileCardImgOverlayStyle, mobileFadeStyleOff, mobileDivStyle } =
+    styles;
 
   const [isChecked] = useState(false);
+  const [item, setItem] = useState({});
   const [allItems, setAllItems] = useState([]);
   const [myStyle, setMyStyle] = useState(false);
-  const [selectedMeal, setSelectedMeal] = useState(null);
+  const [textModal, setTextModal] = useState("");
+  const [modalBack, setModalBack] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
   const [numberOfitemsShown, setNumberofItemsShown] = useState(3);
+
+  const clickClose = () => {
+    setTextModal("");
+    setModalBack(false);
+    setVisibleModal(false);
+  };
 
   const getAllItems = async () => {
     try {
@@ -31,8 +43,6 @@ export default function MobileLayout({ searchField, searchItemField }) {
       console.error(error);
     }
   };
-
-  console.error(selectedMeal);
 
   useEffect(() => {
     getAllItems();
@@ -70,57 +80,30 @@ export default function MobileLayout({ searchField, searchItemField }) {
     setNumberofItemsShown(numberOfitemsShown + 2);
   };
 
-  const onItemSelect = (ml) => {
-    setSelectedMeal(ml);
+  const fadeStyle = !myStyle ? mobileFadeStyleOff : mobileFadeStyleOn;
+
+  const onItemClick = (i) => {
+    setItem(i);
+    setVisibleModal(true);
   };
 
-  const fadeStyle = !myStyle
-    ? {
-        width: "12rem",
-        height: "3rem",
-        backgroundColor: "#949494",
-        border: "none",
-        fontSize: "1.3rem",
-        outline: "none",
-      }
-    : {
-        width: "12rem",
-        height: "3rem",
-        backgroundColor: "#BAB6B6",
-        border: "none",
-        fontSize: "1.3rem",
-        outline: "none",
-      };
   return (
     <div className="footContent m-4">
-      <Container style={{ height: "100%", width: "100%" }}>
+      <Container style={fullWidthHeightStyle}>
         <Jumbotron>
           <Row>
             <Col lg={12} md={12} sm={12} className="mt-3">
               <Container className="MealList m-0 mt-1">
-                {mealClass.map((item) => {
+                {mealClass.map(({ id, label }) => {
                   return (
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                      }}
-                    >
+                    <div style={mobileDivStyle}>
                       <Button
-                        variant="outline-secondary"
+                        key={id}
                         className="m-2"
-                        key={item.id}
-                        onClick={() => {
-                          onItemSelect(item.label);
-                        }}
-                        style={{
-                          width: "12.5rem",
-                          margin: "3rem",
-                          flexShrink: "2",
-                        }}
+                        style={mobileButtonStyle}
+                        variant="outline-secondary"
                       >
-                        {item.label}
+                        {label}
                       </Button>
                     </div>
                   );
@@ -128,53 +111,25 @@ export default function MobileLayout({ searchField, searchItemField }) {
               </Container>
             </Col>
           </Row>
-
           <Row>
             <Col lg={9} md={7} sm={12}>
-              <Container
-                className=""
-                style={{
-                  display: "flex",
-                  flexWrap: "wrap",
-                  flexDirection: "row",
-                  margin: "0rem",
-                }}
-              >
+              <Container className="" style={mobileRowContainerStyle}>
                 {filterItems.slice(0, numberOfitemsShown).map((i, index) => {
-                  const { id, /*  image, */ item, price, ingredient } = i;
+                  const { item, price, ingredient, image } = i;
                   return (
                     <Card
                       key={index}
                       className="ml-3 mr-2"
-                      style={{
-                        width: "24rem",
-                        border: "none",
-                      }}
+                      style={mobileCardStyle}
+                      onClick={() => onItemClick(i)}
                     >
                       <Card.Body>
                         <Card.ImgOverlay>
-                          <div
-                            style={{
-                              height: "7rem",
-                              marginLeft: "0.05rem",
-                              /*                               width: '22rem',
-                               */ color: "#fff",
-                              opacity: "0.8",
-                              marginTop: "8rem",
-                              borderBottomLeftRadius: "15px",
-                              borderBottomRightRadius: "15px",
-                              backgroundColor: "black",
-                              position: "relative",
-                              zIndex: "2",
-                            }}
-                          >
+                          <div style={mobileCardImgOverlayStyle}>
                             <Card.Title>
                               <span
                                 className="m-4 mb-0 mt-0 listFoodItem_1"
-                                style={{
-                                  textTransform: "uppercase",
-                                  lineHeight: "2rem",
-                                }}
+                                style={mobileCardTitleStyle}
                               >
                                 {item}
                               </span>
@@ -196,18 +151,10 @@ export default function MobileLayout({ searchField, searchItemField }) {
                           </div>
                         </Card.ImgOverlay>
                         <Card.Img
+                          src={image}
                           variant="top"
-                          src={burgImage}
-                          style={{
-                            cursor: "pointer",
-                            objectFit: "cover",
-                            margin: ".05rem",
-                            height: "15rem",
-                            borderRadius: "12px",
-                            zIndex: "1",
-                            position: "relative",
-                          }}
-                          onClick={() => history.push(`/item/${id}`)}
+                          alt="food item"
+                          style={mobileCardImgStyle}
                         />
                       </Card.Body>
                     </Card>
@@ -215,19 +162,12 @@ export default function MobileLayout({ searchField, searchItemField }) {
                 })}
                 <Container>
                   {" "}
-                  <div
-                    style={{
-                      paddingRight: "1rem",
-                      display: "flex",
-                      flexDirection: "row",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <div style={showMoreButtonStyle}>
                     <Button
                       onMouseOver={onMouseEnter}
                       onMouseOut={onMouseLeave}
-                      style={fadeStyle}
                       onClick={onNextPage}
+                      style={fadeStyle}
                     >
                       show more
                     </Button>
@@ -238,6 +178,14 @@ export default function MobileLayout({ searchField, searchItemField }) {
           </Row>
         </Jumbotron>
       </Container>
+      <ModalConfirm
+        data={item}
+        itemList={allItems}
+        textModal={textModal}
+        modalBack={modalBack}
+        clickClose={clickClose}
+        visibleModal={visibleModal}
+      />
     </div>
   );
 }
