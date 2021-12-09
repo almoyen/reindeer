@@ -1,16 +1,17 @@
-import React, { isValidElement, useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
+
+import cupImage from "../../assets/images/cup.jpg";
+import cakeImage from "../../assets/images/cake.jpg";
+import colaImage from "../../assets/images/cocacola.jpg";
+import tshirtImage from "../../assets/images/tshirt.jpg";
+
+import { apetizerData, drinkData, foodData } from "../../data";
 import "./index.css";
-import burgImage from "../../Images/v290_52.png";
-import cakeImage from "../../Images/cake.jpg";
-import colaImage from "../../Images/cocacola.jpg";
-import tshirtImage from "../../Images/tshirt.jpg";
-import cupImage from "../../Images/cup.jpg";
 
 const ModalConfirm = (props) => {
-  const [step, setStep] = useState(1); //1, 2, 3, 4 and 5
+  const [step, setStep] = useState(1);
   const [update, setUpdate] = useState(0);
-  const [count, setCount] = useState(1);
   const [shirtCount, setShirtCount] = useState(1);
   const [cupCount, setCupCount] = useState(1);
 
@@ -36,196 +37,7 @@ const ModalConfirm = (props) => {
     },
   ]);
 
-  const foodData = [
-    {
-      id: "0",
-      item: "Turkish Kebab",
-      ingredient: "Rankalainen,Kana, Salati",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "30",
-      image: "/api/attachment/foods/1.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "1",
-      item: "Kerrosateria",
-      ingredient: "Hampurilainen,Raskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/2.jpg",
-
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "2",
-      item: "Kana-ateria",
-      ingredient: "Hamprilainen, Ranskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/3.jpg",
-      foodChoices: ["Veg"],
-    },
-    {
-      id: "3",
-      item: "item04",
-      ingredient: "garlic, salad, Chicken, Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/4.jpg",
-      foodChoices: ["Lacto Veg"],
-    },
-    {
-      id: "4",
-      item: "item05",
-      ingredient: "garlic, salad, Chicken,Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/5.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-  ];
-
-  const apetizerData = [
-    {
-      id: "0",
-      item: "Apetizer1",
-      ingredient: "Rankalainen,Kana, Salati",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "30",
-      image: "/api/attachment/foods/1.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "1",
-      item: "Apetizer2",
-      ingredient: "Hampurilainen,Raskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/2.jpg",
-
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "2",
-      item: "Apetizer3",
-      ingredient: "Hamprilainen, Ranskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/3.jpg",
-      foodChoices: ["Veg"],
-    },
-    {
-      id: "3",
-      item: "Apetizer4",
-      ingredient: "garlic, salad, Chicken, Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/4.jpg",
-      foodChoices: ["Lacto Veg"],
-    },
-    {
-      id: "4",
-      item: "Apetizer5",
-      ingredient: "garlic, salad, Chicken,Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/5.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-  ];
-
-  const drinkData = [
-    {
-      id: "0",
-      item: "Drink1",
-      ingredient: "Rankalainen,Kana, Salati",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "30",
-      image: "/api/attachment/foods/1.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "1",
-      item: "Drink2",
-      ingredient: "Hampurilainen,Raskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/2.jpg",
-
-      foodChoices: ["Non-Veg"],
-    },
-    {
-      id: "2",
-      item: "Drink3",
-      ingredient: "Hamprilainen, Ranskalaiset perunat",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/3.jpg",
-      foodChoices: ["Veg"],
-    },
-    {
-      id: "3",
-      item: "Drink4",
-      ingredient: "garlic, salad, Chicken, Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/4.jpg",
-      foodChoices: ["Lacto Veg"],
-    },
-    {
-      id: "4",
-      item: "Drink5",
-      ingredient: "garlic, salad, Chicken,Chilli",
-      available: true,
-      country: "Finland",
-      discount: false,
-      price: "32",
-
-      image: "/api/attachment/foods/5.jpg",
-      foodChoices: ["Non-Veg"],
-    },
-  ];
-
-  const { visibleModal, clickClose, clickConfirm } = props;
+  const { visibleModal, clickClose, data } = props;
 
   const onChangeCourseMeals = (indexOfItem) => {
     var newCourseMeals = selectedCourseMeals;
@@ -420,10 +232,10 @@ const ModalConfirm = (props) => {
 
   return (
     <Modal size="lg" show={visibleModal} onHide={clickClose} centered>
-      {step == 1 && (
+      {step === 1 && (
         <Modal.Body className="modalBody">
           <div className="title">Step 1: Choose Course Meal</div>
-          <img src={burgImage} className="photo" />
+          <img src={data?.image} alt={data?.item} className="photo" />
           {selectedCourseMeals.map((item, index) => {
             var indexOfItem = index;
             return (
@@ -496,10 +308,10 @@ const ModalConfirm = (props) => {
           </div>
         </Modal.Body>
       )}
-      {step == 2 && (
+      {step === 2 && (
         <Modal.Body className="modalBody">
           <div className="title">Step 2: Choose Apetizer</div>
-          <img src={cakeImage} className="photo" />
+          <img src={cakeImage} alt="cake" className="photo" />
           {selectedApetizers.map((item, index) => {
             var indexOfItem = index;
             return (
@@ -575,10 +387,10 @@ const ModalConfirm = (props) => {
           </div>
         </Modal.Body>
       )}
-      {step == 3 && (
+      {step === 3 && (
         <Modal.Body className="modalBody">
           <div className="title">Step 3: Choose Drinks</div>
-          <img src={colaImage} className="photo" />
+          <img src={colaImage} alt="cola" className="photo" />
           {selectedDrinks.map((item, index) => {
             var indexOfItem = index;
             return (
@@ -652,11 +464,11 @@ const ModalConfirm = (props) => {
           </div>
         </Modal.Body>
       )}
-      {step == 4 && (
+      {step === 4 && (
         <Modal.Body className="modalBody">
           <div className="title">Step 4: Choose Suuveniers</div>
           <div className="suvRow">
-            <img src={tshirtImage} className="photomini" />
+            <img src={tshirtImage} alt="shirt" className="photomini" />
             <div>
               <div className="rowLabel">
                 <div style={{ fontSize: "22px" }}>T-Shirt</div>
@@ -685,7 +497,7 @@ const ModalConfirm = (props) => {
             </div>
           </div>
           <div className="suvRow">
-            <img src={cupImage} className="photomini" />
+            <img src={cupImage} alt="cup" className="photomini" />
             <div>
               <div className="rowLabel">
                 <div style={{ fontSize: "22px" }}>
@@ -729,7 +541,7 @@ const ModalConfirm = (props) => {
           </div>
         </Modal.Body>
       )}
-      {step == 5 && (
+      {step === 5 && (
         <Modal.Body className="modalBody">
           <div className="title">Step 5: Final Steps</div>
           <div className="suvRow">

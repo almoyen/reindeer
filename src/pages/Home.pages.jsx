@@ -1,17 +1,19 @@
 import axios from "axios";
-import { Loader } from ".";
-import { end_points } from "../utils";
 import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import { ArrowLeftRight } from "react-bootstrap-icons";
-import OrdPic from "../Images/background_picture.png";
 import { Badge, Button, Card, Form } from "react-bootstrap";
 import { FormControl, Image, InputGroup } from "react-bootstrap";
 
-function OrderForm({ searchField }) {
+import { Loader } from "../Components";
+import { end_points } from "../config";
+import OrdPic from "../assets/images/background_picture.png";
+
+export default function LandingPage({ searchField, setSearchField }) {
   const history = useHistory();
   const { getAllCities, getAllTrainModels } = end_points;
+
   const [whereCities, setWhereCities] = useState([]);
   const [trainModels, setTrainModels] = useState([]);
   const [destinationCities, setDestinationCities] = useState([]);
@@ -355,5 +357,3 @@ function OrderForm({ searchField }) {
     </>
   );
 }
-
-export default OrderForm;

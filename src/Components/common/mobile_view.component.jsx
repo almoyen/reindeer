@@ -1,21 +1,21 @@
 import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
-import { Button, Card, Col, Container, Jumbotron, Row } from "react-bootstrap";
 import { useHistory } from "react-router";
-import burgImage from "../../Images/v290_52.png";
-import { end_points } from "../../utils";
+import React, { useState, useEffect } from "react";
+import { Button, Card, Col, Container, Jumbotron, Row } from "react-bootstrap";
+
+import { mealClass } from "../../data";
+import { end_points } from "../../config";
+import burgImage from "../../assets/images/v290_52.png";
 
 export default function MobileLayout({ searchField, searchItemField }) {
   const history = useHistory();
   const { getallItems } = end_points;
-  const [allItems, setAllItems] = useState([]);
-  //const [forceUpdate, setForceUpdate] = useState()
+
   const [isChecked] = useState(false);
+  const [allItems, setAllItems] = useState([]);
+  const [myStyle, setMyStyle] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState(null);
   const [numberOfitemsShown, setNumberofItemsShown] = useState(3);
-  const [myStyle, setMyStyle] = useState(false);
 
   const getAllItems = async () => {
     try {
@@ -26,17 +26,7 @@ export default function MobileLayout({ searchField, searchItemField }) {
           arr.push(respond.data[i].menus[j]);
         }
       }
-      // console.log('arr', arr)
       setAllItems(arr);
-      /*  const respond = await axios.get(getallItems)
-      if (isChecked) {
-        setAllItems(respond.data.slice(-3))
-      } else if (!isChecked) {
-        setAllItems(respond.data)
-        setForceUpdate(!forceUpdate)
-      } else {
-        setAllItems(respond.data)
-      } */
     } catch (error) {
       console.error(error);
     }
@@ -46,7 +36,6 @@ export default function MobileLayout({ searchField, searchItemField }) {
 
   useEffect(() => {
     getAllItems();
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [!isChecked]);
 
@@ -84,22 +73,6 @@ export default function MobileLayout({ searchField, searchItemField }) {
   const onItemSelect = (ml) => {
     setSelectedMeal(ml);
   };
-
-  /*   const handleCheckCatagories = (e) => {
-    if (e.target.checked) {
-      setItemSelect(itemSelect.concat(e.target.name))
-    } else {
-      setItemSelect(itemSelect.filter((catagory) => e.target.name !== catagory))
-    }
-  } */
-
-  const mealClass = [
-    { id: 1, label: "Alkuoalat" },
-    { id: 2, label: "Pääruoat" },
-    { id: 3, label: "Jälkiruoka" },
-    { id: 4, label: "Juoma" },
-    { id: 5, label: "Lahjat" },
-  ];
 
   const fadeStyle = !myStyle
     ? {
@@ -236,35 +209,6 @@ export default function MobileLayout({ searchField, searchItemField }) {
                           }}
                           onClick={() => history.push(`/item/${id}`)}
                         />
-                        {/*   {image ? (
-<Card.Img
- variant="top"
- src={burgImage}
- style={{
-   cursor: "pointer",
-   borderRadius: "18px",
-   height: "20rem",
-   width: "26rem",
-   objectFit: "cover",
- }}
- onClick={() => history.push(`/item/${id}`)}
-/>
-) : (
-<Card.Img
- variant="top"
- src={burgImage}
- style={{
-   cursor: "pointer",
-   borderRadius: "18px",
-   height: "20rem",
-   width: "23rem",
-   margin: "0.6rem",
-
-   objectFit: "cover",
- }}
- onClick={() => history.push(`/item/${id}`)}
-/>
-)} */}
                       </Card.Body>
                     </Card>
                   );

@@ -1,36 +1,35 @@
 import axios from "axios";
 import { useHistory } from "react-router";
-import { Count, Loader } from "./index";
-import ModalConfirm from "./modal/index";
-import { end_points } from "../utils/BACKEND_URL";
 import React, { useEffect, useState } from "react";
 import { Card, Col, FormControl } from "react-bootstrap";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
-import burgImage from "../Images/v290_52.png";
-import MobileLayout from "./Reusable-components/mobileView";
+
+import { mealClass } from "../data";
+import { end_points } from "../config";
+import { Count, Loader, MobileLayout } from "../Components";
+
+import ModalConfirm from "../Components/modal";
+import burgImage from "../assets/images/v290_52.png";
 
 function FoodContent({ searchField }) {
+  const breakPoint = 556;
   const history = useHistory();
   const { getallItems, getAllOptions } = end_points;
-  const [size, setSize] = useState(window.innerWidth);
 
-  const breakPoint = 556;
+  const [item, setItem] = useState({});
   const [options, setOptions] = useState([]);
   const [distance, setDistance] = useState(0);
   const [allItems, setAllItems] = useState([]);
+  const [myStyle, setMyStyle] = useState(false);
+  const [textModal, setTextModal] = useState("");
   const [itemSelect, setItemSelect] = useState([]);
-  //const [forceUpdate, setForceUpdate] = useState()
+  const [modalBack, setModalBack] = useState(false);
   const [isChecked, setIsChecked] = useState(false);
-  // const [selectedMeal, setSelectedMeal] = useState(null);
+  const [size, setSize] = useState(window.innerWidth);
+  const [visibleModal, setVisibleModal] = useState(false);
   const [searchItemField, setSearchItemsField] = useState("");
   const [numberOfitemsShown, setNumberofItemsShown] = useState(4);
-  const [myStyle, setMyStyle] = useState(false);
-
-  const [textModal, setTextModal] = useState("");
-  const [modalBack, setModalBack] = useState(false);
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [item, setItem] = useState({});
 
   const clickClose = () => {
     setTextModal("");
@@ -47,11 +46,6 @@ function FoodContent({ searchField }) {
     setItem(i);
     setVisibleModal(true);
   };
-  /*   const updateDimensions = () => {
-    setSize({ width: size })
-  } */
-
-  //return size
 
   const getOptions = async () => {
     try {
@@ -72,15 +66,6 @@ function FoodContent({ searchField }) {
         }
       }
       setAllItems(arr);
-      /*  const respond = await axios.get(getallItems)
-      if (isChecked) {
-        setAllItems(respond.data.slice(-3))
-      } else if (!isChecked) {
-        setAllItems(respond.data)
-        setForceUpdate(!forceUpdate)
-      } else {
-        setAllItems(respond.data)
-      } */
     } catch (error) {
       console.error(error);
     }
@@ -122,10 +107,6 @@ function FoodContent({ searchField }) {
     setNumberofItemsShown(numberOfitemsShown + 2);
   };
 
-  // const onItemSelect = (ml) => {
-  //   setSelectedMeal(ml);
-  // };
-
   const handleCheckCatagories = (e) => {
     if (e.target.checked) {
       setItemSelect(itemSelect.concat(e.target.name));
@@ -135,14 +116,6 @@ function FoodContent({ searchField }) {
       );
     }
   };
-
-  const mealClass = [
-    { id: 1, label: "Alkuoalat" },
-    { id: 2, label: "Pääruoat" },
-    { id: 3, label: "Jälkiruoka" },
-    { id: 4, label: "Juoma" },
-    { id: 5, label: "Lahjat" },
-  ];
 
   const onMouseEnter = () => {
     setMyStyle(true);

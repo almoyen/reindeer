@@ -1,10 +1,12 @@
-import React from 'react'
-import Icon from '../Images/ReinDeer_logo.png'
-import CartIcon from '../Images/shopping_cart_item.png'
-import { useHistory } from 'react-router'
-import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import React from "react";
+import { useHistory } from "react-router";
+import { Container, Navbar, Nav, NavDropdown } from "react-bootstrap";
+
+import Icon from "../assets/images/ReinDeer_logo.png";
+import CartIcon from "../assets/images/shopping_cart_item.png";
+
 function Header() {
-  const history = useHistory()
+  const history = useHistory();
   return (
     <>
       <Navbar
@@ -13,26 +15,26 @@ function Header() {
         bg="dark"
         variant="dark"
         fluid
-        style={{ position: 'relative', width: '100%' }}
+        style={{ position: "relative", width: "100%" }}
       >
         <Container fluid className="NavItems">
           <Navbar.Brand
             style={{
-              cursor: 'pointer',
-              paddingLeft: '5rem',
-              paddingBottom: '2.5rem',
-              position: 'relative',
+              cursor: "pointer",
+              paddingLeft: "5rem",
+              paddingBottom: "2.5rem",
+              position: "relative",
             }}
           >
             <img
               alt="icon"
               src={Icon}
-              style={{ position: 'fixed' }}
+              style={{ position: "fixed" }}
               width="100"
-              onClick={() => history.push('/')}
+              onClick={() => history.push("/")}
               height="30"
               className="d-inline-block align-top pt-2"
-            />{' '}
+            />{" "}
             {/*             <strong>Reindeer</strong>
              */}
           </Navbar.Brand>
@@ -42,18 +44,18 @@ function Header() {
             <Nav className="me-auto"></Nav>
             <Nav
               className="ml-auto paddingLeft5"
-              style={{ marginRight: '7rem' }}
+              style={{ marginRight: "7rem" }}
             >
               <Nav.Link
-                style={{ width: '60px', backgroundColor: 'dark' }}
-                onClick={() => history.push('/login')}
+                style={{ width: "60px", backgroundColor: "dark" }}
+                onClick={() => history.push("/login")}
               >
                 login
               </Nav.Link>
               <Nav.Link
-                style={{ width: '60px', backgroundColor: 'dark' }}
+                style={{ width: "60px", backgroundColor: "dark" }}
                 eventKey={2}
-                onClick={() => history.push('/register')}
+                onClick={() => history.push("/register")}
                 className="float-right"
               >
                 register
@@ -62,14 +64,14 @@ function Header() {
               <NavDropdown
                 title="en"
                 id="basic-nav"
-                style={{ width: '60px', marginLeft: '20px' }}
+                style={{ width: "60px", marginLeft: "20px" }}
               ></NavDropdown>
 
               <Nav.Link
                 className="float-end"
-                style={{ width: '50px', backgroundColor: 'dark' }}
+                style={{ width: "50px", backgroundColor: "dark" }}
                 eventKey={2}
-                onClick={() => history.push('/Cart')}
+                onClick={() => history.push("/Cart")}
               >
                 <img
                   alt="icon"
@@ -84,7 +86,7 @@ function Header() {
         </Container>
       </Navbar>
     </>
-  )
+  );
 }
 
-export default Header
+export default Header;

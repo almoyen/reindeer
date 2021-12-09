@@ -51,7 +51,7 @@
   font-weight: 400;
 }
 .image_div {
-  background-image: url("./Images/background_picture.png");
+  background-image: url("./assets/images/background_picture.png");
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;

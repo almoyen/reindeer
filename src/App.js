@@ -1,17 +1,16 @@
-import React, { useState } from 'react'
-import { Route, Switch } from 'react-router'
-import { LandingPage, FoodContent, Navbar } from './Components'
-//import MobileLayout from './Components/Reusable-components/mobileView'
-//import Prac from './Components/Reusable-components/unusedComponents'
+import React, { useState } from "react";
+import { Route, Switch } from "react-router";
+
+import { Navbar } from "./Components";
+import { LandingPage, FoodContentPage } from "./pages";
 
 function App() {
-  const [searchField, setSearchInput] = useState('')
-  const [searchItemField, setSearchItemsField] = useState('')
+  const [searchField, setSearchInput] = useState("");
+  const [searchItemField, setSearchItemsField] = useState("");
 
   return (
     <>
       <Navbar />
-
       <Switch>
         <Route
           exact
@@ -24,11 +23,10 @@ function App() {
             />
           )}
         />
-
         <Route
           path="/orders"
           render={(props) => (
-            <FoodContent
+            <FoodContentPage
               searchItemField={searchItemField}
               setSearchItemsField={setSearchItemsField}
               {...props}
@@ -37,7 +35,7 @@ function App() {
         />
       </Switch>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
