@@ -7,10 +7,11 @@ import { Badge, Button, Card, Form } from "react-bootstrap";
 import { FormControl, Image, InputGroup } from "react-bootstrap";
 
 import { Loader } from "../Components";
-import { end_points, styles } from "../config";
+import { end_points, styles, colors } from "../config";
 import OrdPic from "../assets/images/background_picture.png";
 
 export default function LandingPage({ searchField, setSearchField }) {
+  const { bright } = colors;
   const history = useHistory();
   const { getAllCities, getAllTrainModels } = end_points;
 
@@ -110,7 +111,7 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 where
                               </Form.Label>
@@ -150,7 +151,7 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 destination
                               </Form.Label>
@@ -187,7 +188,7 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 departure date & time
                               </Form.Label>
@@ -209,7 +210,7 @@ export default function LandingPage({ searchField, setSearchField }) {
                               <Form.Label
                                 className="m-4 mb-1 mt-2 p-2 pt-3 tableoflist"
                                 htmlFor="inlineFormInputGroup"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 train model
                               </Form.Label>

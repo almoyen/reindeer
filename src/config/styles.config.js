@@ -1,3 +1,7 @@
+import { colors } from "./colors.config";
+
+const { fadeOff, fadeOn, bright, home, dark } = colors;
+
 export const styles = {
   cardStyle: { width: "18rem", height: "17rem" },
   ImageCardStyle: {
@@ -14,7 +18,7 @@ export const styles = {
   mobileFadeStyleOff: {
     width: "12rem",
     height: "3rem",
-    backgroundColor: "#949494",
+    backgroundColor: fadeOff,
     border: "none",
     fontSize: "1.3rem",
     outline: "none",
@@ -22,7 +26,7 @@ export const styles = {
   mobileFadeStyleOn: {
     width: "12rem",
     height: "3rem",
-    backgroundColor: "#BAB6B6",
+    backgroundColor: fadeOn,
     border: "none",
     fontSize: "1.3rem",
     outline: "none",
@@ -52,7 +56,7 @@ export const styles = {
     height: "7rem",
     marginLeft: "0.05rem",
     /*                               width: '22rem',
-     */ color: "#fff",
+     */ color: bright,
     opacity: "0.8",
     marginTop: "8rem",
     borderBottomLeftRadius: "15px",
@@ -100,7 +104,7 @@ export const styles = {
   desktopFadeStyleOff: {
     width: "8rem",
     height: "3rem",
-    backgroundColor: "#949494",
+    backgroundColor: fadeOff,
     border: "none",
     fontSize: "1.3rem",
     outline: "none",
@@ -109,7 +113,7 @@ export const styles = {
   desktopFadeStyleOn: {
     width: "8rem",
     height: "3rem",
-    backgroundColor: "#BAB6B6",
+    backgroundColor: fadeOn,
     border: "none",
     fontSize: "1.3rem",
     outline: "none",
@@ -155,7 +159,7 @@ export const styles = {
     height: "7rem",
     marginLeft: "0.05rem",
     /*                               width: '22rem',
-     */ color: "#fff",
+     */ color: bright,
     opacity: "0.8",
     marginTop: "8rem",
     borderBottomLeftRadius: "15px",
@@ -216,20 +220,20 @@ export const styles = {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#0000",
+    backgroundColor: home,
   },
   homeRowColCardStyle: {
     width: "80rem",
-    backgroundColor: "#000009DF",
+    backgroundColor: dark,
     opacity: "0.88",
     borderRadius: "15px",
   },
-  homeFormControlStyle: { background: "grey", color: "#fff" },
+  homeFormControlStyle: { background: "grey", color: bright },
   homeInputContolStyle: {
     marginLeft: "1.5rem",
     width: "50px",
     height: "50px",
-    backgroundColor: "#0000",
+    backgroundColor: home,
     opacity: "0.88",
     border: "none",
   },
@@ -238,15 +242,15 @@ export const styles = {
     backgroundColor: "none",
     fontSize: "40px",
     cursor: "pointer",
-    color: "#fff",
+    color: bright,
   },
   homeFormInputControlStyle: {
     marginRight: "4rem",
     width: "20px",
-    color: "#fff",
+    color: bright,
     background: "grey",
   },
-  homeInputFromControlStyle: { background: "grey", color: "#fff" },
+  homeInputFromControlStyle: { background: "grey", color: bright },
   homeInputGroupTextStyle: {
     marginLeft: "1.5rem",
     width: "50px",
@@ -257,7 +261,7 @@ export const styles = {
   homeFormInputLabelStyle: {
     marginRight: "4rem",
     width: "20px",
-    color: "#fff",
+    color: bright,
     background: "grey",
   },
   homeRowContainerStyle: { paddingRight: "4rem", paddingBottom: "15px" },

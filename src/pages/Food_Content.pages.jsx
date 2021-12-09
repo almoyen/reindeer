@@ -5,7 +5,7 @@ import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { Container, Jumbotron, Button, Row } from "react-bootstrap";
 
 import { mealClass } from "../data";
-import { end_points, styles } from "../config";
+import { end_points, styles, colors } from "../config";
 import { Count, Loader, MobileLayout } from "../Components";
 
 import ModalConfirm from "../Components/modal";
@@ -13,6 +13,7 @@ import burgImage from "../assets/images/v290_52.png";
 
 function FoodContent({ searchField }) {
   const breakPoint = 556;
+  const { bright } = colors;
   const { getallItems, getAllOptions } = end_points;
 
   const [item, setItem] = useState({});
@@ -206,7 +207,7 @@ function FoodContent({ searchField }) {
                               <Form.Group
                                 as={Row}
                                 className="mt-4"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 <Col>
                                   <div
@@ -261,7 +262,7 @@ function FoodContent({ searchField }) {
                               <Form.Group
                                 as={Row}
                                 className="mt-4"
-                                style={{ color: "#fff" }}
+                                style={{ color: bright }}
                               >
                                 <Col>
                                   {options &&
