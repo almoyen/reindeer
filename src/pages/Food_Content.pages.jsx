@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useHistory } from "react-router";
 import React, { useEffect, useState } from "react";
 import { Card, Col, FormControl } from "react-bootstrap";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
@@ -14,7 +13,6 @@ import burgImage from "../assets/images/v290_52.png";
 
 function FoodContent({ searchField }) {
   const breakPoint = 556;
-  const history = useHistory();
   const { getallItems, getAllOptions } = end_points;
 
   const [item, setItem] = useState({});
@@ -391,7 +389,7 @@ function FoodContent({ searchField }) {
                         {filterItems
                           .slice(0, numberOfitemsShown)
                           .map((i, index) => {
-                            const { id, image, item, price, ingredient } = i;
+                            const { image, item, price, ingredient } = i;
                             return (
                               <Card
                                 key={index}
@@ -429,7 +427,7 @@ function FoodContent({ searchField }) {
                                         >
                                           {item?.length <= 20
                                             ? item
-                                            : `${item.substring(1, 21)}...`}
+                                            : `${item.substring(0, 20)}...`}
                                         </span>
                                       </Card.Title>
                                       <Card.Text>
@@ -478,9 +476,9 @@ function FoodContent({ searchField }) {
                                         zIndex: "1",
                                         position: "relative",
                                       }}
-                                      onClick={() =>
-                                        history.push(`/item/${id}`)
-                                      }
+                                      // onClick={() =>
+                                      //   history.push(`/item/${id}`)
+                                      // }
                                     />
                                   )}
                                 </Card.Body>
