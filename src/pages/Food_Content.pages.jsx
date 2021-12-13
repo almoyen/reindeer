@@ -1,139 +1,143 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Card, Col, FormControl } from "react-bootstrap";
-import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { Container, Jumbotron, Button, Row } from "react-bootstrap";
+import axios from 'axios'
+import React, { useEffect, useState } from 'react'
+import { Card, Col, FormControl } from 'react-bootstrap'
+import { Form, OverlayTrigger, Tooltip } from 'react-bootstrap'
+import { Container, Jumbotron, Button, Row } from 'react-bootstrap'
 
-import { mealClass } from "../data";
-import { end_points, styles, colors } from "../config";
-import { Count, Loader, MobileLayout } from "../Components";
+import { mealClass } from '../data'
+import { end_points, styles, colors } from '../config'
+import { Count, Loader, MobileLayout } from '../Components'
 
-import ModalConfirm from "../Components/modal";
-import burgImage from "../assets/images/v290_52.png";
+import ModalConfirm from '../Components/modal'
+import burgImage from '../assets/images/v290_52.png'
 
 function FoodContent({ searchField }) {
-  const breakPoint = 556;
-  const { bright } = colors;
-  const { getallItems, getAllOptions } = end_points;
+  const breakPoint = 556
+  const { bright } = colors
+  const { getallItems, getAllOptions } = end_points
 
-  const [item, setItem] = useState({});
-  const [options, setOptions] = useState([]);
-  const [distance, setDistance] = useState(0);
-  const [allItems, setAllItems] = useState([]);
-  const [myStyle, setMyStyle] = useState(false);
-  const [textModal, setTextModal] = useState("");
-  const [itemSelect, setItemSelect] = useState([]);
-  const [modalBack, setModalBack] = useState(false);
-  const [isChecked, setIsChecked] = useState(false);
-  const [size, setSize] = useState(window.innerWidth);
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [searchItemField, setSearchItemsField] = useState("");
-  const [numberOfitemsShown, setNumberofItemsShown] = useState(4);
+  const [item, setItem] = useState({})
+  const [options, setOptions] = useState([])
+  const [distance, setDistance] = useState(0)
+  const [allItems, setAllItems] = useState([])
+  const [myStyle, setMyStyle] = useState(false)
+  const [textModal, setTextModal] = useState('')
+  const [itemSelect, setItemSelect] = useState([])
+  const [modalBack, setModalBack] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
+  const [size, setSize] = useState(window.innerWidth)
+  const [visibleModal, setVisibleModal] = useState(false)
+  const [searchItemField, setSearchItemsField] = useState('')
+  const [numberOfitemsShown, setNumberofItemsShown] = useState(4)
 
   const clickClose = () => {
-    setTextModal("");
-    setModalBack(false);
-    setVisibleModal(false);
-  };
+    setTextModal('')
+    setModalBack(false)
+    setVisibleModal(false)
+  }
 
   const onItemClick = (i) => {
-    setItem(i);
-    setVisibleModal(true);
-  };
+    setItem(i)
+    setVisibleModal(true)
+  }
 
   const getOptions = async () => {
     try {
-      const respond = await axios.get(getAllOptions);
-      setOptions(respond.data);
+      const respond = await axios.get(getAllOptions)
+      setOptions(respond.data)
     } catch (error) {
-      console.error(error.message);
+      console.error(error.message)
     }
-  };
+  }
 
   const getAllItems = async () => {
     try {
-      let arr = [];
-      const respond = await axios.get(getallItems);
+      let arr = []
+      const respond = await axios.get(getallItems)
       for (let i = 0; i < respond.data.length; i++) {
         for (let j = 0; j < respond.data[i].menus.length; j++) {
-          arr.push(respond.data[i].menus[j]);
+          arr.push(respond.data[i].menus[j])
         }
       }
-      setAllItems(arr);
+      setAllItems(arr)
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   useEffect(() => {
-    getOptions();
-    getAllItems();
-    window.addEventListener("resize", () => setSize(window.innerWidth));
+    getOptions()
+    getAllItems()
+    window.addEventListener('resize', () => setSize(window.innerWidth))
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!isChecked]);
+  }, [!isChecked])
 
   const filterItems = allItems.filter((el) => {
     if (
       searchField &&
       !el.item.toLowerCase().includes(searchField.toLowerCase())
     ) {
-      return false;
+      return false
     }
     if (
       itemSelect.length > 0 &&
       !itemSelect.some((catagory) => el.foodChoices.includes(catagory))
     ) {
-      return false;
+      return false
     }
     if (
       searchItemField &&
       el.ingredient.toLowerCase().includes(searchItemField.toLowerCase())
     ) {
-      return false;
+      return false
     }
     if (!isChecked && !el.length > 0 && !el) {
-      return false;
+      return false
     }
-    return true;
-  });
+    return true
+  })
 
   const onNextPage = () => {
-    setNumberofItemsShown(numberOfitemsShown + 2);
-  };
+    setNumberofItemsShown(numberOfitemsShown + 2)
+  }
 
   const handleCheckCatagories = (e) => {
     if (e.target.checked) {
-      setItemSelect(itemSelect.concat(e.target.name));
+      setItemSelect(itemSelect.concat(e.target.name))
     } else {
-      setItemSelect(
-        itemSelect.filter((catagory) => e.target.name !== catagory)
-      );
+      setItemSelect(itemSelect.filter((catagory) => e.target.name !== catagory))
     }
-  };
+  }
 
   const onMouseEnter = () => {
-    setMyStyle(true);
-  };
+    setMyStyle(true)
+  }
 
   const onMouseLeave = () => {
-    setMyStyle(false);
-  };
+    setMyStyle(false)
+  }
 
-  const { desktopContainerCardStyle, desktopCardStyle, desktopCardTitleStyle } =
-    styles;
-  const { desktopRowContainerStyle, desktopCardImgOverlayStyle } = styles;
-  const { desktopFadeStyleOff, fullWidthHeightStyle, desktopDivStyle } = styles;
-  const { desktopButtonStyle, desktopRowDivStyle, desktopColDivStyle } = styles;
-  const { desktopCardImgStyle, desktopContainerDivStyle, desktopFadeStyleOn } =
-    styles;
+  const {
+    desktopContainerCardStyle,
+    desktopCardStyle,
+    desktopCardTitleStyle,
+  } = styles
+  const { desktopRowContainerStyle, desktopCardImgOverlayStyle } = styles
+  const { desktopFadeStyleOff, fullWidthHeightStyle, desktopDivStyle } = styles
+  const { desktopButtonStyle, desktopRowDivStyle, desktopColDivStyle } = styles
+  const {
+    desktopCardImgStyle,
+    desktopContainerDivStyle,
+    desktopFadeStyleOn,
+  } = styles
 
-  const fadeStyle = !myStyle ? desktopFadeStyleOff : desktopFadeStyleOn;
+  const fadeStyle = !myStyle ? desktopFadeStyleOff : desktopFadeStyleOn
 
   return (
     <>
       {filterItems && filterItems.length > 0 ? (
         <>
-          {" "}
+          {' '}
           {size >= breakPoint ? (
             <div className="footContent m-5">
               <Container style={fullWidthHeightStyle}>
@@ -163,7 +167,7 @@ function FoodContent({ searchField }) {
                             >
                               {item.label}
                             </Button>
-                          );
+                          )
                         })}
                       </Container>
                     </Col>
@@ -183,10 +187,10 @@ function FoodContent({ searchField }) {
                                 overlay={
                                   <Tooltip
                                     className="sidebarItems"
-                                    style={{ color: "light" }}
+                                    style={{ color: 'light' }}
                                   >
                                     {distance}
-                                    {"   "}€
+                                    {'   '}€
                                   </Tooltip>
                                 }
                               >
@@ -195,7 +199,7 @@ function FoodContent({ searchField }) {
                                   placement="top"
                                   className="mt-3"
                                   defaultValue="{distance}"
-                                  style={{ width: "12rem" }}
+                                  style={{ width: '12rem' }}
                                   onChange={(e) => setDistance(e.target.value)}
                                 />
                               </OverlayTrigger>
@@ -218,7 +222,7 @@ function FoodContent({ searchField }) {
                                       className=""
                                       type="checkbox"
                                       isChecked={!isChecked}
-                                      style={{ color: "gray" }}
+                                      style={{ color: 'gray' }}
                                     />
                                     <span>All items</span>
                                   </div>
@@ -229,7 +233,7 @@ function FoodContent({ searchField }) {
                                     <Form.Check
                                       className=""
                                       type="checkbox"
-                                      style={{ color: "gray" }}
+                                      style={{ color: 'gray' }}
                                     />
                                     <span>Best rated</span>
                                   </div>
@@ -240,9 +244,9 @@ function FoodContent({ searchField }) {
                                     <Form.Check
                                       className=""
                                       type="checkbox"
-                                      style={{ color: "gray" }}
+                                      style={{ color: 'gray' }}
                                       onClick={() => {
-                                        setIsChecked(!isChecked);
+                                        setIsChecked(!isChecked)
                                       }}
                                     />
                                     <span>New items</span>
@@ -278,12 +282,12 @@ function FoodContent({ searchField }) {
                                             type="checkbox"
                                             name={i.label}
                                             id={`default-${i.label}`}
-                                            style={{ color: "gray" }}
+                                            style={{ color: 'gray' }}
                                             onChange={handleCheckCatagories}
                                           />
                                           <span>{i.label}</span>
                                         </div>
-                                      );
+                                      )
                                     })}
                                 </Col>
                               </Form.Group>
@@ -292,14 +296,14 @@ function FoodContent({ searchField }) {
                                 className="mt-2"
                                 controlId="formGridCity"
                               >
-                                <Form.Label style={{ color: "gray" }}>
+                                <Form.Label style={{ color: 'gray' }}>
                                   <Card.Title className="text-secondary mt-3 sidebarItems">
                                     Alergic?
                                   </Card.Title>
                                 </Form.Label>
                                 <FormControl
                                   className="sidebarTitles"
-                                  value={searchItemField || ""}
+                                  value={searchItemField || ''}
                                   placeholder="type anything"
                                   onChange={(e) =>
                                     setSearchItemsField(e.target.value)
@@ -317,7 +321,7 @@ function FoodContent({ searchField }) {
                         {filterItems
                           .slice(0, numberOfitemsShown)
                           .map((i, index) => {
-                            const { image, item, price, ingredient } = i;
+                            const { image, item, price, ingredient } = i
                             return (
                               <Card
                                 key={index}
@@ -341,15 +345,15 @@ function FoodContent({ searchField }) {
                                       <Card.Text>
                                         <h5
                                           className="m-4 mt-1 listFoodItem_2"
-                                          style={{ lineHeight: "10px" }}
+                                          style={{ lineHeight: '10px' }}
                                         >
                                           {ingredient}
                                         </h5>
                                         <h5
                                           className="m-4"
-                                          style={{ lineHeight: "10px" }}
+                                          style={{ lineHeight: '10px' }}
                                         >
-                                          {price} € (INC. Vat)
+                                          {price} € {/* (INC. Vat) */}
                                         </h5>
                                       </Card.Text>
                                     </div>
@@ -369,10 +373,10 @@ function FoodContent({ searchField }) {
                                   )}
                                 </Card.Body>
                               </Card>
-                            );
+                            )
                           })}
 
-                        <Container style={{ paddingRight: "10rem" }}>
+                        <Container style={{ paddingRight: '10rem' }}>
                           <div style={desktopContainerDivStyle}>
                             <Button
                               onMouseOver={onMouseEnter}
@@ -400,13 +404,13 @@ function FoodContent({ searchField }) {
             </div>
           ) : (
             <MobileLayout />
-          )}{" "}
+          )}{' '}
         </>
       ) : (
         <Loader />
       )}
     </>
-  );
+  )
 }
 
-export default FoodContent;
+export default FoodContent
